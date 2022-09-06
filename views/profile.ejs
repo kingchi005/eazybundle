@@ -1,0 +1,294 @@
+<%- include('./partials/head.ejs') %>
+
+
+<div id="liveAlertPlaceholder" class="mx-2 ml-3 text-center border"></div>
+<!-- <input class="p-1 ref-link" name="" id="referral-link" readonly> -->
+
+<div class="row m-0 p-0 px-">
+<div class="col w-100 rounded-0 border-bottom bg-light m-0 mb-1 pb-5 pt-1 py-3 px-4">
+<form class="form " id="user">
+	<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">My profile</h5>
+		<div class="form-group row justify-content-between mt-3">
+			<label class="col-5" for="">User name</label>
+			<input class="p-1 col-6 text-center  font-weight-bolder" type="text" value="<%= user.user_name%>" readonly>
+		</div>
+		<div class="form-group row justify-content-between mt-3">
+			<label class="col-5" for="">Email</label>
+			<input class="p-1 col-6 text-center  font-weight-bolder" type="text" value="<%= user.email%>" readonly>
+		</div>
+		<div class="form-group row justify-content-between mt-3">
+			<label class="col-5" for="">Phone number</label>
+			<div class="input-group mb-3 col-2">
+			<input class="p-1  text-center font-weight-bolder col" name="phone" type="tel" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="<%= `0${user.phone}` %>" required>
+			<button name="update" class="btn btn-outline-info " >Update</button>
+			</div>
+		</div>
+		<div class="form-group row justify-content-between mt-3">
+			<label class="col-3" for="">Referral link</label>
+			<div class="input-group mb-3 col-6">
+				<input class="p-1 col text-center border-warning bg-light font-weight-bolder" name="reflink" aria-describedby="button-addon2" type="text" value="" readonly>
+			  <button class="btn btn-outline-warning bg-light" type="button" id="copy-ref"><i class="fa fa-copy text-warning"></i></button>
+			</div>
+		</div>
+</form>
+</div>
+
+<div class="col w-100 rounded-0 border-bottom bg-light m-0 mb-1 pb-5 pt-1 py-3 px-4">
+<form class="form " id="update-bank" method="post">
+	<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">bank details</h5>
+	<label for="">Account number</label>
+	<% if (user.bank_details.Name) { -%>
+	<input type="number" name="account_number" value="<%= user.bank_details.account_number %>" readonly required>
+	<label for="">Bank name</label>
+	<select name="bank_name" readonly>
+		<option value="<%= user.bank_details.bank_name %>" disabled selected><%= user.bank_details.bank_name %></option>
+<!-- 		<% for (let bank of banks) { -%>
+		<option value="<%= bank.bank_code %>"><%= bank.name %></option>			
+		<% } -%>
+ -->	</select>
+	<div class="error acct_name"></div>
+	<!-- <div class="spin"></div> -->
+	<label for="">Account name</label>
+	<input style="display: ;" type="text" name="account_name" value="<%= user.bank_details.Name %>" readonly required>
+
+	<% } else { -%>
+	<input type="number" name="account_number" placeholder="10 digits" required>
+	<label for="">Bank name</label>
+	<select name="bank_name">
+		<option value="" disabled selected>Select your bank name</option>
+		<% for (let bank of banks) { -%>
+		<option value="<%= bank.bank_code %>"><%= bank.name %></option>			
+		<% } -%>
+	</select>
+	<div class="error acct_name text-danger"></div>
+	<div class="spin"></div>
+	<i class="spin"><img src="svg/spinner.svg"></i>
+	<label for="">Account name</label>
+	<input style="display: ;" type="text" name="account_name" readonly required>
+	<button id="bank" class="btn btn-outline-info btn-animate-click disabled col-3 mt-3" type="upate" name="submit" style="">Update</button>
+	<% } -%>
+<!-- <div class="spinner spin"></div> -->
+	<!-- <button id="verify" class="btn-animate-click" type="update" disabled>Verify</button> -->
+	<!-- <img class="spin" src="svg/spinner.svg"> -->
+</form>
+</div>
+</div>
+
+<div class="row m-0 p-0 px-">
+	<div class="col w-100 rounded-0 border-bottom bg-light m-0 mb-1 pb-5 pt-1 py-3 px-4">
+	<form class="form " id="change-password" method="post">
+		<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">Change Password</h5>
+		<div class="form-group row mt-3">
+			<label for="" class="col-4">Current password</label>
+			<input class=" col-7" type="password" required name="current_p">
+			<div class="error ml-3 current-p text-danger"></div>
+		</div>
+		<div class="form-group row mt-3">
+			<label for="" class="col-4">New password</label>
+			<input class=" col-7" type="password" required name="new_p">
+			<div class="error ml-3 new-p text-danger"></div>
+		</div>
+		<div class="form-group row mt-3">
+			<label for="" class="col-4">Confirm password</label>
+			<input class=" col-7" type="password" required name="confirm_p">
+			<div class="error ml-3 confirm-p text-danger"></div>
+		</div>
+		<button class="btn btn-outline-info mt-3" name="update">Update</button>
+	</form>
+	</div>
+
+	<div class="col w-100 rounded-0 border-bottom bg-light m-0 mb-1 pb-5 pt-1 py-3 px-4">
+		<% if (user.downlines !== '' ) { -%>
+	<form id="downlines">
+		<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">Downlines</h5>
+		<ol class="list-group border-top rounded-0">
+			<% for (let i = 0; i < user.downlines.length; i++) { -%>
+			<li class="list-group-item font-weight-bold text-secondary border-0 border-bottom"><%= user.downlines[i] %></li>
+			<% } -%>
+		</ol>
+		<% } -%>
+
+	</form>
+	</div>
+</div>
+
+
+
+
+
+<%- include('./partials/foot.ejs') %>
+
+
+
+<script type="text/javascript">
+/*	(function () {
+		let ref_link = _('#referral-link');
+		ref_link.value = `${window.location.protocol}//${window.location.host}/signup?ref=<%= user.ref_id %>`
+		// _('form').account_name.style.display = ''
+	}) ()*/
+
+	// variables
+	const update_bank_form = _('#update-bank')
+	const acct_no = update_bank_form.account_number;
+	const acct_name = update_bank_form.account_name;
+	const bank_code = update_bank_form.bank_name;
+	const acct_name_err = _('.error.acct_name');
+	const op_err = _('.error.current-p');
+	const np_err = _('.error.new-p');
+	const cp_err = _('.error.confirm-p');
+	const spin = _('i.spin')
+	const user_form = _('form#user')
+	const ref_link_input = user_form.reflink
+	const btn_copy = _('#copy-ref')
+	const password_form = _('#change-password')
+	const password_btn = 	password_form.update
+	const old_password = 	password_form.current_p
+	const new_password = 	password_form.new_p
+	const confirm_password = 	password_form.confirm_p
+
+		password_form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			password_btn.innerHTML = '<i class="spin"><img src="svg/spinner.svg"></i>'
+			cp_err.textContent = ''
+			op_err.textContent = ''
+			np_err.textContent = ''
+			if (new_password.value !== confirm_password.value) {
+				cp_err.textContent = "Passwords don't match"
+				password_btn.innerHTML = 'Update'
+			}else {
+				let req = {
+					old_password:old_password.value,
+					new_password:new_password.value
+				}
+				req = JSON.stringify(req)
+
+				let response = await fetch('/password/<%= user._id %>', {
+					method: 'PUT',
+					body: req,
+					headers: {'Content-Type':'application/json'}
+				})
+				let res = await response.json();
+				log(res)
+				if (res.message === 'Incorrect old password') {
+					op_err.textContent = 'Incorrect password'
+					password_btn.innerHTML = 'Update'
+					return
+				}
+				if (res.message === 'Password must have minimum of 6 characters') {
+					np_err.textContent = res.message
+					password_btn.innerHTML = 'Update'
+					return
+				}
+				if (res.type === 'success') {
+					password_btn.innerHTML = 'Update'
+					alert(res.message, res.type)
+				}
+			}
+	})
+
+
+	btn_copy.addEventListener('click', copy_text)
+	btn_copy.addEventListener('touchstart', copy_text)
+
+	function copy_text(text) {
+		let  copyText = document.getElementById("myInput");
+		ref_link_input.select();
+		ref_link_input.setSelectionRange(0, 99999); /* For mobile devices */
+		navigator.clipboard.writeText(ref_link_input.value);
+		alert('Copied', 'info')
+		// log(ref_link_input.value)
+	}
+	ref_link_input.value = `${window.location.protocol}//${window.location.host}/signup?ref=<%= user.ref_id %>`
+
+	user_form.addEventListener('submit', async (e) => {
+		e.preventDefault()
+		let phone = user_form.phone.value
+		let req = {phone_number:phone}
+		req = JSON.stringify(req)
+		let response = await fetch(`/add-phonenumber/<%= user._id %>`, {
+			method: 'POST',
+			body: req,
+			headers: {'Content-Type':'application/json'}
+		});
+		let res = await response.json();
+		if (res.type === 'success') {
+			alert(res.message, res.type)
+			return
+		}
+		// log(res)
+	})
+/*	user_form.update.addEventListener('click', () => {
+		log(user_form.phone.value)
+	})
+*/	// let bank_name = update_bank_form.bank_name.options[ update_bank_form.bank_name.selectedIndex].text;
+
+	const update_bank_btn = _('#bank')
+	update_bank_form.bank_name.addEventListener('change', async () => {
+			acct_name_err.textContent = ''
+			spin.style.display = 'block'
+		// acct_name.value = 'yes'
+		let res = await fetch(`/verify-bank-details?account_number=${acct_no.value}&bank_code=${bank_code.value}`);
+		let bank_details = await res.json();
+		// log(bank_details.data.account_name)
+		if (bank_details.status == true) {
+			spin.style.display = 'none'
+			acct_no.readonly = true
+			acct_name_err.textContent = ''
+			acct_name.value = bank_details.data.account_name
+			update_bank_btn.disabled = false
+		} else if (bank_details.status == false) {
+			spin.style.display = 'none'
+			acct_name_err.textContent = 'Invalid bank details'
+			update_bank_btn.disabled = true
+			acct_name.value = ''
+		}else {
+			spin.style.display = 'none'
+			acct_name_err.textContent = 'An error occured'
+			acct_name.value = ''
+			update_bank_btn.disabled = true
+		}
+	})
+
+	update_bank_form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		update_bank_btn.style.backgroundColor = '#88d'
+		update_bank_btn.innerHTML = `<div class="spinner"></div>`
+		update_bank_btn.disabled = true
+		let bank_detail = {
+			bank_name:update_bank_form.bank_name.options[ update_bank_form.bank_name.selectedIndex].text,
+			account_number:acct_no.value,
+			Name:acct_name.value
+		}
+		let updated_bank = await fetch
+		try {
+			bank_detail = JSON.stringify(bank_detail);
+			let response = await fetch('/bank-details/<%= user._id %>', {
+				method: 'POST',
+				body: bank_detail,
+				headers: {'Content-Type' : 'application/json'}
+			});
+			let res = await response.json();
+			log(res)
+			if (res.type === 'success') {
+				alert(res.message, res.type)
+				update_bank_btn.style.background = 'none'
+				update_bank_btn.disabled = false
+				update_bank_btn.innerHTML = `Update`				
+			}else {
+				alert(res.message, res.type)
+				update_bank_btn.style.background = 'none'
+				update_bank_btn.disabled = false
+				update_bank_btn.innerHTML = `Update`				
+			}
+		} catch(e) {
+			alert(e.message, e.type)
+			update_bank_btn.style.background = 'none'
+			update_bank_btn.disabled = false
+			update_bank_btn.innerHTML = `Update`				
+		}
+
+	})
+
+
+
+</script>

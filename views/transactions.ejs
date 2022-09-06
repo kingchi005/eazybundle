@@ -1,0 +1,76 @@
+<%- include('./partials/head.ejs') %>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.css"/>
+<%
+ const currency = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'NGN', minimumFractionDigits: 2 });
+ // const {formatDistanceToNow, subDays, format} = require('date-fns');
+%>
+
+
+<div class="row m-0 p-0 mobile-view table-trn bg-light table-trn">
+	<h5 class="text-primary text-uppercase pb-3  p-3 font-italic">Recent Transactions</h5>
+	<% if (transactions !== '') { -%>
+		<% for (let i = 0; i < transactions.length; i++) { -%>
+	<div class="trn-item">
+		<!-- <div><img src="/svg/tick-circle-solid.svg" alt="confirmed"></div> -->
+		<div class="svg"><i class="bi bi-check-circle-fill"></i></div>
+		<div>
+			<div><b><%= transactions[i].Description %></b></div>
+			<div><%= transactions[i].Phone %></div>
+			<div><%= functions.formatDistanceToNow(transactions[i].Date) %></div>
+		</div>
+		<div class="right">
+			<div><b><%= transactions[i].Type %></b></div>
+			<div class="text-success">Confirmed</div>
+			<div><%= currency.format(transactions[i].Amount)%></div>
+		</div>
+	</div>
+		<% } -%>
+	<% } else { -%>
+	<h3 align="center">No recent transactions..</h3>
+	<% } -%>
+</div>
+<div class="row m-0 p-0 desktop-view table-trn bg-light">
+
+	<h5 class="text-primary text-uppercase pb-3  p-3 font-italic">Recent Transactions</h5>
+	<table class="table table-responsive table-hover text-cente table-striped " style="font-size: .8em;">
+		<% if (transactions !== '') { -%>
+		<thead class="text-uppercase bg-success align-middle text-white">
+			<th>sn</th>
+			<th>type</th>
+			<th>description</th>
+			<th>date</th>
+			<th>amount</th>
+			<th>phone</th>
+			<th>prev. balance</th>
+			<th>avail. balance</th>
+		</thead>
+		<tbody class="align-middle">
+			<% for (let i = 0; i < transactions.length; i++) { -%>
+			<tr>
+				<td><%= (i+1) %></td>
+				<td><%= transactions[i].Type %></td>
+				<td><%= transactions[i].Description %></td>
+				<td class="" style="white-space: pre-wrap;"><%= functions.format(transactions[i].Date, 'yyyy-MM-dd hh:mm:ss').toString() %></td>
+				<td class="amount" align="right" style="padding-right: 15px;"><%= currency.format(transactions[i].Amount) %></td>
+				<td>0<%= transactions[i].Phone %></td>
+				<td id="p-bal" align="right" style="padding-right: 15px;"><%= currency.format(transactions[i].Previous_balance) %></td>
+				<td id="n-bal" align="right" style="padding-right: 15px;"><%= currency.format(transactions[i].New_balance) %></td>
+			</tr>
+			<% } -%>
+		</tbody>
+	</table>
+	<% } else { -%>
+	<h3 align="center">No recent transactions..</h3>
+	<% } -%>
+</div>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
+
+<script>
+	$(document).ready( function () {
+		$('.desktop-view table').DataTable(/*{
+			order: [0, 'desc']
+		}*/);
+	});
+</script>
+<%- include('./partials/foot.ejs') %>

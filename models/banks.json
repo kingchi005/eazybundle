@@ -1,0 +1,343 @@
+{
+    "full_prop_list": [
+      {                                                                  
+        "id": 1,                                                         
+        "name": "Access Bank",                                           
+        "slug": "access-bank",                                           
+        "code": "044",                                                   
+        "longcode": "044150149",                                         
+        "gateway": "emandate",                                           
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2020-02-18T08:06:44.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 3,                                                         
+        "name": "Access Bank (Diamond)",                                 
+        "slug": "access-bank-diamond",                                   
+        "code": "063",                                                   
+        "longcode": "063150162",                                         
+        "gateway": "emandate",                                           
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2020-02-18T08:06:48.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 4,                                                         
+        "name": "Ecobank Nigeria",                                       
+        "slug": "ecobank-nigeria",                                       
+        "code": "050",                                                   
+        "longcode": "050150010",                                         
+        "gateway": null,                                                 
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2020-02-18T20:23:53.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 6,                                                         
+        "name": "Fidelity Bank",                                         
+        "slug": "fidelity-bank",                                         
+        "code": "070",                                                   
+        "longcode": "070150003",                                         
+        "gateway": "emandate",                                           
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2021-08-27T09:15:29.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 7,                                                         
+        "name": "First Bank of Nigeria",                                 
+        "slug": "first-bank-of-nigeria",                                 
+        "code": "011",                                                   
+        "longcode": "011151003",                                         
+        "gateway": "ibank",                                              
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2021-03-25T14:22:52.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 9,                                                         
+        "name": "Guaranty Trust Bank",                                   
+        "slug": "guaranty-trust-bank",                                   
+        "code": "058",                                                   
+        "longcode": "058152036",                                         
+        "gateway": "ibank",                                              
+        "pay_with_bank": true,                                           
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2022-06-14T06:59:27.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 11,                                                        
+        "name": "Keystone Bank",                                         
+        "slug": "keystone-bank",                                         
+        "code": "082",                                                   
+        "longcode": "082150017",                                         
+        "gateway": null,                                                 
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2020-02-18T20:23:45.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 67,                                                        
+        "name": "Kuda Bank",                                             
+        "slug": "kuda-bank",                                             
+        "code": "50211",                                                 
+        "longcode": "",                                                  
+        "gateway": "digitalbankmandate",                                 
+        "pay_with_bank": true,                                           
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2019-11-15T17:06:54.000Z",                         
+        "updatedAt": "2022-04-08T17:07:53.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 169,                                                       
+        "name": "PalmPay",                                               
+        "slug": "palmpay",                                               
+        "code": "999991",                                                
+        "longcode": "",                                                  
+        "gateway": null,                                                 
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2020-11-24T09:58:37.000Z",                         
+        "updatedAt": "2020-11-24T10:03:19.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 14,                                                        
+        "name": "Stanbic IBTC Bank",                                     
+        "slug": "stanbic-ibtc-bank",                                     
+        "code": "221",                                                   
+        "longcode": "221159522",                                         
+        "gateway": null,                                                 
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2020-02-18T20:24:17.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 16,                                                        
+        "name": "Sterling Bank",                                         
+        "slug": "sterling-bank",                                         
+        "code": "232",                                                   
+        "longcode": "232150016",                                         
+        "gateway": "emandate",                                           
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2022-05-27T08:56:01.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 17,                                                        
+        "name": "Union Bank of Nigeria",                                 
+        "slug": "union-bank-of-nigeria",                                 
+        "code": "032",                                                   
+        "longcode": "032080474",                                         
+        "gateway": "emandate",                                           
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2020-02-18T20:22:54.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 18,                                                        
+        "name": "United Bank For Africa",                                
+        "slug": "united-bank-for-africa",                                
+        "code": "033",                                                   
+        "longcode": "033153513",                                         
+        "gateway": "emandate",                                           
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2022-03-09T10:28:57.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 19,                                                        
+        "name": "Unity Bank",                                            
+        "slug": "unity-bank",                                            
+        "code": "215",                                                   
+        "longcode": "215154097",                                         
+        "gateway": "emandate",                                           
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2019-07-22T12:44:02.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 20,                                                        
+        "name": "Wema Bank",                                             
+        "slug": "wema-bank",                                             
+        "code": "035",                                                   
+        "longcode": "035150103",                                         
+        "gateway": null,                                                 
+        "pay_with_bank": false,                                          
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2021-02-09T17:49:59.000Z"                          
+      },                                                                 
+      {                                                                  
+        "id": 21,                                                        
+        "name": "Zenith Bank",                                           
+        "slug": "zenith-bank",                                           
+        "code": "057",                                                   
+        "longcode": "057150013",                                         
+        "gateway": "emandate",                                           
+        "pay_with_bank": true,                                           
+        "active": true,                                                  
+        "country": "Nigeria",                                            
+        "currency": "NGN",                                               
+        "type": "nuban",                                                 
+        "is_deleted": false,                                             
+        "createdAt": "2016-07-14T10:04:29.000Z",                         
+        "updatedAt": "2022-06-24T13:23:25.000Z"                          
+      }                                                                  
+    ],
+    "working_list": [
+      {
+        "id": 1,
+        "name": "Access Bank",
+        "bank_code": "044"
+      },
+      {
+        "id": 3,
+        "name": "Access Bank (Diamond)",
+        "bank_code": "063"
+      },
+      {
+        "id": 4,
+        "name": "Ecobank Nigeria",
+        "bank_code": "050"
+      },
+      {
+        "id": 6,
+        "name": "Fidelity Bank",
+        "bank_code": "070"
+      },
+      {
+        "id": 7,
+        "name": "First Bank of Nigeria",
+        "bank_code": "011"
+      },
+      {
+        "id": 9,
+        "name": "Guaranty Trust Bank",
+        "bank_code": "058"
+      },
+      {
+        "id": 11,
+        "name": "Keystone Bank",
+        "bank_code": "082"
+      },
+      {
+        "id": 67,
+        "name": "Kuda Bank",
+        "bank_code": "50211"
+      },
+      {
+        "id": 169,
+        "name": "PalmPay",
+        "bank_code": "999991"
+      },
+      {
+        "id": 14,
+        "name": "Stanbic IBTC Bank",
+        "bank_code": "221"
+      },
+      {
+        "id": 16,
+        "name": "Sterling Bank",
+        "bank_code": "232"
+      },
+      {
+        "id": 17,
+        "name": "Union Bank of Nigeria",
+        "bank_code": "032"
+      },
+      {
+        "id": 18,
+        "name": "United Bank For Africa",
+        "bank_code": "033"
+      },
+      {
+        "id": 19,
+        "name": "Unity Bank",
+        "bank_code": "215"
+      },
+      {
+        "id": 20,
+        "name": "Wema Bank",
+        "bank_code": "035"
+      },
+      {
+        "id": 21,
+        "name": "Zenith Bank",
+        "bank_code": "057"
+      }
+    ]
+    
+}

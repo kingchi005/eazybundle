@@ -1,0 +1,104 @@
+<%- include('./partials/head.ejs') %>
+
+<div id="liveAlertPlaceholder" class="mx-2 text-center"></div>
+<form class="custom-form mt-5">
+	<h3>Create Account with us</h3>
+	<div>
+		<img src="">
+	</div>
+	<div>
+		<label for='user_name'>User name:</label>
+		<input type="text" name="user_name">
+		<div class="user_name error text-danger"></div>
+	</div>
+	<div>
+		<label for='email'>Email:</label>
+		<input type="email" name="email" placeholder="exampl@email.com">
+		<div class="email error text-danger"></div>
+	</div>
+	<div>
+		<label for='upline'>Referer ID:</label>
+		<input type="text" name="upline" placeholder="(Optional)" value="<%= ref_id%>">
+	</div>
+	<div>
+		<label for='password'>Password:</label>
+		<input type="password" name="password" placeholder="6 - 8 characters">
+		<div class="password error text-danger"></div>
+	</div>
+	<div>
+		<label for='Cpassword'>Re-enter Password:</label>
+		<input type="password" name="Cpassword" placeholder="Confirm password">
+		<div class="Cpassword error text-danger"></div>
+	</div>
+	<button class="btn btn-primary mt-3 shadow-none rounded w-100">Sign up</button>
+	<!-- <button>Sign up</button> -->
+	<hr/>
+	<p>Already have an account? <a href="/login">Log in</a></p>
+</form>
+<%- include('./partials/foot.ejs') %>
+
+<script>
+	/*	(function () {
+			_('input:nth-child()').onfocus = () => {
+				this.style.display = 'none';
+			}
+		}) ();*/
+	const btn = _('form button');
+	let emailError = _('.error.email')
+	let usernameError = _('.error.user_name')
+	let passwordError = _('.error.password')
+	let repasswordError = _('.error.Cpassword')
+	const form = _('form')
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+
+		btn.classList.add('disabled', 'bg-light');
+		btn.innerHTML = '<i class="spin text"><img src="svg/spinner.svg"></i> ';
+
+		    // reset errors
+    emailError.textContent = '';
+    usernameError.textContent = '';
+    passwordError.textContent = '';
+    repasswordError.textContent = '';
+		let	Cpassword = form.Cpassword.value
+    //form values
+		let req = {
+			user_name : form.user_name.value
+			,email : form.email.value
+			,upline : form.upline.value
+			,password : form.password.value
+		}
+		if (req.password !== Cpassword) {
+			repasswordError.textContent = "Passwords don't match";
+			btn.classList.remove('disabled', 'bg-light');
+			btn.innerHTML = 'Sign up';
+			return;
+		}
+		try {
+			req = JSON.stringify(req);
+			let response = await fetch('/signup', {
+				method: 'POST',
+				body: req,
+				headers: {'Content-Type' : 'application/json'}
+			})
+			let res = await response.json();
+			if (res.errors) {
+				usernameError.textContent = res.errors.user_name;
+				emailError.textContent = res.errors.email;
+				passwordError.textContent = res.errors.password;
+			}
+			if (res.user) {
+				// log(res)
+				alert(`${res.message}`, res.type)
+			}
+			btn.classList.remove('disabled', 'bg-light');
+			btn.innerHTML = 'Sign up';
+		} catch(e) {
+			// statements
+			console.log(e);
+			btn.classList.remove('disabled', 'bg-light');
+			btn.innerHTML = 'Sign up';
+		}
+
+	})
+</script>

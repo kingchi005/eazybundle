@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<%const currency = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'NGN', minimumFractionDigits: 2 }); %>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>EazyBundle | <%= title%></title>
+	<link rel="stylesheet" href="/style.css">
+	<link rel="stylesheet" href="/bootstrap.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<style>
+	.logo{
+		position: relative;
+		padding: 0;
+		margin-left: 0;
+		left: -5px;
+		top: -20px;
+	}
+	.dropdown-toggle { outline: 0; }
+
+.btn-toggle ,.sidebar a.btn{
+  padding: .25rem 3rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, .65);
+  letter-spacing: .5px;
+  background-color: transparent;
+  /*margin-left: 2.5rem !important;*/
+  /*width: 80% !important;*/
+}
+.btn-toggle{
+	width: 100%;
+}
+.btn-toggle:hover, .sidebar a.btn:hover,
+.btn-toggle:focus {
+  color: rgba(0, 0, 0, .85);
+  background-color: #d2f4ea;
+}
+.sidebar{
+	position: fixed;
+	z-index: 1 !important;
+}
+.sidebar a.btn{
+	letter-spacing: .5px;
+}
+.btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='white' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
+}
+.btn-toggle-0::before{
+  width: 1.25em;
+  line-height: 0;
+  content: url();
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
+}
+
+.btn-toggle[aria-expanded="true"],.sidebar a.btn, .sidebar button {
+  color: #ddd;
+}
+.btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.btn-toggle-nav a{
+  color: #ddd !important;
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+}
+.btn-toggle-nav a:hover,.sidebar a.btn:hover,
+.btn-toggle-nav a:focus {
+  background-color: #d2f4ea;
+}
+
+.scrollarea {
+  overflow-y: auto;
+}
+#list-unstyled li{
+	color: #ddd;
+}
+.sidebar .fa, .sidebar .bi{
+	position: absolute;
+	left: 5px;
+	margin-right: 5px;
+}
+.sidebar li a.btn, .sidebar li button.btn{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+/*.sidebar i.fa, .sidebar i.bi{
+	background: rgba(38, 0, 209, 0.64);
+	align-content: center;
+	border-radius: 20px;
+	width: 40px;
+	height: 40px;
+}
+*/
+button .bi-list {
+}
+.nav-btn{
+	background: none;
+	border-radius: 50%;
+	border: none;
+}
+.bi-list{
+	position: relative;
+	top: 5px;
+	left: 5px;
+	font-size: 30px;
+	padding: 0px;
+	border-radius: 50%;
+	border: 1px solid #ddf;
+	padding: 5px 8px !important;
+}
+.bi-list:hover{
+	background: #555;
+	color: ddd;
+}
+</style>
+<body>
+	<script src="/custom_func.js"></script>
+	<div class="p-0 m-0" style="background: #ddf;">
+	<nav>
+	<div class="sidebar h-100 flex-shrink-0 p-3" style="position: fixed;">
+		<div class="logo border-bottom mb-3">		
+				<a href="/"><img src="/logo.png"></a>
+			<button type="button" onclick="close_sidebar()" class="btn-close border rounded-pill p-2 btn-close-white" aria-label="Close-sideber"></button>
+
+		</div>
+	  <ul class="list-unstyled ps-0">
+	  	<% if (user) { -%>	  		
+	    <li class="mb-1 position-relative">
+	      <a href="/dashboard" class="btn btn-toggle-0 w-100 d-inline-flex align-items-center rounded border-0 collapsed" >
+	      	<i class="fa fa-table"></i>
+	        Dashboard
+	      </a>
+	    </li>
+	    <li class="mb-1 position-relative">
+	      <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#buy-data" aria-expanded="false">
+	      	<i class="fa fa-solid fa-signal"></i>
+	        Buy Data
+	      </button>
+	      <div class="collapse" id="buy-data">
+	        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+	          <li><a href="/data-bundle/mtn-sme" class="link-dark d-inline-flex text-decoration-none rounded">MTN SME Data</a></li>
+	          <li><a href="/data-bundle/mtn-special" class="link-dark d-inline-flex text-decoration-none rounded">MTN Corperate Data</a></li>
+	          <li><a href="/data-bundle/glo" class="link-dark d-inline-flex text-decoration-none rounded">Glo Data</a></li>
+	          <li><a href="/data-bundle/9mobile" class="link-dark d-inline-flex text-decoration-none rounded">9mobile Data</a></li>
+	          <li><a href="/data-bundle/airtel" class="link-dark d-inline-flex text-decoration-none rounded">Airtel Data</a></li>
+	        </ul>
+	      </div>
+	    </li>
+	    <li class="mb-1 position-relative">
+	      <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#buy-airtime" aria-expanded="false">
+	      	<i class="fa fa-solid fa-mobile-signal fa-mobile"></i>
+	        Buy Airtime
+	      </button>
+	      <div class="collapse" id="buy-airtime">
+	        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+	          <li><a href="/airtime/MTN" class="link-dark d-inline-flex text-decoration-none rounded">MTN Airtime</a></li>
+	          <li><a href="/airtime/Glo" class="link-dark d-inline-flex text-decoration-none rounded">Glo Airtime</a></li>
+	          <li><a href="/airtime/9mobile" class="link-dark d-inline-flex text-decoration-none rounded">9mobile Airtime</a></li>
+	          <li><a href="/airtime/Airtel" class="link-dark d-inline-flex text-decoration-none rounded">Airtel Airtime</a></li>
+	        </ul>
+	      </div>
+	    </li>
+	    <li class="mb-1 position-relative">
+	      <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#utility-bill" aria-expanded="false">
+	      	<i class="fa fa-phone"></i>
+	        Utility payment
+	      </button>
+	      <div class="collapse" id="utility-bill">
+	        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+	          <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Coming Soon...</a></li>
+	        </ul>
+	      </div>
+	    </li>
+	    <li class="mb-1 position-relative">
+	      <a href="/fund-wallet" class="btn btn-toggle-0 w-100 d-inline-flex align-items-center rounded border-0 collapsed" >
+	      	<i class="bi bi-cash-stack"></i>
+	        Fund wallet
+	      </a>
+	    </li>
+	    <li class="mb-1 position-relative">
+	      <a href="/profile" class="btn btn-toggle-0 w-100 d-inline-flex align-items-center rounded border-0 collapsed" >
+	      	<i class="fa bi bi-gear-fill"></i>
+	        Profile
+	      </a>
+	    </li>
+			<li class="mb-1 position-relative">
+	      <a href="/transactions" class="btn btn-toggle-0 w-100 d-inline-flex align-items-center rounded border-0 collapsed" >
+	      	<i class="fa fa-solid fa-list"></i>
+	        Transactions
+	      </a>
+	    </li>
+	    <li class="mb-1 position-relative">
+	      <a href="/dashboard" class="btn btn-toggle-0 w-100 d-inline-flex align-items-center rounded border-0 collapsed" >
+	      	<i class="fa fa-solid fa-question"></i>
+	        F.A.Qs
+	      </a>
+	    </li>
+<!-- 	    
+	    <li class="mb-1 position-relative">
+	      <a href="/dashboard" class="btn btn-toggle-0 w-100 d-inline-flex align-items-center rounded border-0 collapsed" >
+	        Dashboard
+	      </a>
+	    </li>
+	    <li class="mb-1 position-relative">
+	      <a href="/dashboard" class="btn btn-toggle-0 w-100 d-inline-flex align-items-center rounded border-0 collapsed" >
+	        Dashboard
+	      </a>
+	    </li>
+	    <li class="mb-1 position-relative">
+	      <a href="/dashboard" class="btn btn-toggle-0 w-100 d-inline-flex align-items-center rounded border-0 collapsed" >
+	        Dashboard
+	      </a>
+	    </li>
+	    <li class="mb-1 position-relative">
+	      <a href="/dashboard" class="btn btn-toggle-0 w-100 d-inline-flex align-items-center rounded border-0 collapsed" >
+	        Dashboard
+	      </a>
+	    </li>
+ -->	    <li class="border-top my-3"></li>
+<!-- 	    <li class="mb-1 position-relative">
+	      <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+	        Account
+	      </button>
+	      <div class="collapse" id="account-collapse">
+	        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+	          <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">New...</a></li>
+	          <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Profile</a></li>
+	          <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Settings</a></li>
+	          <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Sign out</a></li>
+	        </ul>
+	      </div>
+	    </li>
+ -->
+	  	<% } else { -%>
+	  	<% } -%>
+ 		  </ul>
+	</div>
+</nav>
+	<nav class="sidebar" style="display:none;">
+		<div class="logo">
+			<a href="/"><img src="/logo.png"></a>
+ <!-- <h2><a href="/">EazyBundle</a></h2> -->
+		</div>
+		<ul class="list-unstyled">
+			<% if (user) { -%>
+			<li><a href="/dashboard"><div class="title" >Dashboard</div></a></li>
+			<li><a data-bs-toggle="collapse" href="#buy-data" role="button" aria-expanded="false" aria-controls="buy-data">
+
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"><path fill="currentColor" d="M10 14a1.99 1.99 0 0 0-1.981 2c0 1.104.887 2 1.981 2a1.99 1.99 0 0 0 1.98-2c0-1.105-.886-2-1.98-2zm-4.2-2.242l1.4 1.414a3.933 3.933 0 0 1 5.601 0l1.399-1.414a5.898 5.898 0 0 0-8.4 0zM3 8.928l1.4 1.414a7.864 7.864 0 0 1 11.199 0L17 8.928a9.831 9.831 0 0 0-14 0zM.199 6.1l1.4 1.414a11.797 11.797 0 0 1 16.801 0L19.8 6.1a13.763 13.763 0 0 0-19.601 0z"/></svg>
+				<div class="justify-content-" style="display: flex; justify-content:space-between;">
+				<div class="title">Buy Data</div>
+				<div><i class="fa fa-caret-down"></i></div>
+				</div>
+			</a></li>
+			<div class="collapse" id="buy-data">
+				<ul>
+					<li><a href="/data-bundle/mtn">MTN SME Data</a></li>
+					<!-- <li><a href="/data-bundle/1">MTN Special</a></li> -->
+					<li><a href="/data-bundle/glo">Glo Data</a></li>
+					<li><a href="/data-bundle/9mobile">9mobile Data</a></li>
+					<li><a href="/data-bundle/airtel">Airtel Data</a></li>
+				</ul>
+			</div>
+			<li><a data-bs-toggle="collapse" href="#buy-airtime" role="button" aria-expanded="false" aria-controls="buy-airtime">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="27" preserveAspectRatio="xMidYMid meet" viewBox="0 0 100 100" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"><path fill="currentColor" d="M69.328 29.884H30.567v.01a2.495 2.495 0 0 0-2.396 2.49v59.967a2.495 2.495 0 0 0 2.396 2.489v.011h38.761a2.5 2.5 0 0 0 2.5-2.5V32.384a2.5 2.5 0 0 0-2.5-2.5zM50.059 92.268a2.45 2.45 0 1 1 0-4.9a2.45 2.45 0 0 1 0 4.9zm11.813-7.396H38.128V39.84h23.743v45.032zm7.731-69.176a1.488 1.488 0 0 0-.006-1.85l.024-.024l-.999-.999l-.001-.001l-.078-.078l-.004.004c-10.238-10.154-26.825-10.132-37.032.073c-.015.015-.019.036-.034.051l-.008-.008l-.955.955l-.003.002l-.002.003l-.118.119l.024.024a1.502 1.502 0 0 0 .08 1.979l-.004.004l1.918 1.918l.026-.026c.55.428 1.303.427 1.85-.006l.025.024l1.079-1.078l-.022-.022c.015-.015.036-.019.051-.034c8.053-8.052 21.135-8.074 29.221-.075l-.009.009l.956.957v.001h.001l.12.121l.024-.024a1.503 1.503 0 0 0 1.979-.079l.004.004l.021-.021h.001v-.001L69.5 15.85l.128-.128l-.025-.026z"/><path fill="currentColor" d="m62.208 21.235l.024-.024l-1.079-1.079l-.004.004c-6.165-6.078-16.12-6.054-22.251.076c-.015.015-.019.035-.033.05l-.009-.008l-1.079 1.079l.024.024a1.501 1.501 0 0 0 .079 1.979l-.004.004l1.918 1.918l.026-.026c.55.428 1.303.427 1.85-.006l.025.025l1.079-1.078l-.022-.022c.015-.015.036-.019.051-.034c3.977-3.977 10.425-3.995 14.436-.072l-.005.005l.957.957h.001l.121.121l.024-.025a1.503 1.503 0 0 0 1.979-.079l.004.004l.021-.021l1.897-1.897l-.026-.026a1.484 1.484 0 0 0-.004-1.849z"/></svg>
+				<div class="title" >
+				Buy Airtime
+				<i class="fa fa-caret-down"></i>
+			</div>
+			</a></li>
+			<div class="collapse" id="buy-airtime">
+				<ul>
+					<li><a href="/airtime/MTN">MTN Airtime</a></li>
+					<li><a href="/airtime/Glo">Glo Airtime</a></li>
+					<li><a href="/airtime/9mobile">9mobile Airtime</a></li>
+					<li><a href="/airtime/Airtel">Airtel Airtime</a></li>
+				</ul>
+			</div>
+			<li><a data-bs-toggle="collapse" href="#utility-bill" role="button" aria-expanded="false" aria-controls="utility-bill">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27" height="24" preserveAspectRatio="xMidYMid meet" viewBox="0 0 576 512" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"><path fill="currentColor" d="M400 256c0 61.9-50.1 112-112 112s-112-50.1-112-112s50.1-112 112-112s112 50.1 112 112zm-128-32v64h-8c-8.8 0-16 7.2-16 16s7.2 16 16 16h48c8.8 0 16-7.2 16-16s-7.2-16-16-16h-8v-80c0-8.8-7.2-16-16-16h-16c-8.8 0-16 7.2-16 16s7.2 16 16 16zM0 128c0-35.35 28.65-64 64-64h448c35.3 0 64 28.65 64 64v256c0 35.3-28.7 64-64 64H64c-35.35 0-64-28.7-64-64V128zm48 48v160c35.35 0 64 28.7 64 64h352c0-35.3 28.7-64 64-64V176c-35.3 0-64-28.7-64-64H112c0 35.3-28.65 64-64 64z"/></svg>
+				<div class="title" >
+				Utility Payment
+				<i class="fa fa-caret-down"></i>
+			</div>
+			</a></li>
+			<div class="collapse" id="utility-bill">
+				<ul>
+					<li><a href="">Coming soon...</a></li>
+				</ul>
+			</div>
+			<li><a href="/fund-wallet">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27" height="27" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"><path fill="currentColor" d="M688 512a112 112 0 1 0 0 224h208v160H128V352h768v160H688zm32 160h-32a48 48 0 0 1 0-96h32a48 48 0 0 1 0 96zm-80-544l128 160H384l256-160z"/></svg>
+				<div class="title" >
+				Fund wallet
+				<i class="fa fa-caret-down"></i>
+				</div>
+			</a></li>
+			<li><a href="/pricing">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27" height="24" preserveAspectRatio="xMidYMid meet" viewBox="0 0 576 512" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"><path fill="currentColor" d="M400 256c0 61.9-50.1 112-112 112s-112-50.1-112-112s50.1-112 112-112s112 50.1 112 112zm-128-32v64h-8c-8.8 0-16 7.2-16 16s7.2 16 16 16h48c8.8 0 16-7.2 16-16s-7.2-16-16-16h-8v-80c0-8.8-7.2-16-16-16h-16c-8.8 0-16 7.2-16 16s7.2 16 16 16zM0 128c0-35.35 28.65-64 64-64h448c35.3 0 64 28.65 64 64v256c0 35.3-28.7 64-64 64H64c-35.35 0-64-28.7-64-64V128zm48 48v160c35.35 0 64 28.7 64 64h352c0-35.3 28.7-64 64-64V176c-35.3 0-64-28.7-64-64H112c0 35.3-28.65 64-64 64z"/></svg>
+				<div class="title" >
+				Pricing
+			</div>
+			</a></li>
+			<li><a href="/profile" class="text">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27" height="27" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"><path fill="currentColor" d="m2.344 15.271l2 3.46a1 1 0 0 0 1.366.365l1.396-.806c.58.457 1.221.832 1.895 1.112V21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1.598a8.094 8.094 0 0 0 1.895-1.112l1.396.806c.477.275 1.091.11 1.366-.365l2-3.46a1.004 1.004 0 0 0-.365-1.366l-1.372-.793a7.683 7.683 0 0 0-.002-2.224l1.372-.793c.476-.275.641-.89.365-1.366l-2-3.46a1 1 0 0 0-1.366-.365l-1.396.806A8.034 8.034 0 0 0 15 4.598V3a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v1.598A8.094 8.094 0 0 0 7.105 5.71L5.71 4.904a.999.999 0 0 0-1.366.365l-2 3.46a1.004 1.004 0 0 0 .365 1.366l1.372.793a7.683 7.683 0 0 0 0 2.224l-1.372.793c-.476.275-.641.89-.365 1.366zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4s-4-1.794-4-4s1.794-4 4-4z"/></svg>
+				<div class="title" >
+				Profile
+			</div>
+			</a></li>
+			<li><a href="#">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27" height="27" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"><path fill="currentColor" d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zM262.655 90c-54.497 0-89.255 22.957-116.549 63.758c-3.536 5.286-2.353 12.415 2.715 16.258l34.699 26.31c5.205 3.947 12.621 3.008 16.665-2.122c17.864-22.658 30.113-35.797 57.303-35.797c20.429 0 45.698 13.148 45.698 32.958c0 14.976-12.363 22.667-32.534 33.976C247.128 238.528 216 254.941 216 296v4c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12v-1.333c0-28.462 83.186-29.647 83.186-106.667c0-58.002-60.165-102-116.531-102zM256 338c-25.365 0-46 20.635-46 46c0 25.364 20.635 46 46 46s46-20.636 46-46c0-25.365-20.635-46-46-46z"/></svg>
+				<div class="title" >
+				F.A.Qs
+			</div>
+			</a></li>
+<!-- 			<li><a href="/logout">
+				<i><img src="/svg/spinner.svg"></i>
+				<div class="title" >Logout</div>
+			</a></li>
+ -->			<li></li>
+			<% } else { -%>
+			<li><a href="/login">
+				<i><img src="/svg/spinner.svg"></i>
+				<div class="title" >Log in</div>
+			</a></li>
+			<li><a href="/signup">
+				<i><img src="/svg/spinner.svg"></i>
+				<div class="title" >Sign up</div>
+			</a></li>
+			<% } -%>
+		</ul>
+	</nav>
+
+	<div class="main " style="">
+		<div class="top-bar bg-info" style="">
+			<i onclick="open_nav()" class="bi bi-list navbar-toggler"></i>
+			<div class="page-title"><h1><%= title%></h1></div>
+      <!-- </button> -->
+
+
+		<div class="btn-group">
+		  <button type="button" class="btn btn-warn bg-transparent dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+				<img src="/svg/account-circle.svg">
+		  </button>
+				<ul class="dropdown-menu">
+					<% if (user) { -%>
+					<li><a class="dropdown-item text-uppercase" id="currency"><%= user.user_name%></a></li>
+					<li><a class="dropdown-item c-formt text-black font-weight-bolder"><%= currency.format(user.balance) %></a></li>
+					<li><a  class="dropdown-item"href="/fund-wallet">Fund Wallet</a></li>
+			    <li><hr class="dropdown-divider"></li>
+					<li><a  class="dropdown-item"href="/logout"><i class="fa fa-solid fa-right-from-bracket"></i>Log out</a></li>
+					<% } else { -%>
+					<li><a  class="dropdown-item"href="/login"><i class="bi fa bi-box-arrow-in-right"></i>Sign in</a></li>
+					<% } -%>
+				</ul>
+		</div>
+	</div>
+
+	<script src="/js/jquery.js"></script>
+	<script>
+		const sidebar = document.querySelector('div.sidebar');
+		const l = () => {
+			let sidebar = document.querySelector('.sidebar');
+			let drop = document.querySelector('i.fa-caret-down')
+			if (sidebar.style.width == '60px') {
+				drop.style.display = 'none'
+				alert('in')
+			} else {
+				drop.style.display = 'block'
+				console.log(document.querySelector('.sidebar').style.width)
+			}
+		};
+
+		$(function(){
+		  $('[data-toggle="popover"]').popover()
+		});
+		jQuery(document).ready(function($) {
+			let path = window.location.pathname.split("/").pop();
+
+			if (path == '') {
+				path = '/'
+			}
+			// $('#page').text(path)
+			let target = $('nav a[href="/'+path+'"]')
+			// console.log(target);
+			target.addClass('active')
+		})
+		const open_nav = () => {
+			let full = '280px'
+			let sm = '60px'
+			if (sidebar.style.width !== full) {
+				sidebar.style.width = full
+			}else {
+				sidebar.style.width = sm
+			}
+		}
+
+		const close_sidebar = () => {
+			let full = '280px'
+			let sm = '60px'
+			if (sidebar.style.width !== sm) {
+				sidebar.style.width = sm
+			}else {
+				sidebar.style.width = full
+			}			
+		}
+
+
+	</script>
+	

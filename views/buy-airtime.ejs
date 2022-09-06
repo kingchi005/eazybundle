@@ -1,0 +1,52 @@
+<%- include('./partials/head.ejs') %>
+
+<div id="liveAlertPlaceholder" class="mx-2 text-center"></div>
+<form class="buy custom-form" id="airtime">
+  <h2><%= package.name %> Airtime</h2>
+  <div class="form-group">
+    <label for="number">Phone number</label>
+    <input type="tel" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" id="number"  required/>
+  </div>
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <input type="tel" id="amount" required />
+  </div>
+  <div class="form-submit mt-3 px-sm-5">
+    <button class="rounded shadow-none btn text-right btn-outline-primary" type="submit"> Purchase </button>
+  </div>
+</form>
+<script>
+  const form = _('form');
+  const mobile_number = _('.buy #number')
+  const amount = _('.buy #amount')
+  const submit_btn = _('button[type="submit"]')
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submit_btn.innerHTML = '<i class="spin"><img src="/svg/spinner.svg"></i> Processing'
+    submit_btn.classList.add('disabled')
+
+    let product = {
+      network: '<%= package.network %>',
+      net_name: '<%= package.name %>',
+      mobile_number: mobile_number.value,
+      amount: amount.value
+    }
+    product = JSON.stringify(product)
+    const url = '/airtime/<%= user._id %>'
+    const option = {
+        method: 'POST',
+        body: product,
+        headers: {'Content-Type' : 'application/json'}
+      }
+    let response = await fetch(url, option)
+    let result = await response.json();
+    // log(result)
+    submit_btn.innerHTML = 'Purchase'
+    submit_btn.classList.remove('disabled')
+    if (result.error) {
+      return alert(result.error.message, result.error.type)
+    }
+    alert(result.message, result.type)
+  })
+</script>
+<%- include('./partials/foot.ejs') %>

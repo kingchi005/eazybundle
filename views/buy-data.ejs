@@ -1,0 +1,115 @@
+<%- include('./partials/head.ejs') %>
+
+
+<div id="liveAlertPlaceholder" class="mx-2 text-center" style="margin: 0 5px;"></div>
+<!-- <button type="button" class="btn btn-primary" id="liveAlertBtn">Show live alert</button> -->
+
+
+<form class="buy custom-form" id="airtime">
+  <h2><%= package %></h2>
+  <div class="form-group">
+    <label for="number">Phone number</label>
+    <input type="tel" id="number" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" required/>
+  </div>
+  <div class="form-group">
+    <label for="select">Choose data plan</label>
+    <select name="plan" id="plan" required>
+      <option value="" disabled selected>Select data plan</option>
+      <% for (let p of price_list) { -%>
+      <option value="<%= p.price %>" data-plan-id="<%= p.planId %>"><%= p.plan %></option>     
+      <% } -%>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <input type="tel" id="amount" readonly required />
+  </div>
+  <div class="form-submit mt-3 px-sm-5">
+    <!-- data-bs-target="#confirm-purchase-modal" -->
+    <button id="confirm-btn" data-bs-toggle="modal" data-bs-target="#confirm-purchase-modal" class="rounded shadow-none btn text-right btn-outline-primary disabled" type="confirm">Purchase </button>
+  </div>
+<!-- CONFIRMATION MODAL -->
+<div class="modal modal-alert fade bg-secondary py-5" tabindex="-1" role="dialog" id="confirm-purchase-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-3 shadow">
+      <div class="modal-body p-4 text-center">
+        <h5 class="mb-0">Confirm transaction</h5>
+        <p class="mb-0" id="trn-msg"></p>
+      </div>
+      <div class="modal-footer flex-nowrap p-0">
+        <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" data-bs-dismiss="modal"><strong>Confirm</strong></button>
+        <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">Edit info</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+
+
+<script>
+  const trn_msg = _('#trn-msg')
+  const form = _('form');
+  const number = _('.buy #number')
+  const selected_plan = form.plan
+  const amount = _('.buy #amount')
+  const submit_btn = _('button[type="submit"]')
+  const confirm_btn = _('button[type="confirm"]')
+  selected_plan.addEventListener('change', () => {
+    // alert('Nice, you triggered this alert message!', 'success')
+    amount.value = selected_plan.value
+    confirm_btn.classList.remove('disabled')
+  })
+ /* $('button[type="confirm"]').click(function(e) {
+    if (number.validity.valid) {
+      e.preventDefault()
+      // log('clicked')
+      // $('#confirm-purchase-modal').show('#confirm-purchase-modal')
+    }
+  })*/
+  confirm_btn.addEventListener('click', e => {
+    e.preventDefault()
+    if (number.validity.valid) {
+      trn_msg.textContent = `You are about to purchase ${selected_plan.selectedOptions[0].text} for ${number.value}`
+    }
+  })
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    // log('submited')
+    confirm_btn.innerHTML = '<i class="spin"><img src="/svg/spinner.svg"></i> Processing'
+    confirm_btn.classList.add('disabled')
+
+    let product = {
+      network: '<%= package %>',
+      plan_id: selected_plan.selectedOptions[0].getAttribute('data-plan-id'),
+      number: number.value,
+      amount: amount.value,
+      Description: selected_plan.selectedOptions[0].text
+    }
+    product = JSON.stringify(product)
+    const url = '/purchase-data-bundle/<%= user._id %>'
+    const option = {
+        method: 'POST',
+        body: product,
+        headers: {'Content-Type' : 'application/json'}
+      }
+    let response = await fetch(url, option)
+    let result = await response.json();
+    // log(result)
+    confirm_btn.innerHTML = 'Purchase'
+    confirm_btn.classList.remove('disabled')
+    if (result.err) {
+      return alert(result.err.message, result.err.type)
+    }
+    alert(result.message, result.type)
+    
+  })
+
+
+
+  const confirm_purchase = () => {
+    // log("welcome")
+  }
+</script>
+<%- include('./partials/foot.ejs') %>
