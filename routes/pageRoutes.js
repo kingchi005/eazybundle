@@ -24,6 +24,10 @@ router.get('/fund-wallet', requireAuth, (req, res) => {
 router.get('/transactions', requireAuth, fetch_transactions, (req, res) => {
   res.render('transactions', {title: 'Transacions'}) 
 })
+router.get('/testing',(req, res) => {
+  console.log(req.connection)
+  // res.send(JSON.parse(req.header))
+})
 
 
 //airtime render

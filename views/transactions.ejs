@@ -7,7 +7,7 @@
 
 
 <div class="row m-0 p-0 mobile-view table-trn bg-light table-trn">
-	<h5 class="text-primary text-uppercase pb-3  p-3 font-italic">Recent Transactions</h5>
+	<h5 class="text-primary text-uppercase pb-3  p-3 font-italic">Transaction History</h5>
 	<% if (transactions !== '') { -%>
 		<% for (let i = 0; i < transactions.length; i++) { -%>
 	<div class="trn-item">
@@ -26,12 +26,12 @@
 	</div>
 		<% } -%>
 	<% } else { -%>
-	<h3 align="center">No recent transactions..</h3>
+	<h3 align="center">No Transaction History..</h3>
 	<% } -%>
 </div>
 <div class="row m-0 p-0 desktop-view table-trn bg-light">
 
-	<h5 class="text-primary text-uppercase pb-3  p-3 font-italic">Recent Transactions</h5>
+	<h5 class="text-primary text-uppercase pb-3  p-3 font-italic">Transaction History</h5>
 	<table class="table table-responsive table-hover text-cente table-striped " style="font-size: .8em;">
 		<% if (transactions !== '') { -%>
 		<thead class="text-uppercase bg-success align-middle text-white">
@@ -60,7 +60,7 @@
 		</tbody>
 	</table>
 	<% } else { -%>
-	<h3 align="center">No recent transactions..</h3>
+	<h3 align="center">No Transaction History..</h3>
 	<% } -%>
 </div>
 
