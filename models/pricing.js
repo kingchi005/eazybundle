@@ -113,10 +113,10 @@ const superJara = [
     ,net: 'airtel'
     ,price_list: [
       { plan: '300MB for 7days #150', price: 150, planId: "258" },
-      { plan: '500MB for 30days #200', price: 250, planId: "253" },
-      { plan: '1GB for 30days #350', price: 450, planId: "254" },
-      { plan: '2GB for 30days #700', price: 900, planId: "255" },
-      { plan: '5GB for 30days #1800', price: 900, planId: "255" }
+      { plan: '500MB for 30days #200', price: 200, planId: "253" },
+      { plan: '1GB for 30days #350', price: 350, planId: "254" },
+      { plan: '2GB for 30days #700', price: 700, planId: "255" },
+      { plan: '5GB for 30days #1800', price: 1800, planId: "255" }
     ]
   }
   ,{

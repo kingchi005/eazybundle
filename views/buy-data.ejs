@@ -81,7 +81,8 @@
     confirm_btn.classList.add('disabled')
 
     let product = {
-      network: '<%= package %>',
+      network: '<%= network %>',
+      net: '<%= package %>',
       plan_id: selected_plan.selectedOptions[0].getAttribute('data-plan-id'),
       number: number.value,
       amount: amount.value,
@@ -99,8 +100,8 @@
     // log(result)
     confirm_btn.innerHTML = 'Purchase'
     confirm_btn.classList.remove('disabled')
-    if (result.err) {
-      return alert(result.err.message, result.err.type)
+    if (result.error) {
+      return alert(result.error.message, result.error.type)
     }
     alert(result.message, result.type)
     

@@ -1,7 +1,10 @@
 const User = require("../models/userModel");
 const {Transaction, create_transaction} = require("../models/transactionModel");
 const {select_plan} = require('../models/pricing');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const axios = require('axios');
 
+const API_KEY = process.env.SUP_JA_K
 
 /*const create_trn = async (req,res) => {
 	//perform some authentication
@@ -40,17 +43,53 @@ const process_transaction = async (req, res, next) => {
 
 const proceed_puchase_data = async (req, res) => {
 	const {user} = res.locals;
-	const {network, plan_id, number, amount, Description} = req.body;
-	let trn_req_granted = /*make_transaction_request()*/ true;
-	if (trn_req_granted) {
-		// if third party made the transaction
-		let New_balance = user.balance - amount;
-		let trn = {user_name: user.user_name ,Type:network ,Description ,Amount:amount ,Phone:number ,Previous_balance: user.balance ,New_balance }
-		let created_trn = await create_transaction(trn);
-		res.status(created_trn.status).json({message:created_trn.message, type:created_trn.type, transaction_details: created_trn.details});
-	}else {
+	const {network, plan_id, number, amount, Description, net} = req.body;
+	let data = {
+		network,
+		mobile_number: number, /*09166203938*/
+		plan: plan_id,
+		Ported_number: true
+	};
+
+	data = JSON.stringify(data);
+	let config = {
+	  method: 'POST',
+	  url: 'https://www.superjara.com/api/data/',
+	  headers: { 
+	    'Authorization': 'Token '+API_KEY,
+	    'Content-Type': 'application/json'
+	  },
+	  data : data
+	};
+
+	axios(config)
+	.then(response => {
+	  console.log(response.data);
+	  if(response.data.Status === 'successful') {
+  		let New_balance = user.balance - amount;
+  		let trn = {
+  			user_name: user.user_name
+  			,Type:net
+  			,Description
+  			,Amount:amount
+  			,Phone:number
+  			,Previous_balance: user.balance
+  			,New_balance
+  		}
+  		create_transaction(trn)
+  			.then(created_trn => {
+		  		res.status(created_trn.status).json({message:created_trn.message, type:created_trn.type, transaction_details: created_trn.details});
+  			})
+  			.catch(error => {
+		  		res.status(501).json({error: {message: 'Something went wrong please contact the Admin for your support', type: 'danger'}})
+  			})
+  	}else {
+  		res.status(501).json({error: {message: 'Something went wrong please contact the Admin for your support', type: 'danger'}})
+  	}   
+	})
+	.catch((error) => {
 		res.status(501).json({error: {message: 'Something went wrong please contact the Admin for your support', type: 'danger'}})
-	}   
+	});
 };
 
 
