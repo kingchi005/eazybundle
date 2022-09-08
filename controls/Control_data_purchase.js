@@ -65,6 +65,22 @@ const proceed_puchase_data = async (req, res) => {
 	axios(config)
 	.then(response => {
 	  console.log(response.data);
+/*	  {  id: 2823557,
+  ident: 'Data6b96ff5f2-ebf',
+  customer_ref: null,
+  network: 1,
+  balance_before: '244.0',
+  balance_after: '133.0',
+  mobile_number: '09166203938',
+  plan: 242,
+  Status: 'failed',
+  api_response: '',
+  plan_network: 'MTN',
+  plan_name: '500.0MB',
+  plan_amount: '111.0',
+  create_date: '2022-09-09T00:30:44.966289',
+  Ported_number: true
+}*/
 	  if(response.data.Status === 'successful') {
   		let New_balance = user.balance - amount;
   		let trn = {
