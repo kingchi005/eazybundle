@@ -64,7 +64,7 @@ const proceed_puchase_data = async (req, res) => {
 
 	axios(config)
 	.then(response => {
-	  console.log(response.data);
+	  // console.log(response.data);
 			/*{  id: 2823557,
 			  ident: 'Data6b96ff5f2-ebf',
 			  customer_ref: null,
@@ -79,6 +79,23 @@ const proceed_puchase_data = async (req, res) => {
 			  plan_name: '500.0MB',
 			  plan_amount: '111.0',
 			  create_date: '2022-09-09T00:30:44.966289',
+			  Ported_number: true
+			}
+			{
+			  id: 2830567,
+			  ident: 'Data100289a91-54b',
+			  customer_ref: null,
+			  network: 1,
+			  balance_before: '244.0',
+			  balance_after: '24.0',
+			  mobile_number: '07035370828',
+			  plan: 234,
+			  Status: 'successful',
+			  api_response: '',
+			  plan_network: 'MTN',
+			  plan_name: '1.0GB',
+			  plan_amount: '220.0',
+			  create_date: '2022-09-09T20:48:17.327476',
 			  Ported_number: true
 			}*/
 	  if(response.data.Status === 'successful') {
