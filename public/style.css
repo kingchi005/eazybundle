@@ -177,21 +177,23 @@ p, h1, h2, h3, a, ul{
   width: calc(100% - 280px);
   min-height: 100vh;
   left: 280px;
-  top: 60px;
+  /*top: 60px;*/
   /*padding-top:35px;*/
   background: #ddf;
 }
 .top-bar{
-  position: fixed;
+  position: sticky;
   height: 60px;
-  top: 0;
-  width: calc(100% - 280px);
+  top: 0px;
+  /*width: calc(100% - 280px);*/
+  width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
   align-items: center;
   box-shadow: 0 4px 0 0px rgba(0, 0, 0, 0.2);
   color: #224;
+  z-index: 1;
 }
 i.fa-caret-down{
   font-size: 12px;
@@ -465,7 +467,7 @@ a[href="/logout"] div i{
   .bi-list:hover{
     background: #333;
   }
-  .main, .top-bar{
+  .main{
     width: calc(100% - 60px);
   }
   .main{

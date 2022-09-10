@@ -1,8 +1,60 @@
 <%- include('./partials/head.ejs') %>
+<%const currency = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'NGN', minimumFractionDigits: 2 }); %>
 
-<div class="card">
-	<div class="card-body">
-		sidunhsjdbhj
+<div style="
+	background: #8ff4ff;
+	width: 100%;
+	height: 200px;
+	color: #999;
+	padding: 25px 20px;
+	margin-bottom: 30px;
+	text-align: center;
+
+">
+<h4 class="text-uppercase text-secondary">Welcome to <strong>EazyBundle</strong></h4 class="text-uppercase">
+<p class="">We offer you the most affordable and most cheapest data, airtime, Dstv, Gotv and Startimes subscription.
+Here is the right place for your Electricity subscription and also Convert your Airtime to Cash.</p>
+</div>
+<div class="m-auto mx-3" style="
+	position: relative;
+	top: -80px;
+">
+	<div class="card col m-auto" style="
+		background: rgb(255,225,2);
+		background: -moz-linear-gradient(top,  rgba(255,225,2,1) 0%, rgba(160,133,0,1) 100%);
+		background: -webkit-linear-gradient(top,  rgba(255,225,2,1) 0%,rgba(160,133,0,1) 100%);
+		background: linear-gradient(to bottom,  rgba(255,225,2,1) 0%,rgba(160,133,0,1) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffe102', endColorstr='#a08500',GradientType=0 );
+	">
+		<div class="card-title d-flex justify-content-between align-content-center mt-2">
+			<h5 class="ml-5 font-weight-bolder text-uppercase align-middle pb-3 p-3" style="text-shadow: blue; color: blue;font-size: 18px;"><%= currency.format(user.balance) %></h5>
+			<a href="/fund-wallet" class="btn btn-secondary m-1 p-2 rounded-pill mr-5 align-self-center">Fund wallet</a>
+		</div>
+		<div class="card-body">
+			<div >
+			<%- include('./partials/credit_card.ejs') %>
+			</div>
+		</div>
+		<div class="text-center mb-3"><span class="text-dark font-weight-bold">http://127.0.0.1:5000/signup?ref=jwo99s</span><span class="btn btn-info px-1 py-0 rounded-pill">copy</span></div>
+	</div>
+</div>
+
+<div class="row mx-1 mt-1 bg-transparent">
+	<div class="card col m-0">
+		<div class="card-title">
+			dfjhfggdhb
+		</div>		
+		<div class="card-body">
+fdfbdbf
+		</div>
+	</div>
+	<div class="card col m-auto">
+		<div class="card-title">
+			<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">services</h5>
+		</div>		
+		<div class="card-body">
+fdfbdbf
+		</div>
 	</div>
 </div>
 

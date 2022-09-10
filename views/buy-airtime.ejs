@@ -47,6 +47,7 @@
       return alert(result.error.message, result.error.type)
     }
     alert(result.message, result.type)
+    location.assign('/transactions');
   })
 </script>
 <%- include('./partials/foot.ejs') %>
