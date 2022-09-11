@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 //database connection
-dbURI = 'mongodb://localhost:27017/Project-Nodejs';
+dbURI = process.env.DB_URI;
 // const hostname = '192.168.43.19'
 const hostname = '127.0.0.1';
 const PORT = 5000;

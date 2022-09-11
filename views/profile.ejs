@@ -19,7 +19,7 @@
 		<div class="form-group row justify-content-between mt-3">
 			<label class="col-5" for="">Phone number</label>
 			<div class="input-group mb-3 col-2">
-			<input class="p-1  text-center font-weight-bolder col" name="phone" type="tel" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="<%= `0${user.phone}` %>" required>
+			<input class="p-1  text-center font-weight-bolder col" name="phone" type="tel" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="<%= (user.phone) ? `0${user.phone}` : '' %>" required>
 			<button name="update" class="btn btn-outline-info " >Update</button>
 			</div>
 		</div>

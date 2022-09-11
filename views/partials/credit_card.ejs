@@ -27,15 +27,18 @@
 .Inner-wrap {
   background-color: #0c0014;
 background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%230d1838' points='1600%2C160 0%2C460 0%2C350 1600%2C50'/%3E%3Cpolygon fill='%230e315d' points='1600%2C260 0%2C560 0%2C450 1600%2C150'/%3E%3Cpolygon fill='%230f4981' points='1600%2C360 0%2C660 0%2C550 1600%2C250'/%3E%3Cpolygon fill='%231062a6' points='1600%2C460 0%2C760 0%2C650 1600%2C350'/%3E%3Cpolygon fill='%23117aca' points='1600%2C800 0%2C800 0%2C750 1600%2C450'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: auto 147%;
-  background-position: center;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  border-radius: 13px;
-  padding: 20px 40px;
-  box-sizing: border-box;
-  color: #fff;
+    background-size: auto 140%;
+    background-position: center;
+    position: relative;
+    height: 90%;
+    width: 60%;
+    min-width: 350px;
+    border-radius: 13px;
+    padding: 20px 40px;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: .9em;
+    margin: auto;
 }
 
 .p {
@@ -58,7 +61,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 /* Controls chip icon */
 
 .Chip {
-  height: 80px;
+  height: 40px;
   margin: 40px 0 25px 0;
 }
 
@@ -97,6 +100,7 @@ svg {
   float: left;
   margin: 0px 10px;
   font-size: 2.2em;
+  color: #999;
 }
 
 #first-li {
@@ -125,14 +129,15 @@ svg {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.Name h3 {
+.Name h4 {
   position: absolute;
   bottom: 0;
-  left: 18%;
+  left: 10%;
   text-transform: uppercase;
-  font-weight: 400;
-  font-size: 1.35em;
+  font-weight: 600;
+  font-size: 1.05em;
   color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.6);
 }
 
 .Visa {
@@ -149,9 +154,15 @@ svg {
 
       
 <!--       Header SVG -->
+      <div class="Logo-name" style="
+        position: absolute;
+        right: 10px;
+        top: 15px;
+      ">
+        <img src="/logo-1.png" width="100px" alt="">
+      </div>
       
-      
-      <svg class="Logo-name"
+<!--       <svg class="Logo-name"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    version="1.0"
@@ -214,7 +225,7 @@ svg {
   </g>
 </svg>
 
-      
+ -->      
       
 <!--       Logo SVG -->
       
@@ -280,6 +291,7 @@ svg {
 </g>
 </svg>
 <% const acct = `${user.bank_details.account_number}`  %>
+<% if (user.bank_details.account_number) { -%>
       <div class="Card-number abstr">
         <ul>
           <li id="first-li"><%= acct.substr(0, 3) %></li>
@@ -290,12 +302,30 @@ svg {
       
       <div class='Expire'>
         <!-- <h4>Good Thru</h4> -->
-        <p>02/20</p>
+        <p>08/25</p>
       </div>
       
       <div class='Name'>
         <h4><%= user.bank_details.Name%></h4>
       </div>
+<% } else { -%>
+      <div class="Card-number abstr">
+        <ul>
+          <li id="first-li">000</li>
+          <li>000</li>
+          <li id="last-li">0000</li>
+        </ul>
+      </div>
+      
+      <div class='Expire'>
+        <!-- <h4>Good Thru</h4> -->
+        <p>08/25</p>
+      </div>
+      
+      <div class='Name'>
+        <h4><%= user.user_name%></h4>
+      </div>  
+<% } -%>
       
 <!--       Visa Logo SVG -->
       

@@ -506,6 +506,7 @@ a[href="/logout"] div i{
     -webkit-box-shadow: inset 0px -0.5px 2px 1px rgba(0,0,0,0.53);
     -moz-box-shadow: inset 0px -0.5px 2px 1px rgba(0,0,0,0.53);
     box-shadow:  0px .5px 2px 0px rgba(0,0,0,0.41);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.04) 0%, #fff 100%);
   }
   .mobile-view div.trn-item .right{
     text-align: right;

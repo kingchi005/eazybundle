@@ -8,7 +8,7 @@
 
 <div class="row m-0 p-0 mobile-view table-trn bg-light table-trn">
 	<h5 class="text-primary text-uppercase pb-3  p-3 font-italic">Transaction History</h5>
-	<% if (transactions !== '') { -%>
+	<% if (transactions.length !== 0) { -%>
 		<% for (let i = 0; i < transactions.length; i++) { -%>
 	<div class="trn-item">
 		<!-- <div><img src="/svg/tick-circle-solid.svg" alt="confirmed"></div> -->
