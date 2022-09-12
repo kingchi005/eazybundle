@@ -7,7 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
 const cookieParser = require('cookie-parser');
-const {fetch_current_user} = require('./controls/authControl')
+const {fetch_current_user} = require('./controls/authControl');
 
 const app = express();
 
