@@ -27,7 +27,7 @@ const hostname = '127.0.0.1';
 const PORT = 5000;
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true, useFindAndModify: true })
   .then((result) => {
-		app.listen(PORT, hostname, () => {
+		app.listen(process.env.PORT, () => {
 			console.log('server started visit',`${hostname}:${PORT}`)
 		})
   console.log('DB connected');
