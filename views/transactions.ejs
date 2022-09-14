@@ -16,7 +16,7 @@
 		<div>
 			<div><b><%= transactions[i].Description %></b></div>
 			<div><%= transactions[i].Phone %></div>
-			<div><%= functions.formatDistanceToNow(transactions[i].Date) %></div>
+			<div><%= functions.formatDistanceToNow(transactions[i].Date, {addSuffix: true}) %></div>
 		</div>
 		<div class="right">
 			<div><b><%= transactions[i].Type %></b></div>
