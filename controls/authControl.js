@@ -1,5 +1,5 @@
 const User = require("../models/userModel");
-const jwt = require('JsonWebToken');
+const jwt = require('jsonwebtoken');
 // const cookieParser = require('cookie-parser');
 const secreTokenKey = process.env.STK
 
