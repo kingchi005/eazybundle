@@ -12,7 +12,7 @@ const {
 const {
 	process_airtime,
 	proceed_airtime_purchase,
-} = require('../controls/Control_airtime_purchase');
+} = require('../controls/Control_airtime_purchase.js');
 
 const {verify_paystack_trn} = require('../controls/control_wallet_funding');
 
