@@ -3,7 +3,7 @@ const http = require("https");
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 
-const API_KEY = process.env.PAK
+const API_KEY = process.env.PAK_TEST
 
 
 const verify_bank_details = async (req, res) => {
