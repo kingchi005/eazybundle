@@ -3,6 +3,8 @@
   --white: #ffffff;
   --light-grey: #ddd;
   --dark-grey: #333;
+  --full-width: 280px;
+  --mobile-width: 280px;
 }
 
 .fa-signal:before{
@@ -301,6 +303,7 @@ input, select{
   font-size: 1em;
   border: 1px solid #ddd;
   width: 100%;
+  background: #cdf;
 }
 
 input:focus{
@@ -454,11 +457,11 @@ a[href="/logout"] div i{
     display: none;
   }
 @media (max-width: 900px){
-  .sidebar:hover{
-    width: 280px;
+/*  .sidebar:hover{
+    width: var(--full-width);
     transition: .5s;
   }
-  button[aria-label="Close-sideber"]{
+*/  button[aria-label="Close-sideber"]{
     display: inline-block;
   }
   .bi-list{
@@ -482,6 +485,15 @@ a[href="/logout"] div i{
   }
   #liveAlertPlaceholder{
     right: 0;
+  }
+}
+@media (min-width: 901px){
+  .main{
+    left: 280px;
+    /*left: var(--full-width);*/
+  }
+  .sidebar{
+    width: 280px;
   }
 }
 @media (max-width: 800px) {
