@@ -9,10 +9,7 @@ const {
 	proceed_puchase_data,
 	get_price,
 } = require('../controls/Control_data_purchase');
-const {
-	process_airtime,
-	proceed_airtime_purchase,
-} = require('../controls/Control_airtime_purchase.js');
+const {	process_airtime, proceed_airtime_purchase } = require('../controls/control_airtime_purchase');
 
 const {verify_paystack_trn} = require('../controls/control_wallet_funding');
 
