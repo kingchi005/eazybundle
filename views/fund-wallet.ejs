@@ -6,11 +6,15 @@
     <input type="email" id="email-address" value="<%= user.email %>" required readonly />
   </div> -->
   <div class="form-group">
+  <p>
+    <B>NOTE:</B> 1.5% charges imply for this transaction
+  </p>
+  <p class="info"></p>
     <label for="amount">Amount</label>
-    <input class="text-center" type="tel" id="amount" placeholder="Please enter amount greater than 1000" required />
+    <input class="text-center" type="tel" id="amount" name="amount" placeholder="Please enter amount greater than 1000" required />
   </div>
   <div class="form-submit">
-    <button class="btn btn-success w-100" type="submit" onclick="payWithPaystack()"> Pay </button>
+    <button class="btn btn-success w-100" type="submit" name="submit" onclick="payWithPaystack()"> Fund My Wallet </button>
   </div>
 </form>
 
@@ -18,11 +22,18 @@
 <script>
   const paymentForm = document.getElementById('paymentForm');
   paymentForm.addEventListener("submit", payWithPaystack, false);
+  paymentForm.amount.addEventListener('keyup', e => {
+    if (e.target.value === '') {
+      // return paymentForm.submit.textContent = 'Continue to fund'
+    }
+    _('p.info').innerHTML = `${e.target.value} - ${0.015*e.target.value} = &#8358 ${e.target.value - 0.015 * e.target.value}`
+  })
+
   function payWithPaystack(e) {
     e.preventDefault();
 
     let handler = PaystackPop.setup({
-      key: 'pk_test_e579e1d7c7be8ae2a0c9e617e6ee9624e7a881ab', // Replace with your public key
+      key: 'pk_live_96df57764e4a4286d7afd39122c3bdab1b7736e1', // Replace with your public key
       email: '<%= user.email%>',
       // email: document.getElementById("email-address").value,
       amount: document.getElementById("amount").value * 100,
