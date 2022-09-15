@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="/bootstrap.css">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>EazyBundle | <%= title%></title>
@@ -8,5 +9,11 @@
 <body>
 <div align="center"><h1>Oops...</h1>
 <p>Page not found</p></div>
-<p align="center">URL:   <b><%= page%></b></p>
+<p align="center">The page at <b><%= page%></b> was not found</p>
+<div class="text-center">
+	
+<a align="center" href="/dashboard" class="btn btn-warning mx-auto w-25" style="
+	width: 100px;
+">DASHBOARD</a>
+</div>
 <%- include('./partials/foot.ejs') %>
