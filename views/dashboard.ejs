@@ -1,24 +1,23 @@
 <%- include('./partials/head.ejs') %>
 <%const currency = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'NGN', minimumFractionDigits: 2 }); %>
 
-<div style="
+<div class="db-greet" style="
 	background: #8ff4ff;
 	width: 100%;
-	height: 200px;
 	color: #999;
 	padding: 25px 20px;
-	padding-bottom: 300px;
+	padding-bottom: 100px;
 	margin-bottom: 30px;
 	text-align: center;
 
 ">
-<h4 class="text-uppercase text-secondary">Welcome to <strong>EazyBundle</strong></h4 class="text-uppercase">
+<h4 class=" text-uppercase text-secondary">Welcome to <strong>EazyBundle</strong></h4 class="text-uppercase">
 <p class="">We offer you the most affordable and most cheapest data, airtime, Dstv, Gotv and Startimes subscription.
 Here is the right place for your Electricity subscription and also Convert your Airtime to Cash.</p>
 </div>
-<div class="m-auto mx-3" style="
+<div class="m-auto mx-3 dashboard-card" style="
 	position: relative;
-	top: -150px;
+	top: -100px;
 ">
 	<div class="card col m-auto" style="
 		background: rgb(255,225,2);
@@ -30,14 +29,14 @@ Here is the right place for your Electricity subscription and also Convert your 
 	">
 		<div class="card-title d-flex justify-content-between align-content-center mt-2">
 			<h5 class="ml-5 font-weight-bolder text-uppercase align-middle pb-3 p-3" style="text-shadow: blue; color: blue;font-size: 18px;"><%= currency.format(user.balance) %></h5>
-			<a href="/fund-wallet" class="btn btn-secondary m-1 p-2 rounded-pill mr-5 align-self-center">Fund wallet</a>
+			<a href="/fund-wallet" class="btn btn-secondary m-1 p-2 rounded-pill mr-5 align-self-center" style="font-size: 0.8em;">Fund wallet</a>
 		</div>
 		<div class="card-body">
-			<div style="size: ;">
+			<div class="atm-card" style="size: ;">
 			<%- include('./partials/credit_card.ejs') %>
 			</div>
 		</div>
-		<div class="text-center mb-3"><span class="text-dark font-weight-bold">http://127.0.0.1:5000/signup?ref=jwo99s</span><span class="btn btn-info px-1 py-0 rounded-pill">copy</span></div>
+		<div class="text-center mb-3 bg-info rounded-pill justify-content-between" style="display: grid; grid-template-columns: 3fr 1fr; max-width: 300px; margin: 0 auto;"><span class="text-dark font-weight-bold text-monospace"><%= user.ref_id %></span><span class="btn btn-info px-1 py-0 rounded-pill">copy</span></div>
 	</div>
 </div>
 
@@ -69,6 +68,7 @@ fdfbdbf
 						margin-bottom: 10px;
 						box-shadow: 0px 0px 5px 1px #000 inset rgba(0, 0, 0, 0.2);
 						cursor: pointer;
+						color: #225;
 					"><%= user.notifications[i] %></li>
 				<% } -%>					
 			</ul>
