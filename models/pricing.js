@@ -77,8 +77,8 @@ const superJara = [
      { plan: '1GB for 30days #350', price: 350, planId: "234" },
      { plan: '2GB for 30days #700', price: 700, planId: "235" },
      { plan: '3GB for 30days #1000', price: 1000, planId: "263" },
-     { plan: '5GB for 30days #1700', price: 1700, planId: "237" },
-     { plan: '10GB for 30days #2900', price: 2900, planId: "246" }
+     { plan: '5GB for 30days #1600', price: 1600, planId: "237" },
+     { plan: '10GB for 30days #3000', price: 3000, planId: "246" }
    ]
  }
  ,{
@@ -91,9 +91,9 @@ const superJara = [
       { plan: '2GB for 30days #700', price: 700, planId: "209" },
       { plan: '3GB for 30days #1050', price: 1050, planId: "210" },
       { plan: '4GB for 30days #1400', price: 1400, planId: "264" },
-      { plan: '5GB for 30days #1700', price: 1700, planId: "211" },
+      { plan: '5GB for 30days #1600', price: 1600, planId: "211" },
       { plan: '6GB for 30days #1950', price: 1950, planId: "265" },
-      { plan: '10GB for 30days #2900', price: 2900, planId: "43" }
+      { plan: '10GB for 30days #3000', price: 3000, planId: "43" }
     ]
   }
   ,{
@@ -204,3 +204,39 @@ let transaction_structure = {
   PreviousBalance: '2000',
   NewBalance: '1650'
 }
+
+
+      // console.log(response.data);
+        /*{  id: 2823557,
+          ident: 'Data6b96ff5f2-ebf',
+          customer_ref: null,
+          network: 1,
+          balance_before: '244.0',
+          balance_after: '133.0',
+          mobile_number: '09166203938',
+          plan: 242,
+          Status: 'failed',
+          api_response: '',
+          plan_network: 'MTN',
+          plan_name: '500.0MB',
+          plan_amount: '111.0',
+          create_date: '2022-09-09T00:30:44.966289',
+          Ported_number: true
+        }
+        {
+          id: 2830567,
+          ident: 'Data100289a91-54b',
+          customer_ref: null,
+          network: 1,
+          balance_before: '244.0',
+          balance_after: '24.0',
+          mobile_number: '07035370828',
+          plan: 234,
+          Status: 'successful',
+          api_response: '',
+          plan_network: 'MTN',
+          plan_name: '1.0GB',
+          plan_amount: '220.0',
+          create_date: '2022-09-09T20:48:17.327476',
+          Ported_number: true
+        }*/

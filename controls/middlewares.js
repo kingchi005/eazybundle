@@ -32,5 +32,4 @@ const trns = []
 
 
 
-
 module.exports = {fetch_transactions}

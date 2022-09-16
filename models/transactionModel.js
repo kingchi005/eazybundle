@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const User = require("../models/userModel");
 const {formatDistanceToNow, subDays, format} = require('date-fns');
+// const { add_trn_bonus } = require('../controls/middlewares.js');
+const axios = require('axios');
+
 
 // let ca = '2022-08-23T10:55:15.565Z'
 // let dated = format(new Date(ca), 'EEEE,MMMM do, yyyy hh:mm a').toString();
@@ -40,6 +43,23 @@ let transaction_structure = {
   NewBalance: '1650'
 }
 
+//final transaction functions
+const create_transaction = async (transaction_details) => {
+	let res = {status: 0, message: '', type: ''}
+	try {
+		Transaction.create(transaction_details)
+		res.status = 202;
+		res.message = 'Transaction successful';
+		res.type = 'success';
+		res.details = transaction_details;
+	} catch(e) {
+		res.status = 500;
+		res.message = e;
+		res.type = 'danger';
+	}
+	return res;
+}
+
 
 //Post save updates
 transactionSchema.post('save', async function (doc,next) {
@@ -58,23 +78,85 @@ transactionSchema.post('save', async function (doc,next) {
 	}
 })
 
+transactionSchema.post('save', async function (doc,next) {
+	if (this.Type === 'MTN SME' || this.Type === 'Airtel Data') {
+		let bonus_amount;
+		if (this.Description === '3GB for 30days #1000' && this.Amount === 1000) {
+			bonus_amount = 100
+		} else if (this.Description === '5GB for 30days #1600' && this.Amount === 1600) {
+			bonus_amount = 200
+		} else if (this.Description === '10GB for 30days #3000' && this.Amount === 3000) {
+			bonus_amount = 450
+		} else {
+			next();
+		}
 
-//final transaction functions
-const create_transaction = async (transaction_details) => {
-	let res = {status: 0, message: '', type: ''}
-	try {
-		Transaction.create(transaction_details)
-		res.status = 202;
-		res.message = 'Transaction successful';
-		res.type = 'success';
-		res.details = transaction_details;
-	} catch(e) {
-		res.status = 500;
-		res.message = e;
-		res.type = 'danger';
+
+		let config = {
+		  method: 'post',
+		  url: 'https://www.superjara.com/api/topup/',
+		  headers: { 
+		    'Authorization': 'Token '+process.env.SUP_JA_K, 
+		    'Content-Type': 'application/json'
+		  },
+		  data : JSON.stringify({
+			    network: 1,
+			    amount: bonus_amount,
+			    mobile_number: `0${this.Phone}`,
+			    Ported_number: true,
+			    airtime_type: "VTU"
+			})
+		};
+
+		axios(config)
+		.then(response => {
+		  // console.log(JSON.stringify(response.data));
+		  
+			if(response.data.Status === 'successful') {
+				let trn = {
+					user_name:this.user_name
+					,Type: `Bonus`
+					,Description: 'Airtime Bonus'
+					,Amount: bonus_amount
+					,Phone: response.data.mobile_number
+					,Previous_balance: this.balance
+					,New_balance: this.New_balance
+				}
+				create_transaction(trn)
+					.then(created_trn => {
+						if (created_trn.status === 202) {
+							const notify = `Congratulation! You received a transaction bonus of NGN ${created_trn.details.Amount} in form of airtime to 0${created_trn.details.Phone}. \nPurchase more data bundle to receive airtime bonus`
+							User.updateMany({user_name: this.user_name}, {
+								$set: {
+									trn_bonus: created_trn.details.Amount
+								},
+								$push: {
+									notifications: notify
+								}
+							})
+								.then(arg => {
+									next();
+								})
+								.catch(err => {
+								  next();
+								})
+						}
+						next();
+					})
+					.catch(error => {
+						next();
+					});
+			}
+		})
+		.catch(err => {
+			next();
+		})
+	} else {
+		next();
 	}
-	return res;
-}
+})
+
+
 
 const Transaction = mongoose.model('Transaction', transactionSchema)
 module.exports = {Transaction, create_transaction};

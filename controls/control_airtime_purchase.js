@@ -18,7 +18,7 @@ const process_airtime = async (req, res, next) => {
 	const user = await User.findById(id);
 	const bal = user.balance
 	if (bal < amount) {
-	  	return res.status(400).json({error:{message:"Insufficient balance", type:'danger'}})
+  	return res.status(400).json({error:{message:"Insufficient balance", type:'danger'}})
 	}
 	let airtime_trn = {
     network,

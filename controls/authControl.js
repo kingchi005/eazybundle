@@ -50,6 +50,7 @@ const control_signup = async (req, res) => {
 		phone: '',                                                                                                     
 		balance: '0',                                                                                                           
 		ref_bonus: '0',                                                                                                           
+		trn_bonus: '0',                                                                                                           
 		transactions: [],                                                                                                                        
 		bank_details: {                                                                                                           
 		  Name: '',                                                                                     
@@ -59,6 +60,7 @@ const control_signup = async (req, res) => {
 		ref_id: 'dsjdhgh',                                                                                                       
 		upline,                                                                                                     
 		downlines: [],
+		notifications: [],
 	}
 	try {
 		let user = await User.create(new_user)

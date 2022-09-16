@@ -11,7 +11,7 @@
   </p>
   <p class="info"></p>
     <label for="amount">Amount</label>
-    <input class="text-center" type="tel" id="amount" name="amount" placeholder="Please enter amount greater than 1000" required />
+    <input class="text-center" type="tel" id="amount" name="amount" minlength="100" placeholder="100 +" required />
   </div>
   <div class="form-submit">
     <button class="btn btn-success w-100" type="submit" name="submit" onclick="payWithPaystack()"> Fund My Wallet </button>
@@ -34,6 +34,7 @@
 
     let handler = PaystackPop.setup({
       key: 'pk_live_96df57764e4a4286d7afd39122c3bdab1b7736e1', // Replace with your public key
+      // key: 'pk_test_e579e1d7c7be8ae2a0c9e617e6ee9624e7a881ab', // Replace with your public key
       email: '<%= user.email%>',
       // email: document.getElementById("email-address").value,
       amount: document.getElementById("amount").value * 100,
@@ -47,7 +48,14 @@
         let message = 'Payment complete! Reference: ' + response.reference;
         fetch(`/verify-paystack-payment/${response.reference}`)
           .then(response => response.json())
-          .then(data => console.log(data))
+          .then(data => {
+            console.log(data)
+            if (data.type === 'success') {
+              location.assign('/dashboard')
+            }else {
+              alert(data.message, data.type)
+            }
+          })
       }
     });
 

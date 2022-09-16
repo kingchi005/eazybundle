@@ -98,14 +98,16 @@
 	</div>
 
 	<div class="col w-100 rounded-0 border-bottom bg-light m-0 mb-1 pb-5 pt-1 py-3 px-4">
-		<% if (user.downlines !== '' ) { -%>
 	<form id="downlines">
 		<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">Downlines</h5>
+		<% if (user.downlines.length) { -%>
 		<ol class="list-group border-top rounded-0">
 			<% for (let i = 0; i < user.downlines.length; i++) { -%>
 			<li class="list-group-item font-weight-bold text-secondary border-0 border-bottom"><%= user.downlines[i] %></li>
 			<% } -%>
 		</ol>
+		<% } else { -%>
+			<h4>You have no downlines</h4>			
 		<% } -%>
 
 	</form>
@@ -243,7 +245,7 @@
 			acct_name.value = ''
 		}else {
 			spin.style.display = 'none'
-			acct_name_err.textContent = 'An error occured'
+			acct_name_err.textContent = 'An error occured :('
 			acct_name.value = ''
 			update_bank_btn.disabled = true
 		}

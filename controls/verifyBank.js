@@ -21,12 +21,14 @@ const verify_bank_details = async (req, res) => {
   fetch(url, {"method": "GET", "headers": {"content-type": "application/json", "authorization": "Bearer "+API_KEY, } })
       .then(response => response.body)
       .then(data => data.on('readable', () => {
-      let chunk;
-      while (null !== (chunk = data.read())) {
-        res.json(JSON.parse(chunk))
-      }
-  }))
-  .catch(err => console.log(err));
+        let chunk;
+        while (null !== (chunk = data.read())) {
+          res.json(JSON.parse(chunk))
+        }
+      }))
+  .catch(err => 
+    res.status(500).json({error: 'Something went wrong'})
+  );
 
   // res.json(result)
 

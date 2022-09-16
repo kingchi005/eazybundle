@@ -25,6 +25,7 @@ const userSchema = Schema({
 	  phone: { type: Number },
 	  balance: { type: Number },
 	  ref_bonus: { type: Number },
+	  trn_bonus: { type: Number },
 	  transactions: [String],
 	  bank_details: {
 	    Name: { type: String },
@@ -34,6 +35,7 @@ const userSchema = Schema({
 	  ref_id: { type: String },
 	  upline: { type: String },
 	  downlines: [String],
+	  notifications: [String],
 }, { timestamps: true })
 
 //Generate refID
@@ -49,8 +51,9 @@ userSchema.pre('save', async function (next) {
 
 //if Refferer
 userSchema.post('save', async function (doc,next) {
+	const notify = `Congratulations! Your downline ${doc.user_name} has successfully registered.`
 	const new_downline = this.user_name;
-	const urUpline = await User.findOneAndUpdate({ref_id: this.upline}, {$push: {downlines: this.user_name}})
+	const urUpline = await User.updateMany({ref_id: this.upline}, {$push: {downlines: this.user_name, notifications: notify}})
 	if (urUpline) {
 		console.log('upline added');
 		next();
