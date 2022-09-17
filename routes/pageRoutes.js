@@ -22,7 +22,7 @@ router.get('/fund-wallet', requireAuth, (req, res) => {
   res.render('fund-wallet', {title: 'Fund wallet'}) 
 })
 router.get('/transactions', requireAuth, fetch_transactions, (req, res) => {
-  res.render('transactions', {title: 'Transacions'}) 
+  res.render('transactions', {title: 'Transactions'}) 
 })
 router.get('/testing',(req, res) => {
   console.log(req.connection)
