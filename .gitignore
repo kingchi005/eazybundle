@@ -1,3 +1,5 @@
 .env
 node_modules/*
 web-content.txt
+secret.txt
+
