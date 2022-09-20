@@ -27,6 +27,7 @@ const transactionSchema = Schema({
 	,Description: {type: String}
 	// ,Date: {type: Date}
 	,Amount: {type: Number}
+	,cost_price: {type: Number}
 	,Phone: {type: Number}
 	,Previous_balance: {type: Number}
 	,New_balance: {type: Number}
