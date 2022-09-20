@@ -2,119 +2,132 @@
 
 
 <div id="liveAlertPlaceholder" class="mx-2 ml-3 text-center border"></div>
-<!-- <input class="p-1 ref-link" name="" id="referral-link" readonly> -->
+<!-- <input class="rounded p-1 ref-link" name="" id="referral-link" readonly> -->
 
-<div class="row m-0 p-0 px-">
-<div class="col w-100 rounded-0 border-bottom bg-light m-0 mb-1 pb-5 pt-1 py-3 px-4">
-<form class="form " id="user">
-	<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">My profile</h5>
-		<div class="form-group row justify-content-between mt-3">
-			<label class="col-5" for="">User name</label>
-			<input class="p-1 col-6 text-center  font-weight-bolder" type="text" value="<%= user.user_name%>" readonly>
+<div class="container-lg mx-2 d-none justify-content-center">
+	<div class="row mx-0 justify-content-around">
+		<div class="col-md-5 bg-light mb-2 rounded me-1 p-3">
+			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima sit quis necessitatibus consectetur placeat quibusdam laudantium ex dolores omnis </p>
 		</div>
-		<div class="form-group row justify-content-between mt-3">
-			<label class="col-5" for="">Email</label>
-			<input class="p-1 col-6 text-center  font-weight-bolder" type="text" value="<%= user.email%>" readonly>
+		<div class="col-md-5 bg-light mb-2 rounded me-1 p-3">
+			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima sit quis necessitatibus consectetur placeat quibusdam laudantium ex dolores omnis </p>
 		</div>
-		<div class="form-group row justify-content-between mt-3">
-			<label class="col-5" for="">Phone number</label>
-			<div class="input-group mb-3 col-2">
-			<input class="p-1  text-center font-weight-bolder col" name="phone" type="tel" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="<%= (user.phone) ? `0${user.phone}` : '' %>" required>
-			<button name="update" class="btn btn-outline-info " >Update</button>
-			</div>
+		<div class="col-md-5 bg-light mb-2 rounded me-1 p-3">
+			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima sit quis necessitatibus consectetur placeat quibusdam laudantium ex dolores omnis </p>
 		</div>
-		<div class="form-group row justify-content-between mt-3">
-			<label class="col-3" for="">Referral link</label>
-			<div class="input-group mb-3 col-6">
-				<input class="p-1 col text-center border-warning bg-light font-weight-bolder" name="reflink" aria-describedby="button-addon2" type="text" value="" readonly>
-			  <button class="btn btn-outline-warning bg-light" type="button" id="copy-ref"><i class="fa fa-copy text-warning"></i></button>
-			</div>
+		<div class="col-md-5 bg-light mb-2 rounded me-1 p-3">
+			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima sit quis necessitatibus consectetur placeat quibusdam laudantium ex dolores omnis </p>
 		</div>
-</form>
-</div>
-
-<div class="col w-100 rounded-0 border-bottom bg-light m-0 mb-1 pb-5 pt-1 py-3 px-4">
-<form class="form " id="update-bank" method="post">
-	<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">bank details</h5>
-	<label for="">Account number</label>
-	<% if (user.bank_details.Name) { -%>
-	<input type="number" name="account_number" value="<%= user.bank_details.account_number %>" readonly required>
-	<label for="">Bank name</label>
-	<select name="bank_name" readonly>
-		<option value="<%= user.bank_details.bank_name %>" disabled selected><%= user.bank_details.bank_name %></option>
-<!-- 		<% for (let bank of banks) { -%>
-		<option value="<%= bank.bank_code %>"><%= bank.name %></option>			
-		<% } -%>
- -->	</select>
-	<div class="error acct_name"></div>
-	<!-- <div class="spin"></div> -->
-	<label for="">Account name</label>
-	<input style="display: ;" type="text" name="account_name" value="<%= user.bank_details.Name %>" readonly required>
-
-	<% } else { -%>
-	<input type="number" name="account_number" placeholder="10 digits" required>
-	<label for="">Bank name</label>
-	<select name="bank_name">
-		<option value="" disabled selected>Select your bank name</option>
-		<% for (let bank of banks) { -%>
-		<option value="<%= bank.bank_code %>"><%= bank.name %></option>			
-		<% } -%>
-	</select>
-	<div class="error acct_name text-danger"></div>
-	<div class="spin"></div>
-	<i class="spin"><img src="svg/spinner.svg"></i>
-	<label for="">Account name</label>
-	<input style="display: ;" type="text" name="account_name" readonly required>
-	<button id="bank" class="btn btn-outline-info btn-animate-click disabled col-3 mt-3" type="upate" name="submit" style="">Update</button>
-	<% } -%>
-<!-- <div class="spinner spin"></div> -->
-	<!-- <button id="verify" class="btn-animate-click" type="update" disabled>Verify</button> -->
-	<!-- <img class="spin" src="svg/spinner.svg"> -->
-</form>
-</div>
-</div>
-
-<div class="row m-0 p-0 px-">
-	<div class="col w-100 rounded-0 border-bottom bg-light m-0 mb-1 pb-5 pt-1 py-3 px-4">
-	<form class="form " id="change-password" method="post">
-		<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">Change Password</h5>
-		<div class="form-group row mt-3">
-			<label for="" class="col-4">Current password</label>
-			<input class=" col-7" type="password" required name="current_p">
-			<div class="error ml-3 current-p text-danger"></div>
-		</div>
-		<div class="form-group row mt-3">
-			<label for="" class="col-4">New password</label>
-			<input class=" col-7" type="password" required name="new_p">
-			<div class="error ml-3 new-p text-danger"></div>
-		</div>
-		<div class="form-group row mt-3">
-			<label for="" class="col-4">Confirm password</label>
-			<input class=" col-7" type="password" required name="confirm_p">
-			<div class="error ml-3 confirm-p text-danger"></div>
-		</div>
-		<button class="btn btn-outline-info mt-3" name="update">Update</button>
-	</form>
-	</div>
-
-	<div class="col w-100 rounded-0 border-bottom bg-light m-0 mb-1 pb-5 pt-1 py-3 px-4">
-	<form id="downlines">
-		<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">Downlines</h5>
-		<% if (user.downlines.length) { -%>
-		<ol class="list-group border-top rounded-0">
-			<% for (let i = 0; i < user.downlines.length; i++) { -%>
-			<li class="list-group-item font-weight-bold text-secondary border-0 border-bottom"><%= user.downlines[i] %></li>
-			<% } -%>
-		</ol>
-		<% } else { -%>
-			<h4>You have no downlines</h4>			
-		<% } -%>
-
-	</form>
 	</div>
 </div>
 
 
+<div class="container-lg mx-2 justify-content-center">
+	<div class="row mx-0 justify-content-between mt-3 bg-light">
+		<div class="col-md-6 bg-white mb-2 pb-4 rounded px-4">
+			<form class=" " id="user">
+				<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">My profile</h5>
+					<div class="form-group row justify-content-between mt-3">
+						<label class="col" for="">User name</label>
+						<input class="rounded p-1 col text-center font-weight-bolder" type="text" value="<%= user.user_name%>" readonly>
+					</div>
+					<div class="form-group row justify-content-between mt-3">
+						<label class="col" for="">Email</label>
+						<input class="rounded p-1 col text-center  font-weight-bolder" type="text" value="<%= user.email%>" readonly>
+					</div>
+					<div class="form-group row justify-content-between mt-3">
+						<label class="" for="">Phone number</label>
+						<div class="input-group mb-3 col-2">
+							<input class="rounded p-1  text-center font-weight-bolder col" name="phone" type="tel" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="<%= (user.phone) ? `0${user.phone}` : '' %>" required>
+							<button name="update" class="btn btn-outline-info " >Update</button>
+						</div>
+					</div>
+					<div class="form-group row justify-content-between mt-3">
+						<label class="" for="">Referral link</label>
+						<div class="input-group mb-3 col-6">
+							<input class="rounded p-1 col text-center border-warning bg-light font-weight-bolder" name="reflink" aria-describedby="button-addon2" type="text" value="" readonly>
+						  <button class="btn btn-outline-warning bg-light" type="button" id="copy-ref"><i class="fa fa-copy text-warning"></i></button>
+						</div>
+					</div>
+			</form>
+		</div>
+
+		<div class="col-md-6 bg-white mb-2 pb-4 rounded px-4">
+			<form class=" " id="update-bank" method="post">
+				<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">bank details</h5>
+				<label for="">Account number</label>
+				<% if (user.bank_details.Name) { -%>
+				<input class="rounde" type="number" name="account_number" value="<%= user.bank_details.account_number %>" readonly required>
+				<label for="">Bank name</label>
+				<select name="bank_name" readonly>
+					<option value="<%= user.bank_details.bank_name %>" disabled selected><%= user.bank_details.bank_name %></option>
+			<!-- 		<% for (let bank of banks) { -%>
+					<option value="<%= bank.bank_code %>"><%= bank.name %></option>			
+					<% } -%>
+			 -->	</select>
+				<div class="error acct_name"></div>
+				<!-- <div class="spin"></div> -->
+				<label for="">Account name</label>
+				<input class="rounde" style="display: ;" type="text" name="account_name" value="<%= user.bank_details.Name %>" readonly required>
+
+				<% } else { -%>
+				<input class="rounde" type="number" name="account_number" placeholder="10 digits" required>
+				<label for="">Bank name</label>
+				<select name="bank_name">
+					<option value="" disabled selected>Select your bank name</option>
+					<% for (let bank of banks) { -%>
+					<option value="<%= bank.bank_code %>"><%= bank.name %></option>			
+					<% } -%>
+				</select>
+				<div class="error acct_name text-danger"></div>
+				<div class="spin"></div>
+				<i class="spin"><img src="svg/spinner.svg"></i>
+				<label for="">Account name</label>
+				<input class="rounde" style="display: ;" type="text" name="account_name" readonly required>
+				<button id="bank" class="btn btn-outline-info btn-animate-click disabled col-3 mt-3" type="upate" name="submit" style="">Update</button>
+				<% } -%>
+			<!-- <div class="spinner spin"></div> -->
+				<!-- <button id="verify" class="btn-animate-click" type="update" disabled>Verify</button> -->
+				<!-- <img class="spin" src="svg/spinner.svg"> -->
+			</form>
+		</div>
+
+		<div class="col-md-6 bg-white mb-2 pb-4 rounded px-4">
+			<form class=" " id="change-password" method="post">
+				<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">Change Password</h5>
+				<div class="form-group row mt-3">
+					<label for="" class="col">Current password</label>
+					<input class="rounded  col" type="password" required name="current_p">
+					<div class="error ml-3 current-p text-danger"></div>
+				</div>
+				<div class="form-group row mt-3">
+					<label for="" class="col">New password</label>
+					<input class="rounded  col" type="password" required name="new_p">
+					<div class="error ml-3 new-p text-danger"></div>
+				</div>
+				<div class="form-group row mt-3">
+					<label for="" class="col">Confirm password</label>
+					<input class="rounded  col" type="password" required name="confirm_p">
+					<div class="error ml-3 confirm-p text-danger"></div>
+				</div>
+				<button class="btn btn-outline-info mt-3" name="update">Update</button>
+			</form>
+		</div>
+
+		<div class="col-md-6 bg-white mb-2 pb-4 rounded px-4">
+				<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">Downlines</h5>
+				<% if (user.downlines.length) { -%>
+				<ol class="list-group border-top rounded-0">
+					<% for (let i = 0; i < user.downlines.length; i++) { -%>
+					<li class="list-group-item font-weight-bold text-secondary border-0 border-bottom"><%= user.downlines[i] %></li>
+					<% } -%>
+				</ol>
+				<% } else { -%>
+					<h4>You have no downlines</h4>			
+				<% } -%>
+		</div>
+	</div>
+</div>
 
 
 

@@ -303,11 +303,11 @@ input, select{
   font-size: 1em;
   border: 1px solid #ddd;
   width: 100%;
-  background: #cdf;
+  color: inherit;
 }
 
 input:focus{
-	border: 2px solid blue;
+	border: 1px solid blue;
 }
 
 label{
@@ -330,6 +330,24 @@ butto{
   letter-spacing: 2px;
   cursor: pointer;
 }
+.dashboard-card{
+  background: rgb(255,225,2);
+  background: -moz-linear-gradient(top,  rgba(255,225,2,1) 0%, rgba(160,133,0,1) 100%);
+  background: -webkit-linear-gradient(top,  rgba(255,225,2,1) 0%,rgba(160,133,0,1) 100%);
+  background: linear-gradient(to bottom,  rgba(255,225,2,1) 0%,rgba(160,133,0,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffe102', endColorstr='#a08500',GradientType=0 );
+  box-shadow: 0px 0px 10px 0px #000 inset;
+  max-width: 500px;
+  top: -80px;
+}
+.db-greet{
+  background: #8ff4ff;
+  width: 100%;
+  color: #999;
+  padding: 25px 20px;
+  padding-bottom: 100px;
+  text-align: center;
+}
 form.buy button{
   /*border-radius: 10px;*/
 }
@@ -350,7 +368,7 @@ button:disabled:hover{
   font-weight: bold;
 }
 input::-webkit-input-placeholder{
-  color: #777;
+  color: #888;
 }
 input .error{
 	border: 2px solid #FF1E00;
@@ -497,9 +515,6 @@ a[href="/logout"] div i{
   }
 }
 @media (max-width: 800px) {
-  .row{
-    display: block !important;
-  }
   .desktop-view{
     display: none !important;
   }
@@ -544,7 +559,7 @@ button{
 
 @media (max-width: 500px) {
   .top-bar{
-    float: right;
+    /*float: right;*/
   }
   i.navbar-toggler{
     font-size: .9em;
@@ -552,7 +567,7 @@ button{
     margin-left: 0;
   }
   .atm-card{
-    font-size: .7em;
+    font-size: .6em;
   }
   .Inner-wrap{
     display: none;
@@ -566,7 +581,19 @@ button{
   }
   input, select{
     width: 100% !important;
+    border: 1px solid #ddf;
   }
+}
+@media (max-width: 400px) {
+/*  .sidebar{
+    width: 0px;
+    left: -35px;
+    padding: 0;
+    margin: 0;
+  }
+  .main{
+    left: 0;
+  }*/
 }
 @media (max-width: 300px) {
   h1.page-title{

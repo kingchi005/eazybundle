@@ -412,15 +412,15 @@ button .bi-list {
 			}
 		}
 
-		_('.sidebar, .sidebar *').addEventListener('mouseover', e => {
-			if (window.matchMedia("(max-width: 900px)").matches) {
+		_('.sidebar, .sidebar *').addEventListener('mousever', e => {
+			if (window.matchMedia("(max-width: 900px)").matches || window.matchMedia("(min-width: 400px)").matches) {
 				_('.sidebar').style.width = full_w
 				_('.main').style.left = full_w
 				_('.main').style.transition = '.5s'					
 			}
 		})
-		_('.sidebar, .sidebar *').addEventListener('mouseout', e => {
-			if (window.matchMedia("(max-width: 900px)").matches) {
+		_('.sidebar, .sidebar *').addEventListener('moueout', e => {
+			if (window.matchMedia("(max-width: 900px)").matches || window.matchMedia("(min-width: 400px)").matches) {
 				_('.sidebar').style.width = sm_w
 				_('.main').style.left = sm_w
 				_('.main').style.transition = '.5s'					
