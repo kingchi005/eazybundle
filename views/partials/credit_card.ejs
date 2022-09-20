@@ -31,7 +31,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     background-position: center;
     position: relative;
     height: 70%;
-    width: 300px;
+    width: 350px;
     /*min-width: 300px;*/
     border-radius: 13px;
     padding: 20px 40px;
@@ -306,7 +306,12 @@ svg {
       </div>
       
       <div class='Name'>
-        <h4><%= user.bank_details.Name%></h4>
+        <%
+          let bname = user.bank_details.Name
+          let sname = bname.split(/\s/)
+        %>
+        <h4><%= `${sname[0]} ${sname[sname.length - 1]}` %></h4>
+        <!-- <h4><%= user.bank_details.Name%></h4> -->
       </div>
 <% } else { -%>
       <div class="Card-number abstr">
@@ -323,7 +328,7 @@ svg {
       </div>
       
       <div class='Name'>
-        <h4><%= user.user_name%></h4>
+        <h4><%= user.user_name %></h4>
       </div>  
 <% } -%>
       
