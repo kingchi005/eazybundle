@@ -111,7 +111,7 @@ transactionSchema.post('save', async function (doc,next) {
 				create_transaction(trn)
 					.then(created_trn => {
 						if (created_trn.status === 202) {
-							const notify = `Congratulation! You received a transaction bonus of NGN ${created_trn.details.Amount} in form of airtime to 0${created_trn.details.Phone}. \nPurchase more data bundle to receive airtime bonus`
+							const notify = `Congratulation! You received a transaction bonus of NGN ${created_trn.details.Amount} in form of airtime to 0${created_trn.details.Phone}. \nPurchase more data bundle to receive airtime bonus |${Date.now()}`
 							User.updateMany({user_name: this.user_name}, {
 								$set: {
 									trn_bonus: created_trn.details.Amount

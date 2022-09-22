@@ -1,51 +1,32 @@
 <%- include('./partials/head.ejs') %>
 
 
-<div id="liveAlertPlaceholder" class="mx-2 ml-3 text-center border"></div>
-<!-- <input class="rounded p-1 ref-link" name="" id="referral-link" readonly> -->
+<!-- <input class="rounded bg-transparent p-1 ref-link" name="" id="referral-link" readonly> -->
 
-<div class="container-lg mx-2 d-none justify-content-center">
-	<div class="row mx-0 justify-content-around">
-		<div class="col-md-5 bg-light mb-2 rounded me-1 p-3">
-			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima sit quis necessitatibus consectetur placeat quibusdam laudantium ex dolores omnis </p>
-		</div>
-		<div class="col-md-5 bg-light mb-2 rounded me-1 p-3">
-			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima sit quis necessitatibus consectetur placeat quibusdam laudantium ex dolores omnis </p>
-		</div>
-		<div class="col-md-5 bg-light mb-2 rounded me-1 p-3">
-			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima sit quis necessitatibus consectetur placeat quibusdam laudantium ex dolores omnis </p>
-		</div>
-		<div class="col-md-5 bg-light mb-2 rounded me-1 p-3">
-			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima sit quis necessitatibus consectetur placeat quibusdam laudantium ex dolores omnis </p>
-		</div>
-	</div>
-</div>
-
-
-<div class="container-lg mx-2 justify-content-center">
-	<div class="row mx-0 justify-content-between mt-3 bg-light">
+<div class="container-xl justify-content-center">
+	<div class="row mx-0 justify-content-between pt-1 bg-transparent">
 		<div class="col-md-6 bg-white mb-2 pb-4 rounded px-4">
 			<form class=" " id="user">
 				<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">My profile</h5>
 					<div class="form-group row justify-content-between mt-3">
 						<label class="col" for="">User name</label>
-						<input class="rounded p-1 col text-center font-weight-bolder" type="text" value="<%= user.user_name%>" readonly>
+						<input class="rounded bg-transparent p-1 col text-center font-weight-bolder" type="text" value="<%= user.user_name%>" readonly>
 					</div>
 					<div class="form-group row justify-content-between mt-3">
 						<label class="col" for="">Email</label>
-						<input class="rounded p-1 col text-center  font-weight-bolder" type="text" value="<%= user.email%>" readonly>
+						<input class="rounded bg-transparent p-1 col text-center  font-weight-bolder" type="text" value="<%= user.email%>" readonly>
 					</div>
 					<div class="form-group row justify-content-between mt-3">
 						<label class="" for="">Phone number</label>
 						<div class="input-group mb-3 col-2">
-							<input class="rounded p-1  text-center font-weight-bolder col" name="phone" type="tel" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="<%= (user.phone) ? `0${user.phone}` : '' %>" required>
+							<input class="rounded bg-transparent p-1  text-center font-weight-bolder col" name="phone" type="tel" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="<%= (user.phone) ? `0${user.phone}` : '' %>" required>
 							<button name="update" class="btn btn-outline-info " >Update</button>
 						</div>
 					</div>
 					<div class="form-group row justify-content-between mt-3">
 						<label class="" for="">Referral link</label>
 						<div class="input-group mb-3 col-6">
-							<input class="rounded p-1 col text-center border-warning bg-light font-weight-bolder" name="reflink" aria-describedby="button-addon2" type="text" value="" readonly>
+							<input class="rounded bg-transparent p-1 col text-center border-warning bg-light font-weight-bolder" name="reflink" aria-describedby="button-addon2" type="text" value="" readonly>
 						  <button class="btn btn-outline-warning bg-light" type="button" id="copy-ref"><i class="fa fa-copy text-warning"></i></button>
 						</div>
 					</div>
@@ -97,17 +78,17 @@
 				<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">Change Password</h5>
 				<div class="form-group row mt-3">
 					<label for="" class="col">Current password</label>
-					<input class="rounded  col" type="password" required name="current_p">
+					<input class="rounded bg-transparent  col" type="password" required name="current_p">
 					<div class="error ml-3 current-p text-danger"></div>
 				</div>
 				<div class="form-group row mt-3">
 					<label for="" class="col">New password</label>
-					<input class="rounded  col" type="password" required name="new_p">
+					<input class="rounded bg-transparent  col" type="password" required name="new_p">
 					<div class="error ml-3 new-p text-danger"></div>
 				</div>
 				<div class="form-group row mt-3">
 					<label for="" class="col">Confirm password</label>
-					<input class="rounded  col" type="password" required name="confirm_p">
+					<input class="rounded bg-transparent  col" type="password" required name="confirm_p">
 					<div class="error ml-3 confirm-p text-danger"></div>
 				</div>
 				<button class="btn btn-outline-info mt-3" name="update">Update</button>
