@@ -68,6 +68,7 @@ const proceed_airtime_purchase = async (req, res) => {
 				,Type: `${net_name}`
 				,Description: 'Airtime transaction'
 				,Amount: amount
+				,cost_price: response.data.paid_amount
 				,Phone: response.data.mobile_number
 				,Previous_balance: user.balance
 				,New_balance

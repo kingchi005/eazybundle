@@ -6,13 +6,6 @@ const axios = require('axios');
 
 const API_KEY = process.env.SUP_JA_K
 
-/*const create_trn = async (req,res) => {
-	//perform some authentication
-	
-	let trn = await create_transaction(req.body);
-	res.status(trn.status).json({message:trn.message, type:trn.type});
-}*/
-
 
 //get the price of select data plan
 const get_price = (req, res) => {
@@ -72,6 +65,7 @@ const proceed_puchase_data = async (req, res) => {
 	  			,Type:response.data.plan_network
 	  			,Description
 	  			,Amount:amount
+	  			,cost_price: response.data.plan_amount
 	  			,Phone: response.data.mobile_number
 	  			,Previous_balance: user.balance
 	  			,New_balance

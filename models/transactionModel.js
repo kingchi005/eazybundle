@@ -24,6 +24,7 @@ let transaction_structure = {
   Type: 'MTN SME',
   Description: '1GB for 30days 350',
   Amount: '50',
+  cost_price: '49',
   Phone: '090909',
   PreviousBalance: '2000',
   NewBalance: '1650'
@@ -104,6 +105,7 @@ transactionSchema.post('save', async function (doc,next) {
 					,Type: `Bonus`
 					,Description: 'Airtime Bonus'
 					,Amount: bonus_amount
+					,cost_price: response.data.paid_amount
 					,Phone: response.data.mobile_number
 					,Previous_balance: this.balance
 					,New_balance: this.New_balance
