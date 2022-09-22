@@ -19,30 +19,40 @@ Here is the right place for your Electricity subscription and also Convert your 
 				%>
 				</div>
 			</div>
-			<div class="text-center mb-3 bg-info rounded-pill justify-content-between" style="display: grid; grid-template-columns: 3fr 1fr; max-width: 300px; margin: 0 auto;"><span class="text-dark font-weight-bold text-monospace"><%= user.ref_id %></span><span class="btn btn-info px-1 py-0 rounded-pill">copy</span></div>
+			<div class="text-center mb-3 bg-info rounded-pill justify-content-between" style="display: grid; grid-template-columns: 3fr 1fr; max-width: 300px; margin: 0 auto;"><span class="text-dark ms-3 font-weight-bold text-monospace"><%= user.ref_id %></span><!-- <span class="btn btn-info px-1 py-0 rounded-pill">copy</span> --></div>
 		</div>
 
-			<div class="card col-md m-0 notification bg-white" style="">
+			<div class="card col-md m-0 notification bg-white me-4" style="">
 				<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">Notification</h5>
-						<% if (user.notifications.length) { -%>
+					<% if (user.notifications.length) { -%>
 				<div class="list-group">
 					<ul class="list-unstyled">
-						<% for (var i = 0; i < user.notifications.length; i++) { -%>
+						<%
+							let notification = user.notifications
+							for (var i = 0; i < notification.length; i++) { -%>
+						<%
+							let notify_arr = notification[i].split('|')
+							let notify_me = notify_arr[0]
+							let time = notify_arr[1]
+							time = formatDistanceToNow(parseInt(time), {addSuffix: true})
+						%>
 						<style>
 							.notification li:hover {
 								box-shadow: 0px 0px 4px 0px #000;
 								transition: .05s;
 							}
 						</style>
-							<li style="
+							<li class=" p-2 px-3 mb-3 rounded" style="
 								background: rgba(101, 224, 0, 0.2);
 								border-radius: 5px;
 								padding: 15px;
-								margin-bottom: 10px;
+								margin-bottom: 8px;
 								box-shadow: 0px 0px 5px 1px #000 inset rgba(0, 0, 0, 0.2);
 								cursor: pointer;
 								color: #2b3300;
-							"><%= user.notifications[i] %></li>
+							"><p class="mb-0"><%= notify_me %></p>
+								<small align="" class="text-muted d-block mt-0 text-end m-0"><%= time %></small>
+							</li>
 						<% } -%>					
 					</ul>
 				</div>
@@ -51,18 +61,6 @@ Here is the right place for your Electricity subscription and also Convert your 
 						<% } -%>
 			</div>
 	</div>
-
-<div class="container">
-
-	<div class="card col m-0">
-		<div class="card-title">
-			dfjhfggdhb
-		</div>		
-		<div class="card-body">
-fdfbdbf
-		</div>
-	</div>
-
 	
 </div>
 

@@ -4,21 +4,6 @@ const {formatDistanceToNow, subDays, format} = require('date-fns');
 // const { add_trn_bonus } = require('../controls/middlewares.js');
 const axios = require('axios');
 
-
-// let ca = '2022-08-23T10:55:15.565Z'
-// let dated = format(new Date(ca), 'EEEE,MMMM do, yyyy hh:mm a').toString();
-// console.log(dated)
-/*const date = new Date('2020/09/19');
-console.log(date);
-console.log(`${format(date, 'dd.MM.yyyy')}`);
-console.log(`${format(date, 'yyyy-MM-dd hh:mm:ss a').toString()}`);
-console.log(`${format(date, 'EEEE, MMMM yyyy')}`);
-console.log(`${format(date, 'EEEE,MMMM do, yyyy hh:mm a')}`);
-console.log(`${format(date, 'MMMM, yyyy')}`);
-console.log(`${format(date, 'MMMM.do.')}`);
-console.log(`${format(date, 'EEEE do HH:mm ')}`);
-console.log(`${format(date, 'EEEE,MMMM do, yyyy ppppp')}`);
-console.log(`${format(date, 'do  MMMM yyyy OOOO')}`);*/
 const Schema = mongoose.Schema;
 
 const transactionSchema = Schema({
