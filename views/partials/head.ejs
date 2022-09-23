@@ -13,7 +13,35 @@
 </head>
 <body class="h-100" style="">
 	<script src="/custom_func.js"></script>
+	<!-- offcanvas top-bar -->
+	<div class="offcanvas offcanvas-top bg-info h-75 w-auto" tabindex="-1" id="off-bar-top" aria-labelledby="offcanvasTopLabel">
+	  <div class="offcanvas-header pt-0">
+	    <h5 class="offcanvas-title" id="offcanvasTopLabel"><a href="/" ><img src="/logo.png"></a></h5>
+	    <button type="button" class="btn-close btn-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	  </div>
+	  <div class="offcanvas-body">
+	  	<ul class="nav flex-colum ">
+	  	  <a href="/" class="btn btn-"><li class="nav-item">Home</li></a>
+	  	  <a href="/#about" class="btn btn-"><li class="nav-item">About us</li></a>
+	  	  <a href="/#reviews" class="btn btn-"><li class="nav-item">Reviews</li></a>
+	  	  <a href="/#pricing" class="btn btn-"><li class="nav-item">Pricing</li></a>
+	  	  <a class="btn btn-" href="#"><li>FAQs</li></a>
+	  	  <a class="btn btn-" href="#"><li>Privacy policy</li></a>
+<!-- 	  	  <a class="btn btn-" href="#"><li>Privacy policy</li></a>
+	  	  <a class="btn btn-" href="#"><li>Privacy policy</li></a>
+ -->
 
+	  	</ul>
+
+	  </div>
+  	  <div class="d-block justify-content-end text-end m-5">
+	  	  <a class="btn btn-primary" href="/login">Log in</a>
+	  	  <a class="btn btn-warning" href="/signup">Sign up</a>  	  	
+  	  </div>
+	</div>
+
+
+	<!-- offcanvas sidebar -->
 	<div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="off-bar" aria-labelledby="offcanvasTopLabel">
 	  <div class="offcanvas-header">
 	    <h5 class="offcanvas-title" id="offcanvasTopLabel"><a href="/" ><img src="/logo.png"></a></h5>
@@ -110,7 +138,7 @@
 	  </div>
 	</div>
 
-		<nav class="navbar sticky-top bg-info shadow py-0 my-0">
+		<nav class="navbar sticky-top bg-info py-0 my-0" style="box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.5);">
 			<div class="container-xxl py-0 my-0">
 				<div class="">
 					<% if (user) { -%>												
@@ -119,10 +147,10 @@
 			    </button>
 					<% } -%>
 					<a href="/" class="logo-lg"><img class="py-0 my-0 d-non" src="/logo.png"></a>	
-					<a href="/" class="logo-sm"><img class="py-0 my-2" width="50" height="45" src="/logo-1.png" alt="logo-sm"></a>	
+					<!-- <a href="/" class="logo-sm"><img class="py-0 my-2" width="50" height="45" src="/logo-1.png" alt="logo-sm"></a>	 -->
 				</div>
 				<div>
-								<% if (user) { -%>
+								<% if (user && (title != 'get cheap data')) { -%>
 					<div class="btn-group rounded">
 					  <button type="button" class="btn btn- bg-transparent dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
 							<!-- <img src="/svg/account-circle.svg"> -->
@@ -137,18 +165,39 @@
 							</ul>
 					</div>
 					<a href="/#" class="btn text-primary"><i class="bi bi-bell-fill"></i></a> 
-								<% } else { -%>
-								<div class="justify-content-between w-100">
-									<div class="btn-group rounded-0 ">
+					<% } -%>
+							<% if (title == 'get cheap data' || !user) { -%>
+						<div class="justify-content-between w-100">
+									<div class="btn-grop rounded-0 d-none d-lg-inline-block text-uppercase fw-bold justify-content-center">
 										<a href="/" class="btn ">Home</a>
 										<a href="/#about" class="btn ">About us</a>
 										<a href="/#pricing" class="btn ">Pricing</a>
 										<a href="/#reviews" class="btn ">Reviews</a>
-										<a href="/#faqs" class="btn ">FAQs</a>
-										<a href="/#contact-us" class="btn ">Get in touch</a>
+										<!-- <a href="/#faqs" class="btn ">More</a> -->
+										<div class="dropdown d-inline-block">
+										  <a class="btn btn-info dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										    More
+										  </a>
+
+										  <ul class="dropdown-menu">
+										    <li><a class="dropdown-item" href="#">FAQs</a></li>
+										    <li><a class="dropdown-item" href="#">Privacy policy</a></li>
+										    <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+										  </ul>
+										</div>
+										<a href="/#contact-us" class="btn ">Contact us</a>
 									</div>
-									<a  class="btn btn-primary"href="/login"><i class="bi bi-box-arrow-in-right me-1"></i>Log in</a>
-									<a  class="btn btn-warning"href="/signup"><i class="bi bi-box-arrow-in- me-1"></i>Sign up</a>
+									<% if (!user) { -%>										
+									<div class="d-sm-inline-block d-none">
+										<a  class="btn btn-primary"href="/login"><i class="bi bi-box-arrow-in-right me-1"></i>Log in</a>
+										<a  class="btn btn-warning"href="/signup"><i class="bi bi-box-arrow-in- me-1"></i>Sign up</a>
+									</div>
+									<% } else { -%>
+										<a  class="btn btn-danger"href="/logout"><i class="bi bi-box-arrow-in- me-1"></i>Sign out</a>
+									<% } -%>
+									<button class="navbar-toggler d-lg-none ms-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#off-bar-top" aria-controls="offcanvasDarkNavbar">
+							      <span class="navbar-toggler-icon"></span>
+							    </button>
 								</div>									
 								<% } -%>
 				</div>
@@ -280,7 +329,7 @@
 				}
 				.side-bar .bi, .offcanvas-sidebar .bi{
 					font-size: 20px;
-					color: #8af5ff;
+					color: rgba(138, 245, 255, 0.69);
 					margin-right: 15px;
 				}
 				.col-list a: hover{

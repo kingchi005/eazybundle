@@ -1,26 +1,28 @@
 <%- include('./partials/head.ejs') %>
-<form class="custom-form mt-5">
-<div id="liveAlertPlaceholder" class="mx-2 text-center"></div>
-<div>
-	<h3 class="pt-5">Log into your account</h3>
+<div class="containe bg-light m-0 h-100 pt-2">
+	<form class="custom-form">
+	<div id="liveAlertPlaceholder" class="mx-2 text-center"></div>
 	<div>
-		<img src="">
-	</div>
-	<div>
-		<label for='user_name'>User name:</label>
-		<input class="input" type="text" name="user_name">
-		<div class="user_name error text-danger"></div>
-	</div>
-	<div>
-		<label for='password'>Password:</label>
-		<input class="input" type="password" name="password">
-		<div class="password error text-danger"></div>
-	</div>
-	<a href="">Forgotten password?</a></p>
-	<button class="btn btn-primary w-100 shadow-none rounded mb-3">Log in</button>	
-	<!-- <hr/> -->
-	<p> <a class="btn btn-info text-decoration-none text-white" href="/signup">Create new account</a></p>
-</form>
+		<h3 class="pt-5">Log into your account</h3>
+		<div>
+			<img src="">
+		</div>
+		<div>
+			<label for='user_name'>User name:</label>
+			<input class="input" type="text" name="user_name">
+			<div class="user_name error text-danger"></div>
+		</div>
+		<div>
+			<label for='password'>Password:</label>
+			<input class="input" type="password" name="password">
+			<div class="password error text-danger"></div>
+		</div>
+		<a href="">Forgotten password?</a></p>
+		<button class="btn btn-primary w-100 shadow-none rounded mb-3">Log in</button>	
+		<!-- <hr/> -->
+		<p> <a class="btn btn-info text-decoration-none text-white" href="/signup">Create new account</a></p>
+	</form>
+</div>
 <%- include('./partials/foot.ejs') %>
 
 <script>

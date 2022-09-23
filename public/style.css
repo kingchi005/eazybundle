@@ -177,7 +177,7 @@ p, h1, h2, h3, a, ul{
 }
 @media (max-width: 500px){
   .navbar a.logo-lg{
-    display: none;
+    display: inline-block;
   }
   .navbar a.logo-sm{
     display: inline-block;
@@ -618,4 +618,19 @@ button{
   button, label{
     width: 100% !important;
   }
+}
+ .card-promo {
+    position: absolute;
+    top: 20px;
+    right: -47px;
+    /*background: #c39a3a;*/
+    color: white;
+    font-size: 1.4em;
+    width: 160px;
+    border-radius: 600px 600px 0 0;
+    padding: 7px;
+    transform: rotate(50deg);
+    text-align: center;
+    overflow: hidden;
+    font-weight: 500;
 }

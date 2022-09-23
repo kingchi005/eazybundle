@@ -37,7 +37,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCr
 //routes
 app.get('*', fetch_current_user);
 app.get('/', (req, res) => {
-	res.render('home', {title: 'get cheap data'})
+	res.render('home', {title: 'get cheap data', page: 'home'})
 });
 
 app.use(authRoutes)
