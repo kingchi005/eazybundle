@@ -165,6 +165,26 @@ p, h1, h2, h3, a, ul{
   padding: 0 10px;
   font-size: 20px;
 }*/
+
+@media (min-width: 500px){
+  .navbar a.logo-lg{
+    display: inline-block;
+  }
+  .navbar a.logo-sm{
+    display: none;
+  }
+
+}
+@media (max-width: 500px){
+  .navbar a.logo-lg{
+    display: none;
+  }
+  .navbar a.logo-sm{
+    display: inline-block;
+  }
+
+}
+
 .sidebar{
   width: 280px;
   color: #ddd;

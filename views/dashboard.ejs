@@ -33,8 +33,8 @@ Here is the right place for your Electricity subscription and also Convert your 
 						<%
 							let notify_arr = notification[i].split('|')
 							let notify_me = notify_arr[0]
-							let time = notify_arr[1]
-							time = formatDistanceToNow(parseInt(time), {addSuffix: true})
+							let time = parseInt(notify_arr[1]);
+							time = formatDistanceToNow(time, {addSuffix: true})
 						%>
 						<style>
 							.notification li:hover {

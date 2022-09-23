@@ -118,12 +118,13 @@
 			      <span class="navbar-toggler-icon"></span>
 			    </button>
 					<% } -%>
-					<a href="/" ><img class="py-0 my-0" src="/logo.png"></a>	
+					<a href="/" class="logo-lg"><img class="py-0 my-0 d-non" src="/logo.png"></a>	
+					<a href="/" class="logo-sm"><img class="py-0 my-2" width="50" height="45" src="/logo-1.png" alt="logo-sm"></a>	
 				</div>
 				<div>
 								<% if (user) { -%>
 					<div class="btn-group rounded">
-					  <button type="button" class="btn btn- bg-transparent border-right rounded-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
+					  <button type="button" class="btn btn- bg-transparent dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
 							<!-- <img src="/svg/account-circle.svg"> -->
 							<i class="bi bi-person-circle text-primary me-2" ></i><%= user.user_name %>
 					  </button>
@@ -134,8 +135,8 @@
 						    <li><hr class="dropdown-divider"></li>
 								<li><a  class="dropdown-item text-danger" href="/logout"><i class="bi bi-box-arrow-right me-3"></i>Log out</a></li>
 							</ul>
-					<a href="/#" class="btn text-primary rounded-0"><i class="bi bi-bell-fill"></i></a> 
 					</div>
+					<a href="/#" class="btn text-primary"><i class="bi bi-bell-fill"></i></a> 
 								<% } else { -%>
 								<div class="justify-content-between w-100">
 									<div class="btn-group rounded-0 ">
@@ -257,7 +258,7 @@
 				<% } else {-%>					
 			<div class="m-0 p-0">
 				<% } -%>					
-			<div id="liveAlertPlaceholder" class="px-2 m-0 text-center border-left-5"></div>
+			<div id="liveAlertPlaceholder" class="px-2 m-0 text-center fixed-bottom border-left-5"></div>
 			<style>
 				.side-bar a, .offcanvas-sidebar a{
 					text-decoration: none;
