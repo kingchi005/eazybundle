@@ -49,7 +49,7 @@
 	  </div>
 	  <div class="offcanvas-body offcanvas-sidebar ms-5">
 	  	<ul class="list-unstyled pt-3">
-	  		<a href="/dashboard" class="active">
+	  		<a href="/dashboard" class="">
 	  			<li class="bar-item">
 	  				<i class="bi bi-house-fill"></i>
 	  				Dashboard
@@ -185,7 +185,7 @@
 										    <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
 										  </ul>
 										</div>
-										<a href="/#contact-us" class="btn ">Contact us</a>
+										<a href="https://tawk.to/chat/632e005c37898912e96af2a1/1gdlr2rnp" class="btn ">Contact us</a>
 									</div>
 									<% if (!user) { -%>										
 									<div class="d-sm-inline-block d-none">
@@ -214,7 +214,7 @@
 				<div class="side-bar h-100">
 					<div id="sidebar" class="ps-3 sticky-top" style="top: 70px;">
 						<ul class="list-unstyled pt-3">
-							<a href="/dashboard" class="active">
+							<a href="/dashboard" class="">
 								<li class="bar-item">
 									<i class="bi bi-house-fill"></i>
 									Dashboard
@@ -344,6 +344,10 @@
 				.sticky-top .btn-group a{
 					border-radius: 0;
 				}
+				a.active li, a.active li:hover{
+					background: #9ac !important;
+					color: #124 !important;
+				}
 			</style>
 
 
@@ -368,11 +372,15 @@
 		jQuery(document).ready(function($) {
 			let path = window.location.pathname.split("/").pop();
 
+			console.log(path)
+			if (window.location.pathname.split("/")[] == 'airtime') {
+			}
+
 			if (path == '') {
 				path = '/'
 			}
 			// $('#page').text(path)
-			let target = $('nav a[href="/'+path+'"]')
+			let target = $('a[href="/'+path+'"]')
 			// console.log(target);
 			target.addClass('active')
 		})
