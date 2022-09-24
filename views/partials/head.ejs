@@ -14,13 +14,17 @@
 <body class="h-100" style="">
 	<script src="/custom_func.js"></script>
 	<!-- offcanvas top-bar -->
-	<div class="offcanvas offcanvas-top bg-info h-75 w-auto" tabindex="-1" id="off-bar-top" aria-labelledby="offcanvasTopLabel">
+	<div class="offcanvas offcanvas-end bg-info  h-5 w-50" tabindex="-1" id="off-bar-top" aria-labelledby="offcanvasTopLabel">
 	  <div class="offcanvas-header pt-0">
-	    <h5 class="offcanvas-title" id="offcanvasTopLabel"><a href="/" ><img src="/logo.png"></a></h5>
-	    <button type="button" class="btn-close btn-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	    <h5 class="offcanvas-title" id="offcanvasTopLabel">
+	    	<a href="/" >
+		    	<!-- <img src="/logo.png"> -->
+		    </a>
+	    </h5>
+	    <button type="button" class="btn-close btn-light mt-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	  </div>
 	  <div class="offcanvas-body">
-	  	<ul class="nav flex-colum ">
+	  	<ul class="nav flex-column text-end justify-content-end">
 	  	  <a href="/" class="btn btn-"><li class="nav-item">Home</li></a>
 	  	  <a href="/#about" class="btn btn-"><li class="nav-item">About us</li></a>
 	  	  <a href="/#reviews" class="btn btn-"><li class="nav-item">Reviews</li></a>
@@ -35,8 +39,12 @@
 
 	  </div>
   	  <div class="d-block justify-content-end text-end m-5">
+	  <% if (user) { -%>
+	  	  <a class="btn btn-danger" href="/logout">Sign out</a>
+	  <% } else { -%>	  	
 	  	  <a class="btn btn-primary" href="/login">Log in</a>
 	  	  <a class="btn btn-warning" href="/signup">Sign up</a>  	  	
+	  <% } -%>
   	  </div>
 	</div>
 
@@ -214,14 +222,14 @@
 				<div class="side-bar h-100">
 					<div id="sidebar" class="ps-3 sticky-top" style="top: 70px;">
 						<ul class="list-unstyled pt-3">
-							<a href="/dashboard" class="">
+							<a href="/dashboard" class="<% if (title == 'Dashboard') { -%> active <% } -%> ">
 								<li class="bar-item">
 									<i class="bi bi-house-fill"></i>
 									Dashboard
 								</li>
 							</a>
 
-							<a href="" data-bs-toggle="collapse" data-bs-target="#buy-data-tog" aria-expanded="true" aria-controls="buy-data-tog">
+							<a href="" class="<% if (title == 'MTN SME' || title == 'MTN Corporate' || title == 'Glo Data' || title == 'Airtel Data' || title == '9mobie Data') { -%> active <% } -%> " data-bs-toggle="collapse" data-bs-target="#buy-data-tog" aria-expanded="true" aria-controls="buy-data-tog">
 								<li class="bar-item">
 									<i class="bi bi-file-bar-graph-fill"></i>
 									Buy Data
@@ -237,7 +245,7 @@
 								</ul>
 							</div>
 
-							<a href="" data-bs-toggle="collapse" data-bs-target="#buy-airtime-tog" aria-expanded="true" aria-controls="buy-airtime-tog">
+							<a href="" class="<% if (title == 'MTN Airtime' || title == 'Glo Airtime' || title == 'Airtel Airtime' || title == '9mobile Airtime') { -%> active <% } -%> " data-bs-toggle="collapse" data-bs-target="#buy-airtime-tog" aria-expanded="true" aria-controls="buy-airtime-tog">
 								<li class="bar-item">
 									<i class="bi bi-phone-vibrate"></i>
 									Buy airtime
@@ -252,7 +260,7 @@
 								</ul>
 							</div>
 
-							<a href="" data-bs-toggle="collapse" data-bs-target="#utility-bill-tog" aria-expanded="true" aria-controls="utility-bill-tog">
+							<a href=""  data-bs-toggle="collapse" data-bs-target="#utility-bill-tog" aria-expanded="true" aria-controls="utility-bill-tog">
 								<li class="bar-item">
 									<i class="bi bi-receipt"></i>
 									Utility Bills
@@ -264,21 +272,21 @@
 
 								</ul>
 							</div>
-							<a href="/fund-wallet">
+							<a href="/fund-wallet" class="<% if (title == 'Fund wallet') { -%> active <% } -%> ">
 								<li class="bar-item">
 									<i class="bi bi-wallet2"></i>
 									Fund wallet
 								</li>
 							</a>
 
-							<a href="/profile">
+							<a href="/profile" class="<% if (title == 'Profile') { -%> active <% } -%> ">
 								<li class="bar-item">
 									<i class="bi bi-gear-fill"></i>
 									Profile
 								</li>
 							</a>
 
-							<a href="/transactions">
+							<a href="/transactions" class="<% if (title == 'Transactions') { -%> active <% } -%> ">
 								<li class="bar-item">
 									<i class="bi bi-receipt-cutoff"></i>
 									Transactions
@@ -332,6 +340,10 @@
 					color: rgba(138, 245, 255, 0.69);
 					margin-right: 15px;
 				}
+				.active .bi{
+					/*color: rgba(138, 245, 255, 0.9);*/
+					color: #233;
+				}
 				.col-list a: hover{
 					background: rgba(235, 253, 255, 0.2);
 					
@@ -369,7 +381,7 @@
 		$(function(){
 		  $('[data-toggle="popover"]').popover()
 		});
-		jQuery(document).ready(function($) {
+		/*jQuery(document).ready(function($) {
 			let path = window.location.pathname.split("/").pop();
 
 			console.log(path)
@@ -383,7 +395,7 @@
 			let target = $('a[href="/'+path+'"]')
 			// console.log(target);
 			target.addClass('active')
-		})
+		})*/
 
 
 	</script>
