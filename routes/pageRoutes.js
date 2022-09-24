@@ -55,6 +55,7 @@ router.get('/data-bundle/:id', requireAuth, (req, res) => {
 		if (network === superJara[i].net) {
 		  return res.render('buy-data', {
 		  	title: superJara[i].name
+		  	,page: 'Data bundle'
 		  	,package: superJara[i].name
 		  	,network: superJara[i].network
 		  	,price_list: superJara[i].price_list
