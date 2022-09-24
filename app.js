@@ -9,6 +9,12 @@ const transactionRoutes = require('./routes/transactionRoutes');
 const cookieParser = require('cookie-parser');
 const {fetch_current_user} = require('./controls/authControl');
 
+
+const {formatDistanceToNow, subDays, format} = require('date-fns');
+const { FormatMoney } = require('format-money-js');
+const fm = new FormatMoney({decimals: 2 });
+
+
 const app = express();
 
 //middleware
@@ -37,7 +43,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCr
 //routes
 app.get('*', fetch_current_user);
 app.get('/', (req, res) => {
-	res.render('home', {title: 'get cheap data', page: 'home'})
+	res.render('home', {title: 'Get cheap data', page: 'home', formatDistanceToNow, fm})
 });
 
 app.use(authRoutes)

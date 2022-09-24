@@ -7,6 +7,27 @@ const secreTokenKey = process.env.STK
 const maxAge = 24*60*60;
 const createToken = id => jwt.sign({id}, secreTokenKey, {expiresIn: maxAge});
 
+
+/*=================--------------------------**USER FUNCTION**--------------------=============================*/
+const {formatDistanceToNow, subDays, format} = require('date-fns');
+const { FormatMoney } = require('format-money-js');
+
+
+const fm = new FormatMoney({decimals: 2 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //generate refID
 // const genRef = () => `${Math.random().toString(36).substr(6,6)}`;
 
@@ -103,6 +124,8 @@ const requireAuth = (req, res, next) => {
 			if (err) {
 				res.redirect('/login')
 			} else {
+				res.locals.fm = fm;
+				res.locals.formatDistanceToNow = formatDistanceToNow;
 				next();
 			}
 		})
@@ -122,6 +145,8 @@ const fetch_current_user = (req, res, next) => {
 			} else {
 				let user = await User.findById(dt.id);
 				res.locals.user = user;
+				res.locals.fm = fm;
+				res.locals.formatDistanceToNow = formatDistanceToNow;
 				next();
 			}
 		})

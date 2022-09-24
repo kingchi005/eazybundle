@@ -4,10 +4,9 @@ const {requireAuth} = require('../controls/authControl');
 const {fetch_transactions} = require('../controls/middlewares');
 const {banks} = require('../models/banks');
 const {airtime_prices, superJara} = require('../models/pricing');
-const {formatDistanceToNow, subDays, format} = require('date-fns');
 
 router.get('/dashboard', requireAuth, (req, res) => {
-	res.render('dashboard', {title: 'Dashboard', formatDistanceToNow})
+	res.render('dashboard', {title: 'Dashboard'})
 })
 router.get('/profile', requireAuth, (req, res) => {
 	res.render('profile', {title: 'Profile', banks})
@@ -23,7 +22,7 @@ router.get('/fund-wallet', requireAuth, (req, res) => {
   res.render('fund-wallet', {title: 'Fund wallet'}) 
 })
 router.get('/transactions', requireAuth, fetch_transactions, (req, res) => {
-  res.render('transactions', {title: 'Transactions'}) 
+  res.render('transactions', {title: 'Transactions',}) 
 })
 router.get('/testing',(req, res) => {
   console.log(req.connection)

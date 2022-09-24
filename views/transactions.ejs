@@ -21,7 +21,7 @@
 		<div class="right">
 			<div><b><%= transactions[i].Type %></b></div>
 			<div class="text-success">Confirmed</div>
-			<div><%= currency.format(transactions[i].Amount)%></div>
+			<div><%= fm.from(transactions[i].Amount, { symbol: '₦' })%></div>
 		</div>
 	</div>
 		<% } -%>
@@ -51,10 +51,10 @@
 				<td><%= transactions[i].Type %></td>
 				<td><%= transactions[i].Description %></td>
 				<td class="" style="white-space: pre-wrap;"><%= functions.format(transactions[i].Date, 'yyyy-MM-dd hh:mm:ss').toString() %></td>
-				<td class="amount" align="right" style="padding-right: 15px;"><%= currency.format(transactions[i].Amount) %></td>
+				<td class="amount" align="right" style="padding-right: 15px;"><%= fm.from(transactions[i].Amount, { symbol: '₦' }) %></td>
 				<td>0<%= transactions[i].Phone %></td>
-				<td id="p-bal" align="right" style="padding-right: 15px;"><%= currency.format(transactions[i].Previous_balance) %></td>
-				<td id="n-bal" align="right" style="padding-right: 15px;"><%= currency.format(transactions[i].New_balance) %></td>
+				<td id="p-bal" align="right" style="padding-right: 15px;"><%= fm.from(transactions[i].Previous_balance, { symbol: '₦' }) %></td>
+				<td id="n-bal" align="right" style="padding-right: 15px;"><%= fm.from(transactions[i].New_balance, { symbol: '₦' }) %></td>
 			</tr>
 			<% } -%>
 		</tbody>

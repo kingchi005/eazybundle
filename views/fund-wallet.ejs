@@ -1,32 +1,61 @@
 <%- include('./partials/head.ejs') %>
-
-<form class="custom-form" id="paymentForm">
-<!--   <div class="form-group">
-    <label for="email">Email Address</label>
-    <input type="email" id="email-address" value="<%= user.email %>" required readonly />
-  </div> -->
-  <div class="form-group">
-  <p>
-    <B>NOTE:</B> 1.5% charges imply for this transaction
-  </p>
-  <p class="info"></p>
-    <label for="amount">Amount</label>
-    <input class="text-center" type="tel" id="amount" name="amount" minlength="100" placeholder="100 +" required />
+  <div class="containe p-5">
+    <form class="custom-form" id="paymentForm">
+    <!--   <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email-address" value="<%= user.email %>" required readonly />
+      </div> -->
+    <h5 class="text-uppercase mb-3"> Fund wallet with paystack</h5>
+    
+      <div class="form-group">
+      <p class="text-start p-2" style="border-left: 3px solid blue;">
+        2% charges imply
+      </p>
+      <!-- <p class="info"></p> -->
+        <label for="amount">Amount</label>
+        <input oninput="check(this)" class="text-cente mb-2" type="number" id="amount" name="amount" placeholder="100 +" required />
+      </div>
+      <ol class="list-group list-group border-0 mb-2">
+        <li class="list-group-item border-top-0 border-start-0 border-end-0 d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto text-muted">
+            Charge
+          </div>
+          <span class="charges text-muted"></span>
+        </li>
+        <li class="list-group-item d-flex border-0 justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            Total
+          </div>
+          <span class="fw-bod total"></span>
+        </li>
+      </ol>
+      <div class="form-submit">
+        <button class="btn btn-success w-100" type="submit" name="submit" onclick="payWithPaystack()"> Fund My Wallet </button>
+      </div>
+      <div class="img mt-3">
+        <img width="343" class="img-fluid" src="https://www.naijatechguide.com/wp-content/uploads/2018/05/paystack-ii.png" alt="">
+      </div>
+    </form>
   </div>
-  <div class="form-submit">
-    <button class="btn btn-success w-100" type="submit" name="submit" onclick="payWithPaystack()"> Fund My Wallet </button>
-  </div>
-</form>
-
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
+  function check(input) {
+    if (input.value < 100) {
+      input.setCustomValidity('Enter amount greater than 100');
+    } else {
+      // input is fine -- reset the error message
+      input.setCustomValidity('');
+    }
+  }
   const paymentForm = document.getElementById('paymentForm');
   paymentForm.addEventListener("submit", payWithPaystack, false);
   paymentForm.amount.addEventListener('keyup', e => {
     if (e.target.value === '') {
       // return paymentForm.submit.textContent = 'Continue to fund'
     }
-    _('p.info').innerHTML = `${e.target.value} - ${0.015*e.target.value} = &#8358 ${e.target.value - 0.015 * e.target.value}`
+    _('.total').innerHTML = `&#8358 ${e.target.value - 0.02 * e.target.value}`
+    _('.charges').innerHTML = `- &#8358 ${0.02 * e.target.value}`
+    // _('.info').innerHTML = `${e.target.value} - ${0.015*e.target.value} = &#8358 ${e.target.value - 0.015 * e.target.value}`
   })
 
   function payWithPaystack(e) {

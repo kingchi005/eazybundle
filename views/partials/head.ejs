@@ -14,7 +14,7 @@
 <body class="h-100" style="">
 	<script src="/custom_func.js"></script>
 	<!-- offcanvas top-bar -->
-	<div class="offcanvas offcanvas-end bg-info  h-5 w-50" tabindex="-1" id="off-bar-top" aria-labelledby="offcanvasTopLabel">
+	<div class="offcanvas offcanvas-end d-lg-none text bg-info  h-5 w-50" tabindex="-1" id="off-bar-top" aria-labelledby="offcanvasTopLabel">
 	  <div class="offcanvas-header pt-0">
 	    <h5 class="offcanvas-title" id="offcanvasTopLabel">
 	    	<a href="/" >
@@ -24,13 +24,13 @@
 	    <button type="button" class="btn-close btn-light mt-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	  </div>
 	  <div class="offcanvas-body">
-	  	<ul class="nav flex-column text-end justify-content-end">
-	  	  <a href="/" class="btn btn-"><li class="nav-item">Home</li></a>
-	  	  <a href="/#about" class="btn btn-"><li class="nav-item">About us</li></a>
-	  	  <a href="/#reviews" class="btn btn-"><li class="nav-item">Reviews</li></a>
-	  	  <a href="/#pricing" class="btn btn-"><li class="nav-item">Pricing</li></a>
+	  	<ul class="list-unstyled flex-column text-start justify-content-start">
+	  	  <a href="/" class="btn d-block text-start btn-"><li class="-item">Home</li></a>
+	  	  <a href="/#about" class="btn d-block text-start btn-"><li class="-item">About us</li></a>
+	  	  <a href="/#reviews" class="btn d-block text-start btn-"><li class="-item">Reviews</li></a>
+	  	  <a href="/#pricing" class="btn d-block text-start btn-"><li class="-item">Pricing</li></a>
 	  	  <!-- <a class="btn btn-" href="#"><li>FAQs</li></a> -->
-	  	  <a class="btn btn-" href="#"><li>Privacy policy</li></a>
+	  	  <a class="btn d-block text-start btn-" href="#"><li>Privacy policy</li></a>
 <!-- 	  	  <a class="btn btn-" href="#"><li>Privacy policy</li></a>
 	  	  <a class="btn btn-" href="#"><li>Privacy policy</li></a>
  -->
@@ -38,7 +38,7 @@
 	  	</ul>
 
 	  </div>
-  	  <div class="d-block justify-content-end text-end m-5">
+  	  <div class="d-block justify-content-start text-start m-5">
 	  <% if (user) { -%>
 	  	  <a class="btn btn-danger" href="/logout">Sign out</a>
 	  <% } else { -%>	  	
@@ -47,6 +47,72 @@
 	  <% } -%>
   	  </div>
 	</div>
+
+
+<!-- NOTIFUCATIONS MODAL-->
+<% if (user) { -%>	
+<div class="modal " id="notification-modal" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down">
+    <div class="modal-content">
+      <div class="modal-header">
+      			<a class="me-2 display-6 text-dark " data-bs-dismiss="modal" href=""><i class="bi bi-arrow-left-circle	"></i></a>
+      		<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">
+	      	Notifications
+		      </h5>
+        <!-- <h5 class="modal-title" id="exampleModalLabel">Notification</h5> -->
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+      	<div class="card col-md m-0 notification bg-white me- border-0" style="height: fit-content;">
+      			<% if (user.notifications.length) { -%>
+      		<div class="list-group">
+      			<ul class="list-unstyled">
+      				<%
+      					let notification = user.notifications
+      					for (var i = notification.length-1; i >= 0; i--) { -%>
+      				<%
+      					let notify_arr = notification[i].split('|')
+      					let notify_me = notify_arr[0]
+      					let time = parseInt(notify_arr[1]);
+      					time = formatDistanceToNow(time, {addSuffix: true})
+      				%>
+      				<style>
+      					.notification li:hover {
+      						box-shadow: 1px 0px 3px 0px #000;
+      						transition: .05s;
+      					}
+      				</style>
+      					<li class=" p-2 px-3 mb-3 rounded" style="
+      						background: rgba(101, 224, 0, 0.2);
+      						border-radius: 5px;
+      						padding: 15px;
+      						margin-bottom: 8px;
+      						box-shadow: 0px 0px 5px 1px #000 inset rgba(0, 0, 0, 0.2);
+      						cursor: pointer;
+      						color: #2b3300;
+      						border-left: 5px solid green;
+      					"><p class="mb-0"><%= notify_me %></p>
+      						<small align="" class="text-muted d-block mt-0 text-end m-0"><%= time %></small>
+      					</li>
+      				<% } -%>					
+      				<div class="text-end">
+      					<!-- <a class="btn btn-sm btn-outline-secondary" href="/notifications">More...</a> -->
+      				</div>
+      			</ul>
+      		</div>
+      				<% } else { -%>
+      					<h3>You have no Notification</h3>
+      				<% } -%>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary d-none d-md-inline-block" data-bs-dismiss="modal">Back</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<% } -%>
+
 
 
 	<!-- offcanvas sidebar -->
@@ -128,7 +194,7 @@
 	  			</li>
 	  		</a>
 
-	  		<a href="/notifications">
+	  		<a href="#" data-bs-toggle="modal" data-bs-target="#notification-modal">
 	  			<li class="bar-item">
 	  				<i class="bi bi-app-indicator"></i>
 	  				Notifications
@@ -158,7 +224,7 @@
 					<!-- <a href="/" class="logo-sm"><img class="py-0 my-2" width="50" height="45" src="/logo-1.png" alt="logo-sm"></a>	 -->
 				</div>
 				<div>
-								<% if (user && (title != 'get cheap data')) { -%>
+								<% if (user && (title != 'Get cheap data')) { -%>
 					<div class="btn-group rounded">
 					  <button type="button" class="btn btn- bg-transparent dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
 							<!-- <img src="/svg/account-circle.svg"> -->
@@ -166,15 +232,15 @@
 					  </button>
 							<ul class="dropdown-menu">
 								<!-- <li><a class="dropdown-item text-uppercase" id="currency"><%= user.user_name %></a></li> -->
-								<li><a class="dropdown-item c-formt text-black font-weight-bolder"><%= currency.format(user.balance) %></a></li>
+								<li><a class="dropdown-item c-formt text-black font-weight-bolder"><%= fm.from(user.balance, { symbol: '₦' }) %></a></li>
 								<li><a  class="dropdown-item"href="/fund-wallet">Fund Wallet</a></li>
 						    <li><hr class="dropdown-divider"></li>
 								<li><a  class="dropdown-item text-danger" href="/logout"><i class="bi bi-box-arrow-right me-3"></i>Log out</a></li>
 							</ul>
 					</div>
-					<a href="/#" class="btn text-primary"><i class="bi bi-bell-fill"></i></a> 
+					<a href="/#" class="btn text-primary" data-bs-toggle="modal" data-bs-target="#notification-modal"><i class="bi bi-bell-fill"></i></a> 
 					<% } -%>
-							<% if (title == 'get cheap data' || !user) { -%>
+							<% if (title == 'Get cheap data' || !user) { -%>
 						<div class="justify-content-between w-100">
 									<div class="btn-grop rounded-0 d-none d-lg-inline-block text-uppercase fw-bold justify-content-center">
 										<a href="/" class="btn ">Home</a>
@@ -293,7 +359,7 @@
 								</li>
 							</a>
 
-							<a href="/notifications">
+							<a href="#" data-bs-toggle="modal" data-bs-target="#notification-modal">
 								<li class="bar-item">
 									<i class="bi bi-app-indicator"></i>
 									Notifications
