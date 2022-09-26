@@ -119,7 +119,7 @@
 	<div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="off-bar" aria-labelledby="offcanvasTopLabel">
 	  <div class="offcanvas-header">
 	    <h5 class="offcanvas-title" id="offcanvasTopLabel"><a href="/" ><img src="/logo.png"></a></h5>
-	    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	    <button type="button" class="btn-close btn-outline-warning border" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	  </div>
 	  <div class="offcanvas-body offcanvas-sidebar ms-5">
 	  	<ul class="list-unstyled pt-3">
@@ -221,7 +221,7 @@
 			    </button>
 					<% } -%>
 					<a href="/" class="logo-lg"><img class="py-0 my-0 d-non" src="/logo.png"></a>	
-					<!-- <a href="/" class="logo-sm"><img class="py-0 my-2" width="50" height="45" src="/logo-1.png" alt="logo-sm"></a>	 -->
+					<a href="/" class="logo-sm"><img class="py-0 my-2" width="50" height="45" src="/logo-1.png" alt="logo-sm"></a>	
 				</div>
 				<div>
 								<% if (user && (title != 'Get cheap data')) { -%>
@@ -261,17 +261,17 @@
 										</div>
 										<a href="https://tawk.to/chat/632e005c37898912e96af2a1/1gdlr2rnp" class="btn ">Contact us</a>
 									</div>
+									<div class="d-sm-inline-block d-nne">
 									<% if (!user) { -%>										
-									<div class="d-sm-inline-block d-none">
 										<a  class="btn btn-primary"href="/login"><i class="bi bi-box-arrow-in-right me-1"></i>Log in</a>
 										<a  class="btn btn-warning"href="/signup"><i class="bi bi-box-arrow-in- me-1"></i>Sign up</a>
-									</div>
 									<% } else { -%>
 										<a  class="btn btn-danger"href="/logout"><i class="bi bi-box-arrow-in- me-1"></i>Sign out</a>
 									<% } -%>
 									<button class="navbar-toggler d-lg-none ms-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#off-bar-top" aria-controls="offcanvasDarkNavbar">
 							      <span class="navbar-toggler-icon"></span>
 							    </button>
+									</div>
 								</div>									
 								<% } -%>
 				</div>
