@@ -28,10 +28,10 @@ Here is the right place for your Electricity subscription and also Convert your 
 				<div class="list-group">
 					<ul class="list-unstyled">
 						<%
-							let notification = user.notifications
-							for (var i = notification.length-1; i >= 1; i--) { -%>
-						<%
-							let notify_arr = notification[i].split('|')
+							// let notification = [user.notifications[user.notifications.length-1], user.notifications[user.notifications.length-2]]
+							// for (let i = 0; i < notification.length; i++) { 
+
+							let notify_arr = user.notifications[user.notifications.length-1].split('|')
 							let notify_me = notify_arr[0]
 							let time = parseInt(notify_arr[1]);
 							time = formatDistanceToNow(time, {addSuffix: true})
@@ -54,7 +54,7 @@ Here is the right place for your Electricity subscription and also Convert your 
 							"><p class="mb-0"><%= notify_me %></p>
 								<small align="" class="text-muted d-block mt-0 text-end m-0"><%= time %></small>
 							</li>
-						<% } -%>					
+						<% //} -%>					
 						<div class="text-end">
 							<a class="btn btn-sm btn-outline-secondary" href="#" data-bs-toggle="modal" data-bs-target="#notification-modal">More...</a>
 						</div>

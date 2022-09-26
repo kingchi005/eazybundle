@@ -80,6 +80,7 @@
           .then(data => {
             console.log(data)
             if (data.type === 'success') {
+              alert(data.message, data.type)
               location.assign('/dashboard')
             }else {
               alert(data.message, data.type)
