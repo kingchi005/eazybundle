@@ -59,6 +59,7 @@
 				btn.innerHTML = 'Log in';
 			}
 			if (res.user) {
+				alert(`${res.message}`, res.type)
 				location.assign('/dashboard');
 			}
 			btn.classList.remove('disabled', 'bg-light');

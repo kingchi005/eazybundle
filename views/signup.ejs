@@ -94,6 +94,7 @@
 			if (res.user) {
 				// log(res)
 				alert(`${res.message}`, res.type)
+				location.assign('/dashboard');
 			}
 			btn.classList.remove('disabled', 'bg-light');
 			btn.innerHTML = 'Sign up';

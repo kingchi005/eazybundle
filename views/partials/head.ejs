@@ -27,7 +27,7 @@
 	  	<ul class="list-unstyled flex-column text-start justify-content-start">
 	  	  <a href="/" class="btn d-block text-start btn-"><li class="-item">Home</li></a>
 	  	  <a href="/#about" class="btn d-block text-start btn-"><li class="-item">About us</li></a>
-	  	  <a href="/#reviews" class="btn d-block text-start btn-"><li class="-item">Reviews</li></a>
+	  	  <!-- <a href="/#reviews" class="btn d-block text-start btn-"><li class="-item">Reviews</li></a> -->
 	  	  <a href="/#pricing" class="btn d-block text-start btn-"><li class="-item">Pricing</li></a>
 	  	  <!-- <a class="btn btn-" href="#"><li>FAQs</li></a> -->
 	  	  <a class="btn d-block text-start btn-" href="#"><li>Privacy policy</li></a>
@@ -39,9 +39,9 @@
 
 	  </div>
   	  <div class="d-block justify-content-start text-start m-5">
-	  <% if (user) { -%>
+	  <% if (false) { -%>
 	  	  <a class="btn btn-danger" href="/logout">Sign out</a>
-	  <% } else { -%>	  	
+	  <% //} else { -%>	  	
 	  	  <a class="btn btn-primary" href="/login">Log in</a>
 	  	  <a class="btn btn-warning" href="/signup">Sign up</a>  	  	
 	  <% } -%>
@@ -119,25 +119,27 @@
 	<div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="off-bar" aria-labelledby="offcanvasTopLabel">
 	  <div class="offcanvas-header">
 	    <h5 class="offcanvas-title" id="offcanvasTopLabel"><a href="/" ><img src="/logo.png"></a></h5>
-	    <button type="button" class="btn-close btn-outline-warning border" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	    <button type="button" class="btn-close rounded-circle btn-outline-warning border" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	  </div>
 	  <div class="offcanvas-body offcanvas-sidebar ms-5">
 	  	<ul class="list-unstyled pt-3">
-	  		<a href="/dashboard" class="">
+
+	  		<a href="/dashboard" class="<% if (title == 'Dashboard') { -%> active <% } -%> ">
 	  			<li class="bar-item">
 	  				<i class="bi bi-house-fill"></i>
 	  				Dashboard
 	  			</li>
 	  		</a>
 
-	  		<a href="" data-bs-toggle="collapse" data-bs-target="#buy-data-tog" aria-expanded="true" aria-controls="buy-data-tog">
+
+	  		<a href="" class="<% if (title == 'MTN SME' || title == 'MTN Corporate' || title == 'Glo Data' || title == 'Airtel Data' || title == '9mobie Data') { -%> active <% } -%>" data-bs-toggle="collapse" data-bs-target="#buy-data-tog" aria-expanded="true" aria-controls="buy-data-tog">
 	  			<li class="bar-item">
 	  				<i class="bi bi-file-bar-graph-fill"></i>
 	  				Buy Data
 	  			</li>
 	  		</a>
 	  		<div id="buy-data-tog" class="accordion-collapse collapse ms-3" aria-labelledby="buy-data-tog" data-bs-parent="#sidebar">
-	  			<ul class="list-unstyled ms-5 col-list">
+	  			<ul class="list-unstyled  ms-3 col-list">
 	  			  <li><a href="/data-bundle/mtn-sme" class="">MTN SME Data</a></li>
 	  			  <li><a href="/data-bundle/mtn-special" class="">MTN Corperate Data</a></li>
 	  			  <li><a href="/data-bundle/glo" class="">Glo Data</a></li>
@@ -146,20 +148,22 @@
 	  			</ul>
 	  		</div>
 
-	  		<a href="" data-bs-toggle="collapse" data-bs-target="#buy-airtime-tog" aria-expanded="true" aria-controls="buy-airtime-tog">
+
+	  		<a href="" class="<% if (title == 'MTN Airtime' || title == 'Glo Airtime' || title == 'Airtel Airtime' || title == '9mobile Airtime') { -%> active <% } -%>" data-bs-toggle="collapse" data-bs-target="#buy-airtime-tog" aria-expanded="true" aria-controls="buy-airtime-tog">
 	  			<li class="bar-item">
 	  				<i class="bi bi-phone-vibrate"></i>
 	  				Buy airtime
 	  			</li>
 	  		</a>
 	  		<div id="buy-airtime-tog" class="accordion-collapse collapse ms-3" aria-labelledby="buy-data-tog" data-bs-parent="#sidebar">
-	  			<ul class="list-unstyled ms-5 col-list">
+	  			<ul class="list-unstyled  ms-3 col-list">
 	  				<li><a href="/airtime/MTN" class="">MTN Airtime</a></li>
 	  				<li><a href="/airtime/Glo" class="">Glo Airtime</a></li>
 	  				<li><a href="/airtime/9mobile" class="">9mobile Airtime</a></li>
 	  				<li><a href="/airtime/Airtel" class="">Airtel Airtime</a></li>
 	  			</ul>
 	  		</div>
+
 
 	  		<a href="" data-bs-toggle="collapse" data-bs-target="#utility-bill-tog" aria-expanded="true" aria-controls="utility-bill-tog">
 	  			<li class="bar-item">
@@ -168,26 +172,29 @@
 	  			</li>
 	  		</a>
 	  		<div id="utility-bill-tog" class="accordion-collapse collapse ms-3" aria-labelledby="buy-data-tog" data-bs-parent="#sidebar">
-	  			<ul class="list-unstyled ms-5 col-list">
+	  			<ul class="list-unstyled  ms-3 col-list">
 	  				<li><a href="#" class="">Coming Soon...</a></li>
 
 	  			</ul>
 	  		</div>
-	  		<a href="/fund-wallet">
+
+	  		<a class="<% if (title == 'Fund wallet') { -%> active <% } -%>" href="/fund-wallet">
 	  			<li class="bar-item">
 	  				<i class="bi bi-wallet2"></i>
 	  				Fund wallet
 	  			</li>
 	  		</a>
 
-	  		<a href="/profile">
+
+	  		<a class="<% if (title == 'Profile') { -%> active <% } -%> " href="/profile">
 	  			<li class="bar-item">
 	  				<i class="bi bi-gear-fill"></i>
 	  				Profile
 	  			</li>
 	  		</a>
 
-	  		<a href="/transactions">
+
+	  		<a class="<% if (title == 'Transactions') { -%> active <% } -%> " href="/transactions">
 	  			<li class="bar-item">
 	  				<i class="bi bi-receipt-cutoff"></i>
 	  				Transactions
@@ -198,6 +205,13 @@
 	  			<li class="bar-item">
 	  				<i class="bi bi-app-indicator"></i>
 	  				Notifications
+	  			</li>
+	  		</a>
+
+	  		<a href="/logout">
+	  			<li class="bar-item">
+	  				<i class="bi bi-box-arrow-right"></i>
+	  				Log out
 	  			</li>
 	  		</a>
 
@@ -216,13 +230,16 @@
 			<div class="container-xxl py-0 my-0">
 				<div class="">
 					<% if (user) { -%>												
-					<button class="navbar-toggler d-lg-none me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#off-bar" aria-controls="offcanvasDarkNavbar">
-			      <span class="navbar-toggler-icon"></span>
+					<button class="navbar-toggler shadow-none rounded-pill px-0 border-0 btn-sm d-lg-none me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#off-bar" aria-controls="offcanvasDarkNavbar">
+			      <span class="navbar-toggler-icon" style="font-size: .5em;"></span>
 			    </button>
 					<% } -%>
-					<a href="/" class="logo-lg"><img class="py-0 my-0 d-non" src="/logo.png"></a>	
-					<a href="/" class="logo-sm"><img class="py-0 my-2" width="50" height="45" src="/logo-1.png" alt="logo-sm"></a>	
+					<a href="/" class="logo-lg d-none d-sm-inline-block"><img class="py-0 my-0 d-non" src="/logo.png"></a>
+					<% if (!user) { -%>						
+					<a class="btn btn-sm btn-outline-primary text d-inline-block d-sm-none"href="/signup"><i class="bi bi-box-arrow-in- me-1" style="border-color: blue;"></i>Sign up</a>
+					<% } -%>
 				</div>
+					<a href="/" class="logo-sm d-inline-block d-sm-none"><img class="py-0 my-2" width="50" height="45" src="/logo-1.png" alt="logo-sm"></a>	
 				<div>
 								<% if (user && (title != 'Get cheap data')) { -%>
 					<div class="btn-group rounded">
@@ -246,7 +263,7 @@
 										<a href="/" class="btn ">Home</a>
 										<a href="/#about" class="btn ">About us</a>
 										<a href="/#pricing" class="btn ">Pricing</a>
-										<a href="/#reviews" class="btn ">Reviews</a>
+										<!-- <a href="/#reviews" class="btn ">Reviews</a> -->
 										<!-- <a href="/#faqs" class="btn ">More</a> -->
 										<div class="dropdown d-inline-block">
 										  <a class="btn btn-info dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -261,17 +278,17 @@
 										</div>
 										<a href="https://tawk.to/chat/632e005c37898912e96af2a1/1gdlr2rnp" class="btn ">Contact us</a>
 									</div>
-									<div class="d-sm-inline-block d-nne">
+									<div class="d-sm-inline-block d-none">
 									<% if (!user) { -%>										
-										<a  class="btn btn-primary"href="/login"><i class="bi bi-box-arrow-in-right me-1"></i>Log in</a>
-										<a  class="btn btn-warning"href="/signup"><i class="bi bi-box-arrow-in- me-1"></i>Sign up</a>
+										<a  class="btn btn-sm text- btn-outline-primary"href="/login" style="border: 1px solid blue;"><i class="bi bi-box-arrow-in-right me-1"></i>Log in</a>
+										<a  class="btn btn-sm btn-warning"href="/signup"><i class="bi bi-box-arrow-in- me-1"></i>Sign up</a>
 									<% } else { -%>
-										<a  class="btn btn-danger"href="/logout"><i class="bi bi-box-arrow-in- me-1"></i>Sign out</a>
+										<a  class="btn btn-sm btn-danger"href="/logout"><i class="bi bi-box-arrow-in- me-1"></i>Sign out</a>
 									<% } -%>
-									<button class="navbar-toggler d-lg-none ms-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#off-bar-top" aria-controls="offcanvasDarkNavbar">
-							      <span class="navbar-toggler-icon"></span>
-							    </button>
 									</div>
+									<button class="navbar-toggler shadow-none btn-sm border-0 rounded-pill d-lg-none mx-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#off-bar-top" aria-controls="offcanvasDarkNavbar">
+							      <span class="navbar-toggler-icon" style="font-size: .5em;"></span>
+							    </button>
 								</div>									
 								<% } -%>
 				</div>
@@ -280,7 +297,7 @@
 
 
 		<!-- main -->
-		<div class="containe w-100 m-0 px-1 p-md-0 row mb-0">
+		<div class="containe w-100 mx-auto h-100 px-1 p-md-0 bg-light row py-auto">
 
 				<% if (user) { -%>
 			<div class="col-lg-3 div d-none d-lg-block bg-dark">
@@ -302,7 +319,7 @@
 								</li>
 							</a>
 							<div id="buy-data-tog" class="accordion-collapse collapse ms-3" aria-labelledby="buy-data-tog" data-bs-parent="#sidebar">
-								<ul class="list-unstyled col-list">
+								<ul class="list-unstyled  col-list">
 								  <li><a href="/data-bundle/mtn-sme" class="">MTN SME Data</a></li>
 								  <li><a href="/data-bundle/mtn-special" class="">MTN Corperate Data</a></li>
 								  <li><a href="/data-bundle/glo" class="">Glo Data</a></li>
@@ -318,7 +335,7 @@
 								</li>
 							</a>
 							<div id="buy-airtime-tog" class="accordion-collapse collapse ms-3" aria-labelledby="buy-data-tog" data-bs-parent="#sidebar">
-								<ul class="list-unstyled col-list">
+								<ul class="list-unstyled  col-list">
 									<li><a href="/airtime/MTN" class="">MTN Airtime</a></li>
 									<li><a href="/airtime/Glo" class="">Glo Airtime</a></li>
 									<li><a href="/airtime/9mobile" class="">9mobile Airtime</a></li>
@@ -333,7 +350,7 @@
 								</li>
 							</a>
 							<div id="utility-bill-tog" class="accordion-collapse collapse ms-3" aria-labelledby="buy-data-tog" data-bs-parent="#sidebar">
-								<ul class="list-unstyled col-list">
+								<ul class="list-unstyled  col-list">
 									<li><a href="#" class="">Coming Soon...</a></li>
 
 								</ul>
@@ -365,6 +382,14 @@
 									Notifications
 								</li>
 							</a>
+
+							<a href="/logout">
+								<li class="bar-item">
+									<i class="bi bi-box-arrow-right"></i>
+									Log out
+								</li>
+							</a>
+
 
 <!-- 							<a href="/faqs">
 								<li class="bar-item">
