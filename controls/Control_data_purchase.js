@@ -62,7 +62,7 @@ const proceed_puchase_data = async (req, res) => {
 	  		let New_balance = user.balance - amount;
 	  		let trn = {
 	  			user_name: user.user_name
-	  			,Type:response.data.plan_network
+	  			,Type:`${response.data.plan_network} Data`
 	  			,Description
 	  			,Amount:amount
 	  			,cost_price: response.data.plan_amount

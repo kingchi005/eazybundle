@@ -18,7 +18,7 @@ const process_fund_wallet = async (email, amount) => {
   const user = await User.findOne({email});
   // console.log(user)
   let New_balance = user.balance + amount;
-  let trn = {user_name: user.user_name ,Type: 'Fund wallet' ,Description: 'Credit transaction' ,amount ,Phone: user.phone ,Previous_balance: user.balance ,New_balance }
+  let trn = {user_name: user.user_name ,Type: 'Fund wallet' ,Description: 'Credit transaction' ,Amount: amount ,Phone: user.phone ,Previous_balance: user.balance ,New_balance }
   let res = await create_transaction(trn);
 	const notify = `Your wallet has been succesfully funded with the sum of ₦ ${amount}, your new balance is ₦ ${New_balance} |${Date.now()}`
   if (res) {
