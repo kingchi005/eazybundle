@@ -2,72 +2,211 @@
 <%const currency = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'NGN', minimumFractionDigits: 2 }); %>
 
 <div class="db-greet" style="">
-<h4 class=" text-uppercase text-secondary">Welcome to <strong>EazyBundle</strong></h4 class="text-uppercase">
-<p class="">We offer you the most affordable and most cheapest data, airtime, Dstv, Gotv and Startimes subscription.
-Here is the right place for your Electricity subscription and also Convert your Airtime to Cash.</p>
+	<h4 class=" text-uppercase text-secondary">Welcome to <strong>EazyBundle</strong></h4 class="text-uppercase">
+	<p class="">We offer you the most affordable and most cheapest data, airtime, Dstv, Gotv and Startimes subscription.
+	Here is the right place for your Electricity subscription and also Convert your Airtime to Cash.</p>
 </div>
-<div class="row mx-1 justify-content-center">
-		<div class="card col dashboard-card mx-5" style="">
-			<div class="card-title d-flex justify-content-between align-content-center mt-2">
-				<h5 class="ml-5 font-weight-bolder text-uppercase align-middle pb-3 p-3" style="text-shadow: blue; color: blue;font-size: 18px;"><%= currency.format(user.balance) %></h5>
-				<a href="/fund-wallet" class="btn btn-secondary btn-sm m-1 p-2 rounded-pill mr-5 align-self-center">Fund wallet</a>
-			</div>
-			<div class="card-body">
-				<div class="atm-card d-none d-md-none d-xl-block d-sm-block" style="size: ;">
-				<%- 
-					include('./partials/credit_card.ejs')
-				%>
-				</div>
-			</div>
-			<div class="text-center mb-3 bg-info rounded-pill justify-content-between" style="display: grid; grid-template-columns: 3fr 1fr; max-width: 300px; margin: 0 auto;"><span class="text-dark ms-3 font-weight-bold text-monospace"><%= user.ref_id %></span><!-- <span class="btn btn-info px-1 py-0 rounded-pill">copy</span> --></div>
+<div class="row mx-1 justify-content-center mb-5">
+	<div class="card col dashboard-card mx-5" style="">
+		<div class="card-title d-flex justify-content-between align-content-center mt-2">
+			<h5 class="ml-5 font-weight-bolder text-uppercase align-middle pb-3 p-3" style="text-shadow: blue; color: blue;font-size: 18px;"><%= currency.format(user.balance) %></h5>
+			<a href="/fund-wallet" class="btn btn-secondary btn-sm m-1 p-2 rounded-pill mr-5 align-self-center">Fund wallet</a>
 		</div>
-
-			<div class="card col-md m-0 notification bg-white me-" style="height: fit-content;">
-				<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">Notification</h5>
-					<% if (user.notifications.length) { -%>
-				<div class="list-group">
-					<ul class="list-unstyled">
-						<%
-							// let notification = [user.notifications[user.notifications.length-1], user.notifications[user.notifications.length-2]]
-							// for (let i = 0; i < notification.length; i++) { 
-
-							let notify_arr = user.notifications[user.notifications.length-1].split('|')
-							let notify_me = notify_arr[0]
-							let time = parseInt(notify_arr[1]);
-							time = formatDistanceToNow(time, {addSuffix: true})
-						%>
-						<style>
-							.notification li:hover {
-								box-shadow: 1px 0px 3px 0px #000;
-								transition: .05s;
-							}
-						</style>
-							<li class=" p-2 px-3 mb-3 rounded" style="
-								background: rgba(101, 224, 0, 0.2);
-								border-radius: 5px;
-								padding: 15px;
-								margin-bottom: 8px;
-								box-shadow: 0px 0px 5px 1px #000 inset rgba(0, 0, 0, 0.2);
-								cursor: pointer;
-								color: #2b3300;
-								border-left: 5px solid green;
-							"><p class="mb-0"><%= notify_me %></p>
-								<small align="" class="text-muted d-block mt-0 text-end m-0"><%= time %></small>
-							</li>
-						<% //} -%>					
-						<div class="text-end">
-							<a class="btn btn-sm btn-outline-secondary" href="#" data-bs-toggle="modal" data-bs-target="#notification-modal">More...</a>
-						</div>
-					</ul>
-				</div>
-						<% } else { -%>
-							<h3>You have no Notification</h3>
-						<% } -%>
+		<div class="card-body">
+			<div class="atm-card d-none d-md-none d-xl-block d-sm-block" style="size: ;">
+			<%- 
+				include('./partials/credit_card.ejs')
+			%>
 			</div>
+		</div>
+		<div class="text-center mb-3 bg-info rounded-pill justify-content-between" style="display: grid; grid-template-columns: 3fr 1fr; max-width: 300px; margin: 0 auto;">
+			<span class="text-dark ms-3 font-weight-bold text-monospace"><%= user.ref_id %></span><!-- <span class="btn btn-info px-1 py-0 rounded-pill">copy</span> -->
+		</div>
 	</div>
-	
+
+	<div class="card col-md m-0 notification bg-white me-" style="height: fit-content;">
+		<h5 class="text-primary text-uppercase pb-3 p-3 font-italic">Notification</h5>
+			<% if (user.notifications.length) { -%>
+		<div class="list-group">
+			<ul class="list-unstyled">
+				<%
+					// let notification = [user.notifications[user.notifications.length-1], user.notifications[user.notifications.length-2]]
+					// for (let i = 0; i < notification.length; i++) { 
+
+					let notify_arr = user.notifications[user.notifications.length-1].split('|')
+					let notify_me = notify_arr[0]
+					let time = parseInt(notify_arr[1]);
+					time = formatDistanceToNow(time, {addSuffix: true})
+				%>
+				<style>
+					.notification li:hover {
+						box-shadow: 1px 0px 3px 0px #000;
+						transition: .05s;
+					}
+				</style>
+					<li class=" p-2 px-3 mb-3 rounded" style="
+						background: rgba(101, 224, 0, 0.2);
+						border-radius: 5px;
+						padding: 15px;
+						margin-bottom: 8px;
+						box-shadow: 0px 0px 5px 1px #000 inset rgba(0, 0, 0, 0.2);
+						cursor: pointer;
+						color: #2b3300;
+						border-left: 5px solid green;
+					"><p class="mb-0"><%= notify_me %></p>
+						<small align="" class="text-muted d-block mt-0 text-end m-0"><%= time %></small>
+					</li>
+				<% //} -%>					
+				<div class="text-end">
+					<a class="btn btn-sm btn-success" href="#" data-bs-toggle="modal" data-bs-target="#notification-modal">All messages</a>
+				</div>
+			</ul>
+		</div>
+				<% } else { -%>
+					<h3>You have no Notification</h3>
+				<% } -%>
+	</div>	
 </div>
 
+<div class="row mx-1 justify-content-start g-4 services" id="">
+	<!-- <h5 class="text-primary text-uppercase pb-3 p-3 font-italic">services</h5> -->
+ 	<div class="col-6 col-sm-4 col-lg-3">
+		<a href="/data-bundle/mtn-sme" class="">
+			<div class="card border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+				<div class="card-body p-3 text-center">
+					<span style="font-size: 30px;">
+						<img width="100" class="rounded-circle" src="/assets/mtn-data.jpg" alt="">
+						<!-- <img src="https://ralphscommunications.com/static/styling/images/printer.svg" height="100px"> -->
+					</span>
+					
+					<div class="h6 m-2 text-dark">MTN SME Data</div>
+				</div>
+			</div>
+		</a>
+	</div>
 
+ 	<div class="col-6 col-sm-4 col-lg-3">
+		<a href="/data-bundle/mtn-special" class="">
+			<div class="card border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+				<div class="card-body p-3 text-center">
+					<span style="font-size: 30px;">
+						<img width="100" class="rounded-circle" src="/assets/mtn-data.jpg" alt="">
+						<!-- <img src="https://ralphscommunications.com/static/styling/images/printer.svg" height="100px"> -->
+					</span>
+					
+					<div class="h6 m-2 text-dark">MTN Corperate Gifting</div>
+				</div>
+			</div>
+		</a>
+	</div>
+
+ 	<div class="col-6 col-sm-4 col-lg-3">
+		<a href="/data-bundle/glo" class="">
+			<div class="card border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+				<div class="card-body p-3 text-center">
+					<span style="font-size: 30px;">
+						<img width="100" class="rounded-circle" src="/assets/glo-data.jpg" alt="">
+						<!-- <img src="https://ralphscommunications.com/static/styling/images/printer.svg" height="100px"> -->
+					</span>
+					
+					<div class="h6 m-2 text-dark">Glo Data</div>
+				</div>
+			</div>
+		</a>
+	</div>
+
+ 	<div class="col-6 col-sm-4 col-lg-3">
+		<a href="/data-bundle/9mobile" class="">
+			<div class="card border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+				<div class="card-body p-3 text-center">
+					<span style="font-size: 30px;">
+						<img width="100" class="rounded-circle" src="/assets/9mobile-data.jpg" alt="">
+						<!-- <img src="https://ralphscommunications.com/static/styling/images/printer.svg" height="100px"> -->
+					</span>
+					
+					<div class="h6 m-2 text-dark">9Mobile Data</div>
+				</div>
+			</div>
+		</a>
+	</div>
+
+ 	<div class="col-6 col-sm-4 col-lg-3">
+		<a href="/data-bundle/airtime" class="">
+			<div class="card border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+				<div class="card-body p-3 text-center">
+					<span style="font-size: 30px;">
+						<img width="100" class="rounded-circle" src="/assets/airtel-data.jpg" alt="">
+						<!-- <img src="https://ralphscommunications.com/static/styling/images/printer.svg" height="100px"> -->
+					</span>
+					
+					<div class="h6 m-2 text-dark">Airtel Data</div>
+				</div>
+			</div>
+		</a>
+	</div>
+
+	<!-- airtime -->
+
+	<div class="col-6 col-sm-4 col-lg-3">
+		<a href="/airtime/MTN" class="">
+			<div class="card border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+				<div class="card-body p-3 text-center">
+					<span style="font-size: 30px;">
+						<img width="100" class="rounded-circle" src="/assets/mtn-data.jpg" alt="">
+						<!-- <img src="https://ralphscommunications.com/static/styling/images/printer.svg" height="100px"> -->
+					</span>
+					
+					<div class="h6 m-2 text-dark">MTN Airtime</div>
+				</div>
+			</div>
+		</a>
+	</div>
+
+ 	<div class="col-6 col-sm-4 col-lg-3">
+		<a href="/airtime/Glo" class="">
+			<div class="card border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+				<div class="card-body p-3 text-center">
+					<span style="font-size: 30px;">
+						<img width="100" class="rounded-circle" src="/assets/glo-airtime.jpg" alt="">
+						<!-- <img src="https://ralphscommunications.com/static/styling/images/printer.svg" height="100px"> -->
+					</span>
+					
+					<div class="h6 m-2 text-dark">Glo Airtime</div>
+				</div>
+			</div>
+		</a>
+	</div>
+
+ 	<div class="col-6 col-sm-4 col-lg-3">
+		<a href="/airtime/9mobile" class="">
+			<div class="card border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+				<div class="card-body p-3 text-center">
+					<span style="font-size: 30px;">
+						<img width="100" class="rounded-circle" src="/assets/9mobile-airtime.jpeg" alt="">
+						<!-- <img src="https://ralphscommunications.com/static/styling/images/printer.svg" height="100px"> -->
+					</span>
+					
+					<div class="h6 m-2 text-dark">9Mobile Airtime</div>
+				</div>
+			</div>
+		</a>
+	</div>
+
+ 	<div class="col-6 col-sm-4 col-lg-3">
+		<a href="/airtime/Airtime" class="">
+			<div class="card border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+				<div class="card-body p-3 text-center">
+					<span style="font-size: 30px;">
+						<img width="100" class="rounded-circle" src="/assets/airtel-airtime.jpg" alt="">
+						<!-- <img src="https://ralphscommunications.com/static/styling/images/printer.svg" height="100px"> -->
+					</span>
+					
+					<div class="h6 m-2 text-dark">Airtel Airtime</div>
+				</div>
+			</div>
+		</a>
+	</div>
+
+</div>
 
 <%- include('./partials/foot.ejs') %>
