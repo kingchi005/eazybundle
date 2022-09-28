@@ -3,7 +3,7 @@
 
 <div class="db-greet" style="">
 	<h4 class=" text-uppercase text-secondary">Welcome to <strong>EazyBundle</strong></h4 class="text-uppercase">
-	<p class="">We offer you the most affordable and most cheapest data, airtime, Dstv, Gotv and Startimes subscription.
+	<p class="">We offer the cheapest data, airtime, Dstv, Gotv and Startimes subscription.
 	Here is the right place for your Electricity subscription and also Convert your Airtime to Cash.</p>
 </div>
 <div class="row mx-1 justify-content-center mb-5">
@@ -12,6 +12,9 @@
 			<h5 class="ml-5 font-weight-bolder text-uppercase align-middle pb-3 p-3" style="text-shadow: blue; color: blue;font-size: 18px;"><%= fm.from(user.balance, { symbol: '₦' }) %></h5>
 			<a href="/fund-wallet" class="btn btn-secondary btn-sm m-1 p-2 rounded-pill mr-5 align-self-center">Fund wallet</a>
 		</div>
+		<marquee attribute_name = "attribute_value" scrollamount="3" class="text-upperc se fw-bold text-primary" style="font-size: 1em;">
+			<!-- Dstv, Gotv and Startimes subscription, Electricity Bill payment and Airtime to Cash are unav -->
+		</marquee>
 		<div class="card-body">
 			<div class="atm-card d-none d-md-none d-xl-block d-sm-block" style="size: ;">
 			<%- 
@@ -69,7 +72,7 @@
 </div>
 
 <div class="row mx-1 justify-content-start g-4 services" id="">
-	<!-- <h5 class="text-primary text-uppercase pb-3 p-3 font-italic">services</h5> -->
+	<h5 class="text-primary text-uppercase pb-1 p-3 font-italic">services</h5>
  	<div class="col-6 col-sm-4 col-lg-3">
 		<a href="/data-bundle/mtn-sme" class="">
 			<div class="card border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
@@ -210,28 +213,132 @@
 </div>
 
 
-<div class="stats row mx-0 g- mt-3 mb-5 justify-content-start">
-	<<% for (var i = 0; i < 4; i++) { -%>
-		<div class="col ">
-			<div class="card  border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
-				<div class="card-body ">
-					<div class="row align-items-center justify-content-between">
-						<div class="col-3">
-							<div class="icon-big text-center icon-primary bubble-shadow-small display-5">
-								<i class="fas fa-wallet"></i>
-							</div>
+<div class="stats row mx-0 g-4 mt-3 mb-5 justify-content-start">
+	<h5 class="text-primary text-uppercase pb-1 p-3 font-italic">stats</h5>
+
+	<div class="col-sm-6 col-md-4">
+		<div class="card card-stats card-round border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+			<div class="card-body">
+				<div class="row align-items-center">
+					<div class="col-icon bg-success rounded">
+						<div class="icon-big text-center text-light bubble-shadow-small">
+							<i class="bi bi-wallet"></i>
 						</div>
-						<div class="col col-8 ml-3 ml-sm-0">
-							<div class="numbers">
-								<p class="card-category">Wallet Balance</p>
-								<h4 class="card-title">₦ 1,209.0</h4>
-							</div>
+					</div>
+					<div class="col col-stats ml-3 ml-sm-0">
+						<div class="numbers">
+							<p class="card-category">Wallet Balance</p>
+							<h4 class="card-title"><%= fm.from(user.balance, { symbol: '₦' }) %></h4>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	<% } -%>
+	</div>
+
+	<div class="col-sm-6 col-md-4">
+		<div class="card card-stats card-round border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+			<div class="card-body">
+				<div class="row align-items-center">
+					<div class="col-icon bg-primary rounded">
+						<div class="icon-big text-center text-light bubble-shadow-small">
+							<i class="bi bi-currency-exchange"></i>
+						</div>
+					</div>
+					<div class="col col-stats ml-3 ml-sm-0">
+						<div class="numbers">
+							<p class="card-category">Referral Bonus</p>
+							<h4 class="card-title"><%= fm.from(user.ref_bonus, { symbol: '₦' }) %></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-6 col-md-4">
+		<div class="card card-stats card-round border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+			<div class="card-body">
+				<div class="row align-items-center">
+					<div class="col-icon bg-info rounded">
+						<div class="icon-big text-center text-light bubble-shadow-small">
+							<i class="bi bi-coin"></i>
+						</div>
+					</div>
+					<div class="col col-stats ml-3 ml-sm-0">
+						<div class="numbers">
+							<p class="card-category">Transaction Bonus</p>
+							<h4 class="card-title"><%= fm.from(user.trn_bonus, { symbol: '₦' }) %></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-6 col-md-4">
+		<div class="card card-stats card-round border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+			<div class="card-body">
+				<div class="row align-items-center">
+					<div class="col-icon bg-warning rounded">
+						<div class="icon-big text-center text-white bubble-shadow-small">
+							<i class="bi bi-people"></i>
+						</div>
+					</div>
+					<div class="col col-stats ml-3 ml-sm-0">
+						<div class="numbers">
+							<a class="card-category">Referrals</a>
+							<h4 class="card-title"><%= user.downlines.length %></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-6 col-md-4">
+		<div class="card card-stats card-round border-0" style="box-shadow: 0px 0px 28px -5px rgba(0, 0, 0, 0.2);">
+			<div class="card-body">
+				<div class="row align-items-center">
+					<div class="col-icon bg-danger rounded">
+						<div class="icon-big text-center text-light bubble-shadow-small">
+							<i class="bi bi-journal-text"></i>
+						</div>
+					</div>
+					<div class="col col-stats ml-3 ml-sm-0">
+						<div class="numbers">
+							<a class="card-category">Total Transaction</a>
+							<h4 class="card-title"><%= user.transactions.length %></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
+<style>
+	.card-stats .col-icon {
+	    width: 65px;
+	    height: 65px;
+	    margin-left: 15px;
+	}
+	.card-stats .icon-big {
+	    width: 100%;
+	    height: 100%;
+	    font-size: 2.2em;
+	    min-height: 64px;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	}
+	.card-stats a{
+		text-decoration: none;
+		cursor: pointer;
+	}
+	.card-stats a:hover{
+		text-decoration: underline;
+	}
+</style>
 
 <%- include('./partials/foot.ejs') %>

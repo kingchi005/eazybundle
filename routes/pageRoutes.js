@@ -24,9 +24,8 @@ router.get('/fund-wallet', requireAuth, (req, res) => {
 router.get('/transactions', requireAuth, fetch_transactions, (req, res) => {
   res.render('transactions', {title: 'Transactions',}) 
 })
-router.get('/testing',(req, res) => {
-  console.log(req.connection)
-  // res.send(JSON.parse(req.header))
+router.get('/privacy-policy',(req, res) => {
+  res.render('privacy-policy', {title: 'Privacy Policy / terms and conditions',}) 
 })
 
 
