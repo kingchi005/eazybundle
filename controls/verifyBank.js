@@ -26,9 +26,10 @@ const verify_bank_details = async (req, res) => {
           res.json(JSON.parse(chunk))
         }
       }))
-  .catch(err => 
+  .catch(err => {
+    console.log(err)
     res.status(500).json({error: 'Something went wrong'})
-  );
+  });
 
   // res.json(result)
 

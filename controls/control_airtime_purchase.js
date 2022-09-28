@@ -78,12 +78,13 @@ const proceed_airtime_purchase = async (req, res) => {
 					res.status(created_trn.status).json({message:created_trn.message, type:created_trn.type, transaction_details: created_trn.details})
 				})
 				.catch(error => {
+					console.log(error)
 					res.status(501).json({error: {message: 'Something went wrong please contact the Admin for your support', type: 'danger'}})
 				})
 		}
 	})
 	.catch((error) => {
-	  // console.log(error);
+	  console.log(error);
 	  // console.log(JSON.stringify(response.data));
 		res.status(501).json({error: {message: 'Something went wrong please contact the Admin for your support', type: 'danger'}})
 	});

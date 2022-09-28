@@ -56,7 +56,7 @@ const verify_paystack_trn =  (req,response) => {
 	}).on('error', error => {
 		const Err = {err: error,}
 		handle_response(Err)
-	  // console.error(error)
+	  console.log(error)
 	})
 	request.end()
 
