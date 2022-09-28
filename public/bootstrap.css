@@ -2262,7 +2262,7 @@ textarea.form-control-lg {
   width: 1em;
   height: 1em;
   margin-top: 0.25em;
-  vertical-align: top;
+  /*vertical-align: top;*/
   background-color: #fff;
   background-repeat: no-repeat;
   background-position: center;

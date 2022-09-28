@@ -10,12 +10,12 @@
 		<div>
 			<label for='user_name'>User name:</label>
 			<input type="text" name="user_name">
-			<div class="user_name error text-danger"></div>
+			<div class="user_name fw-normal error text-danger"></div>
 		</div>
 		<div>
 			<label for='email'>Email:</label>
 			<input type="email" name="email" placeholder="exampl@email.com">
-			<div class="email error text-danger"></div>
+			<div class="email fw-normal error text-danger"></div>
 		</div>
 		<div>
 			<label for='upline'>Referer ID:</label>
@@ -24,14 +24,20 @@
 		<div>
 			<label for='password'>Password:</label>
 			<input type="password" name="password" placeholder="6 - 8 characters">
-			<div class="password error text-danger"></div>
+			<div class="password fw-normal error text-danger"></div>
 		</div>
 		<div>
 			<label for='Cpassword'>Re-enter Password:</label>
 			<input type="password" name="Cpassword" placeholder="Confirm password">
-			<div class="Cpassword error text-danger"></div>
+			<div class="Cpassword fw-normal error text-danger"></div>
 		</div>
-		<button class="btn btn-primary mt-3 shadow-none rounded w-100">Sign up</button>
+		<div class="form-check justify-content-start align-middle align-content-center">
+      <input type="checkbox" class="form-check-input m-0 p-0 float-none" name="agree" id="agree" required="true" pattern="">
+      <label class="form-check-label d-inline" for="agree">I Agree to the <a href="/terms" style="font-size: 1.1em;">terms and conditions.</a></label>
+		</div>
+
+ 	<button class="btn btn-primary mt-3 shadow-none rounded w-100">Sign up</button>
+
 		<!-- <button>Sign up</button> -->
 		<hr/>
 		<p>Already have an account? <a href="/login">Log in</a></p>

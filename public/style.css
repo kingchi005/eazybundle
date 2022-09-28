@@ -192,7 +192,7 @@ form p a {
   font-size: .99em;
 	font-weight: 500;
 }
-input, select{
+input, select:not(input[type="checkbox"]) {
   padding: 3px 12px;
   border-radius: 8px;
   font-size: 1em;
@@ -441,7 +441,7 @@ button{
   a[href="/fund-wallet"], .ref-link{
     /*font-size: .7em;*/
   }
-  input, select{
+  input, select:not(input[type="checkbox"]){
     width: 100% !important;
     border: 1px solid #ddf;
   }

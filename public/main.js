@@ -24,7 +24,7 @@ const alert = (message, type) => {
   alertPlaceholder.append(wrapper)
   setTimeout(() => {
 		wrapper.innerHTML = ''
-  },4000)
+  },5000)
 }
 
 
