@@ -85,7 +85,7 @@ const verify_paystack_trn =  (req,response) => {
 		if (result.data.status === 'success') {
 			// return response.json({msd:'about tp fun u'})
 			let email = result.data.customer.email
-			let amount = result.data.amount / 100
+			let amount = (result.data.amount / 100)*0.98
 			// return response.json({email,amount})
 			let processed_trn = await process_fund_wallet (email, amount);
 			return response.status(processed_trn.status).json({message: processed_trn.message, type: processed_trn.type, transaction_details:processed_trn.transaction_details});
