@@ -1,5 +1,5 @@
 const express = require('express');
-// const enforce = require('express-sslify');
+const enforce = require('express-sslify');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -21,7 +21,7 @@ const fm = new FormatMoney({decimals: 2 });
 const app = express();
 
 //middleware
-// app.use(enforce.HTTPS({ trustProtoHeader: true }));
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
