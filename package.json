@@ -13,10 +13,12 @@
     "express": "^4.17.1",
     "express-sslify": "^1.2.0",
     "format-money-js": "^1.4.3",
+    "joi": "^17.6.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.23",
     "node-fetch": "^3.2.10",
     "nodemailer": "^6.7.8",
+    "sql": "^0.78.0",
     "validator": "^13.7.0"
   },
   "scripts": {

@@ -5,3 +5,4 @@ secret.txt
 .cpanel.yml
 *.zip
 test.js
+models/*.ts

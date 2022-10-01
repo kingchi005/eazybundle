@@ -1,11 +1,31 @@
-const User = require("../models/userModel");
+// const User = require("../models/userModel");
 const jwt = require('jsonwebtoken');
+const Joi = require('joi');
+const validateSignup = require('../controls/validator');
+
 // const cookieParser = require('cookie-parser');
 const secreTokenKey = process.env.STK
 
 //Generate AuthToken
 const maxAge = 24*60*60;
 const createToken = id => jwt.sign({id}, secreTokenKey, {expiresIn: maxAge});
+const genRef = () => `${Math.random().toString(36).substr(6,6)}`;
+
+// mongodb _id generator
+const generateMongoObjectId = () => {
+  const thousand = 1000;
+  const sixteen = 16;
+  const timestamp = ((new Date().getTime() / thousand) | 0).toString(sixteen);
+  return (
+    timestamp +
+    "xxxxxxxxxxxxxxxx"
+      .replace(/[x]/g, function () {
+        return ((Math.random() * sixteen) | 0).toString(sixteen);
+      })
+      .toLowerCase()
+  );
+};
+
 
 
 /*=================--------------------------**USER FUNCTION**--------------------=============================*/
@@ -17,10 +37,19 @@ const fm = new FormatMoney({decimals: 2 });
 
 
 
+// JOI SCHEMAS--------------------------
+const signupSchema = Joi.object({
+	email: Joi.string().email().required()
+	,user_name: Joi.string().required()
+	,upline: Joi.string().allow('').optional()
+	,password: Joi.string().min(6).required()
+});
 
-
-
-
+const signinSchema = Joi.object({
+	user_name: Joi.string().required()
+	// ,email: Joi.string().email().required()
+	,password: Joi.string().required()
+});
 
 
 
@@ -63,26 +92,35 @@ const handleError = err => {
 
 //Controller (sign up)
 const control_signup = async (req, res) => {
-	let {user_name, email, upline, password} = req.body;
+	const {error, value} = signupSchema.validate(req.body,{abortEarly: false})
+	if (error) return console.log(error);
+
+	let {user_name, email, upline, password} = value;
 	let new_user = {
+		_id: generateMongoObjectId(),
 		user_name,                                                                                                      
 		email,                                                                                               
 		password,                                                                                                  
-		phone: '',                                                                                                     
+		phone: '0000000',                                                                                                     
 		balance: '0',                                                                                                           
 		ref_bonus: '0',                                                                                                           
 		trn_bonus: '0',                                                                                                           
 		transactions: [],                                                                                                                        
 		bank_details: {                                                                                                           
 		  Name: '',                                                                                     
-		  account_number: '',                                                                                           
+		  account_number: null,                                                                                           
 		  bank_name: ''                                                                                                
 		},                                                                                                                        
-		ref_id: 'dsjdhgh',                                                                                                       
+		ref_id: genRef(),                                                                                                       
 		upline,                                                                                                     
 		downlines: [],
 		notifications: [],
 	}
+console.log(new_user)
+
+		// creat a new uer in the database
+		// if new uer created add him to his upline's downlines and add to his upline's notifications
+
 	try {
 		let user = await User.create(new_user)
 		// const token = createToken(user._id)
@@ -98,7 +136,16 @@ const control_signup = async (req, res) => {
 
 //Controller (Log in)
 const control_login = async (req, res) => {
-	const {user_name, password} = req.body;
+	const {error, value} = signinSchema.validate(req.body, {abortEarly: false})
+	if (error) return console.log(error);
+	const {user_name, password} = value;
+
+	console.log(value)
+
+
+	// log the user in asap
+
+
 	try {
 		const user = await User.login(user_name, password);
     const token = createToken(user._id);
