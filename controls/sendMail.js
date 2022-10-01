@@ -6,9 +6,9 @@ require('dotenv').config();
 module.exports = async (email, subject, message) => {
 	try {
 		const transporter = nodemailer.createTransport({
-			host: process.env.DOMAIN_NAME,
-			service: 'gmail',
-			// port: 587,
+			host: process.env.MAIL_HOST,
+			service: process.env.MAIL_SERVICE,
+			port: process.env.MAIL_PORT,
 			secure: true,
 			auth: {
 				// user: 'eazybundledata@gmail.com',
