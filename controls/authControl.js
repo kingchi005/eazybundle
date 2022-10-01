@@ -39,16 +39,18 @@ const fm = new FormatMoney({decimals: 2 });
 
 // JOI SCHEMAS--------------------------
 const signupSchema = Joi.object({
-	email: Joi.string().email().required()
-	,user_name: Joi.string().required()
+	email: Joi.string().email().message('Please enter a valid email').required().messages({'string.empty': 'Email is required'})
+	,user_name: Joi.string().required().messages({'string.empty': 'User name is required'})
 	,upline: Joi.string().allow('').optional()
-	,password: Joi.string().min(6).required()
+	,password: Joi.string()
+		.pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).message('Password not strong')
+		.min(6).message('Password length must be at least 6 characters long').required().messages({'string.empty': 'Password is required'})
 });
 
 const signinSchema = Joi.object({
-	user_name: Joi.string().required()
+	user_name: Joi.string().required().messages({'string.empty': 'User name is required'})
 	// ,email: Joi.string().email().required()
-	,password: Joi.string().required()
+	,password: Joi.string().min(6).message('Password length must be at least 6 characters long').required().messages({'string.empty': 'Password is required'})
 });
 
 
@@ -92,8 +94,15 @@ const handleError = err => {
 
 //Controller (sign up)
 const control_signup = async (req, res) => {
+	let errors = {user_name: '', email: '', password: ''}
 	const {error, value} = signupSchema.validate(req.body,{abortEarly: false})
-	if (error) return console.log(error);
+	if (error) {
+		error.details.forEach(properties => {
+			errors[properties.path] = properties.message;
+		})
+		// return console.log(errors);
+		return res.status(400).json({errors})
+	}
 
 	let {user_name, email, upline, password} = value;
 	let new_user = {
@@ -116,7 +125,6 @@ const control_signup = async (req, res) => {
 		downlines: [],
 		notifications: [],
 	}
-console.log(new_user)
 
 		// creat a new uer in the database
 		// if new uer created add him to his upline's downlines and add to his upline's notifications
@@ -134,13 +142,20 @@ console.log(new_user)
 	// console.log(user);
 }
 
+
 //Controller (Log in)
 const control_login = async (req, res) => {
+	let errors = {user_name: '', email: '', password: ''}	
 	const {error, value} = signinSchema.validate(req.body, {abortEarly: false})
-	if (error) return console.log(error);
-	const {user_name, password} = value;
+	if (error) {
+		error.details.forEach(properties => {
+			errors[properties.path] = properties.message;
+		})
+		// return console.log(errors);
+		return res.status(400).json({errors})
+	}
 
-	console.log(value)
+	const {user_name, password} = value;
 
 
 	// log the user in asap
