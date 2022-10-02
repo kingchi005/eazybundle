@@ -1,7 +1,6 @@
 // const User = require("../models/userModel");
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
-const validateSignup = require('../controls/validator');
 
 // const cookieParser = require('cookie-parser');
 const secreTokenKey = process.env.STK
@@ -38,25 +37,8 @@ const fm = new FormatMoney({decimals: 2 });
 
 
 // JOI SCHEMAS--------------------------
-const signupSchema = Joi.object({
-	email: Joi.string().email().message('Please enter a valid email').required().messages({'string.empty': 'Email is required'})
-	,user_name: Joi.string().required().messages({'string.empty': 'User name is required'})
-	,upline: Joi.string().allow('').optional()
-	,password: Joi.string()
-		.pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).message('Password not strong')
-		.min(6).message('Password length must be at least 6 characters long').required().messages({'string.empty': 'Password is required'})
-});
 
-const signinSchema = Joi.object({
-	user_name: Joi.string().required().messages({'string.empty': 'User name is required'})
-	// ,email: Joi.string().email().required()
-	,password: Joi.string().min(6).message('Password length must be at least 6 characters long').required().messages({'string.empty': 'Password is required'})
-});
-
-
-
-
-
+const {signinSchema, signupSchema} = require('../controls/validator');
 
 
 //generate refID
@@ -125,6 +107,7 @@ const control_signup = async (req, res) => {
 		downlines: [],
 		notifications: [],
 	}
+	console.log(new_user)
 
 		// creat a new uer in the database
 		// if new uer created add him to his upline's downlines and add to his upline's notifications
