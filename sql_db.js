@@ -1,26 +1,32 @@
-const mysql = require('mysql2');
+// const mysql = require('mysql2');
+const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
 
-const pool = mysql.createPool({
-	host: process.env.sql_host
-	,user:process.env.sql_user
-	,password:process.env.sql_password
-	,database:process.env.sql_database
-}).promise()
+const sequelize = new Sequelize(process.env.sql_database, process.env.sql_user, process.env.sql_password, {
+  host: process.env.sql_hos,
+  dialect: 'mysql'
+});
+// const pool = mysql.createPool({
+// 	host: process.env.sql_host
+// 	,user:process.env.sql_user
+// 	,password:process.env.sql_password
+// 	,database:process.env.sql_database
+// }).promise()
 
 
 
 
-	pool.query("SELECT * FROM users")
-		.then(res => {
-			const [rows] = res;
-			let user = parseUser(rows[0])
-			console.log(user.bank_details)
-		})
-		.catch(err => {
-		  console.log(err)
-		})
+// 	pool.query("SELECT * FROM users")
+// 		.then(res => {
+// 			const [rows] = res;
+// 			let user = parseUser(rows[0])
+// 			console.log(user.bank_details)
+// 		})
+// 		.catch(err => {
+// 		  console.log(err)
+// 		})
+
 
 
 const parseUser = rawUser => {
@@ -46,4 +52,4 @@ const parseUser = rawUser => {
 	return user
 }
 
-module.exports = {pool}
+module.exports = {sequelize}

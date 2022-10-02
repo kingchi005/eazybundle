@@ -1,4 +1,4 @@
-// const User = require("../models/userModel");
+const {User, add_upline, User_login} = require("../models/userModel");
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 
@@ -24,6 +24,7 @@ const generateMongoObjectId = () => {
       .toLowerCase()
   );
 };
+const securePass = pass => pass
 
 
 
@@ -66,10 +67,10 @@ const handleError = err => {
   }
 
 	//User validaiton err
-	if (err.message.includes('User validation failed')) {
-		Object.values(err.errors).forEach(({properties}) => {
-			errors[properties.path] = properties.message;
-		})
+	if (err.validatorKey === 'not_unique') {
+		// err.forEach(properties => {
+			errors[err.path] = err.message;
+		// })
 	}
  return errors;
 }
@@ -89,36 +90,40 @@ const control_signup = async (req, res) => {
 	let {user_name, email, upline, password} = value;
 	let new_user = {
 		_id: generateMongoObjectId(),
-		user_name,                                                                                                      
-		email,                                                                                               
-		password,                                                                                                  
-		phone: '0000000',                                                                                                     
-		balance: '0',                                                                                                           
-		ref_bonus: '0',                                                                                                           
-		trn_bonus: '0',                                                                                                           
-		transactions: [],                                                                                                                        
-		bank_details: {                                                                                                           
-		  Name: '',                                                                                     
-		  account_number: null,                                                                                           
-		  bank_name: ''                                                                                                
-		},                                                                                                                        
-		ref_id: genRef(),                                                                                                       
-		upline,                                                                                                     
-		downlines: [],
+		user_name,
+		email,
+		password: securePass(password),
+		phone: null,
+		bank_details: {
+		  Name: '',
+		  account_number: null,
+		  bank_name: ''
+		},
+		balance: 0,
+		trn_bonus: 0,
+		ref_bonus: 0,
+		ref_id: genRef(),
+		upline,
 		notifications: [],
+		downlines: [],
+		transactions: [],
 	}
-	console.log(new_user)
+	// console.log(new_user)
+
 
 		// creat a new uer in the database
-		// if new uer created add him to his upline's downlines and add to his upline's notifications
-
 	try {
-		let user = await User.create(new_user)
+		const user = await User.create(new_user)
+		// console.log(user)
 		// const token = createToken(user._id)
     // res.cookie('eb_nU', token, {httpOnly: true, maxAge: maxAge*1000});
 		res.status(201).json({message: 'Account created successfully', type: 'success', user: user._id})
+		// if new uer created add him to his upline's downlines and add to his upline's notifications
+		let ul = await add_upline(user._id, user.upline)
+		console.log(ul)
 	} catch(e) {
-		let errors = handleError(e);
+		// console.log(e.errors[0])
+		const errors = handleError(e.errors[0]);
 		res.status(400).json({errors})
 		// console.log(e);
 	}
@@ -145,7 +150,7 @@ const control_login = async (req, res) => {
 
 
 	try {
-		const user = await User.login(user_name, password);
+		const user = await User_login(user_name, password);
     const token = createToken(user._id);
     res.cookie('eb_nU', token, {httpOnly: true, maxAge: maxAge*1000});
     res.status(200).json({message: 'Login successful', type: 'success', user: user._id});

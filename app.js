@@ -1,6 +1,8 @@
 const express = require('express');
 // const enforce = require('express-sslify');
 // const mongoose = require('mongoose');
+const { Sequelize } = require('sequelize');
+const {sequelize} = require('./sql_db');
 require('dotenv').config();
 
 //Routes
@@ -35,9 +37,20 @@ dbURI = process.env.DB_URI;
 // const hostname = '192.168.43.19'
 const hostname = '127.0.0.1';
 const PORT = process.env.PORT;
+// sql db connecton
+
+
+sequelize.authenticate()
+	.then(result => {
+	  console.log('DB connected');
+		app.listen(PORT, () => {console.log('----------------------------------------------------------\nserver started visit',`${hostname}:${PORT}\n----------------------------------------------------------`) })
+	})
+	.catch(err => {
+	  console.log(err)
+	})
 // mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true, useFindAndModify: true })
   // .then((result) => {
-		app.listen(PORT, () => {console.log('----------------------------------------------------------\nserver started visit',`${hostname}:${PORT}\n----------------------------------------------------------`) })
+		// app.listen(PORT, () => {console.log('----------------------------------------------------------\nserver started visit',`${hostname}:${PORT}\n----------------------------------------------------------`) })
   // console.log('DB connected');
   // })
   // .catch((err) => console.log(err));
