@@ -1,4 +1,4 @@
-const User = require("../models/userModel");
+const {User} = require("../models/userModel");
 const bcrypt = require('bcrypt');
 
 //Password settings
@@ -35,15 +35,13 @@ const update_bank = async (req,res) => {
 		res.status(400).json({message: 'Please enter your bank details', type: 'danger'});
 		return;
 	}
-	const bankDetails = await User.findByIdAndUpdate({_id: req.params.id}, {
-		$set: {
-			bank_details: {
-		    Name
-		    ,account_number
-		    ,bank_name
-		  }
-		}
-	});
+	const bankDetails = await User.update({
+		bank_details: {
+	    Name
+	    ,account_number
+	    ,bank_name
+	  }
+	}, {where: {_id: req.params.id}});
 	if (bankDetails) {
 		res.status(200).json({message: 'Your bank details has been updated successfully', type: 'success'});
 		return
@@ -54,11 +52,7 @@ const update_bank = async (req,res) => {
 //Add a phone number
 const update_phone = async (req,res) => {
 	const {phone_number} = req.body;
-	const user_phone = await User.findByIdAndUpdate({_id: req.params.id}, {
-		$set: {
-			phone: phone_number
-		}
-	});
+	const user_phone = await User.update({phone: phone_number },{where: {_id: req.params.id}});
 	if (user_phone) {
 		res.status(200).json({message: 'Your phone number has been updated successfully', type: 'success'});
 		return
