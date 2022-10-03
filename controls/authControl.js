@@ -1,4 +1,4 @@
-const {User, add_upline, User_login} = require("../models/userModel");
+const {User, add_upline, User_login, parseUser} = require("../models/userModel");
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 
@@ -119,7 +119,7 @@ const control_signup = async (req, res) => {
     // res.cookie('eb_nU', token, {httpOnly: true, maxAge: maxAge*1000});
 		res.status(201).json({message: 'Account created successfully', type: 'success', user: user._id})
 		// if new uer created add him to his upline's downlines and add to his upline's notifications
-		let ul = await add_upline(user._id, user.upline)
+		let ul = await add_upline(user)
 		console.log(ul)
 	} catch(e) {
 		// console.log(e.errors[0])
@@ -193,7 +193,9 @@ const fetch_current_user = (req, res, next) => {
 				res.locals.user = null;
 				next();
 			} else {
-				let user = await User.findById(dt.id);
+				let userData = await User.findByPk(dt.id);
+				const user = parseUser(userData.dataValues)
+				// return console.log(user)
 				res.locals.user = user;
 				res.locals.fm = fm;
 				res.locals.formatDistanceToNow = formatDistanceToNow;
