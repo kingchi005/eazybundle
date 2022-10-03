@@ -61,10 +61,10 @@
 				</select>
 				<div class="error acct_name text-danger"></div>
 				<div class="spin"></div>
-				<i class="spin"><img src="svg/spinner.svg"></i>
+				<i class="spin"><img src="/svg/spinner.svg"></i>
 				<label for="">Account name</label>
 				<input class="rounde" style="display: ;" type="text" name="account_name" readonly required>
-				<button id="bank" class="btn btn-outline-info btn-animate-click disabled mt-3" type="upate" name="submit" style="">Update</button>
+				<button id="bank_btn" class="btn btn-outline-info btn-animate-click disabled mt-3" type="upate" name="submit" style="">Update</button>
 				<% } -%>
 			<!-- <div class="spinner spin"></div> -->
 				<!-- <button id="verify" class="btn-animate-click" type="update" disabled>Verify</button> -->
@@ -143,7 +143,7 @@
 
 		password_form.addEventListener('submit', async (e) => {
 			e.preventDefault();
-			password_btn.innerHTML = '<i class="spin"><img src="svg/spinner.svg"></i>'
+			password_btn.innerHTML = `<i class="spin"><img src="${window.location.protocol}//${window.location.host}/svg/spinner.svg"></i>`
 			cp_err.textContent = ''
 			op_err.textContent = ''
 			np_err.textContent = ''
@@ -217,7 +217,7 @@
 	})
 */	// let bank_name = update_bank_form.bank_name.options[ update_bank_form.bank_name.selectedIndex].text;
 
-	const update_bank_btn = _('#bank')
+	const update_bank_btn = _('#bank_btn')
 	update_bank_form.bank_name.addEventListener('change', async () => {
 			acct_name_err.textContent = ''
 			spin.style.display = 'block'
@@ -230,17 +230,17 @@
 			acct_no.readonly = true
 			acct_name_err.textContent = ''
 			acct_name.value = bank_details.data.account_name
-			update_bank_btn.disabled = false
+			update_bank_btn.classList.remove('disabled')
 		} else if (bank_details.status == false) {
 			spin.style.display = 'none'
 			acct_name_err.textContent = 'Invalid bank details'
-			update_bank_btn.disabled = true
+			update_bank_btn.classList.add('disabled')
 			acct_name.value = ''
 		}else {
 			spin.style.display = 'none'
 			acct_name_err.textContent = 'An error occured :('
 			acct_name.value = ''
-			update_bank_btn.disabled = true
+			update_bank_btn.classList.add('disabled')
 		}
 	})
 

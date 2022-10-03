@@ -83,7 +83,6 @@ const control_signup = async (req, res) => {
 		error.details.forEach(properties => {
 			errors[properties.path] = properties.message;
 		})
-		// return console.log(errors);
 		return res.status(400).json({errors})
 	}
 
@@ -114,9 +113,11 @@ const control_signup = async (req, res) => {
 		// creat a new uer in the database
 	try {
 		const user = await User.create(new_user)
-		// console.log(user)
-		// const token = createToken(user._id)
-    // res.cookie('eb_nU', token, {httpOnly: true, maxAge: maxAge*1000});
+		// -----------LOGIN USER IN ON ACCOUNT CREATION-------------------------------
+/*		console.log(user)
+		const token = createToken(user._id)
+    res.cookie('eb_nU', token, {httpOnly: true, maxAge: maxAge*1000});
+*/
 		res.status(201).json({message: 'Account created successfully', type: 'success', user: user._id})
 		// if new uer created add him to his upline's downlines and add to his upline's notifications
 		let ul = await add_upline(user)
@@ -139,7 +140,6 @@ const control_login = async (req, res) => {
 		error.details.forEach(properties => {
 			errors[properties.path] = properties.message;
 		})
-		// return console.log(errors);
 		return res.status(400).json({errors})
 	}
 
@@ -147,8 +147,6 @@ const control_login = async (req, res) => {
 
 
 	// log the user in asap
-
-
 	try {
 		const user = await User_login(user_name, password);
     const token = createToken(user._id);
@@ -195,7 +193,6 @@ const fetch_current_user = (req, res, next) => {
 			} else {
 				let userData = await User.findByPk(dt.id);
 				const user = parseUser(userData.dataValues)
-				// return console.log(user)
 				res.locals.user = user;
 				res.locals.fm = fm;
 				res.locals.formatDistanceToNow = formatDistanceToNow;

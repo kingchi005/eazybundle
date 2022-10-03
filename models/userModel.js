@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
+const Transaction = require('./transactionModel');
 const {sequelize} = require('../sql_db');
 const bcrypt = require('bcrypt')
 
@@ -50,7 +51,17 @@ const User = sequelize.define('user', {
 	,transactions: { type: DataTypes.JSON }
 })
 
-User.sync({force: false})
+
+// User.hasMany(Transaction);
+// Transaction.belongsTo(User)
+
+// sequelize.sync({force: true})
+// 	.then(() => {console.log('Users and transaction ready') })
+// 	.catch(err => {console.log(err) })
+
+// return console.log(Transaction)
+
+User.sync({force: true})
 	.then(() => {console.log('Users ready') })
 	.catch(err => {console.log(err) })
 
