@@ -61,7 +61,7 @@ const User = sequelize.define('user', {
 
 // return console.log(Transaction)
 
-User.sync({force: true})
+User.sync({force: false})
 	.then(() => {console.log('Users ready') })
 	.catch(err => {console.log(err) })
 

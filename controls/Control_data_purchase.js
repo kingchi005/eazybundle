@@ -1,4 +1,4 @@
-const User = require("../models/userModel");
+const {User} = require("../models/userModel");
 const {Transaction, create_transaction} = require("../models/transactionModel");
 const {select_plan} = require('../models/pricing');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
@@ -18,7 +18,7 @@ const get_price = (req, res) => {
 const process_transaction = async (req, res, next) => {
 	const id = req.params.id;
 	const {network, plan_id, number, amount, Description} = req.body;
-	const user = await User.findById(id);
+	const user = await User.findByPk(id);
 	if (!user) {
   	res.redirect('/')
 		// return res.status(403).send('who the heck are you')
@@ -59,7 +59,6 @@ const proceed_puchase_data = async (req, res) => {
 	axios(config)
 		.then(response => {
 		  if(response.data.Status === 'successful') {
-	  		let New_balance = user.balance - amount;
 	  		let trn = {
 	  			user_name: user.user_name
 	  			,Type:`${response.data.plan_network} Data`

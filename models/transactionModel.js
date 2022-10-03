@@ -22,9 +22,7 @@ const Transaction = sequelize.define('transaction', {
 		allowNull: false,
 		primaryKey: true,
 		unique: true,
-		set() {
-      this.setDataValue('_id', generateMongoObjectId());
-    }
+		defaultValue: generateMongoObjectId()
 	}
 	,user_name: { type: DataTypes.STRING }
 	,Type: { type: DataTypes.STRING }
@@ -37,10 +35,31 @@ const Transaction = sequelize.define('transaction', {
 })
 
 
-Transaction.sync({force: false})
+// Transaction hooks-----
+let helpUrl = 'https://sequelize.org/docs/v6/other-topics/hooks/#instance-hooks'
+
+
+const create_transaction = async (transaction_details) => {
+	let res = {status: 0, message: '', type: ''}
+	try {
+		const details = await Transaction.create(transaction_details)
+		res.status = 202;
+		res.message = 'Transaction successful';
+		res.type = 'success';
+		details.cost_price = details.Amount
+		res.details = details;
+	} catch(e) {
+		res.status = 500;
+		res.message = e;
+		res.type = 'danger';
+	}
+	return res;
+}
+
+Transaction.sync({alter: false})
 	.then(() => {console.log('Transactions ready') })
 	.catch(err => {console.log(err) })
 
 
 
-	module.exports = { Transaction, /*add_upline, User_login, findByIdAndPushArr, parseUser*/ }
+	module.exports = { Transaction, create_transaction, }

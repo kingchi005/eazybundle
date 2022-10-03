@@ -1,4 +1,4 @@
-const User = require("../models/userModel");
+const {User} = require("../models/userModel");
 const {Transaction, create_transaction} = require("../models/transactionModel");
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const axios = require('axios');
@@ -15,7 +15,7 @@ const process_airtime = async (req, res, next) => {
   if (amount < 100) {
   	return res.status(400).json({error:{message:'Please enter amount greater than 100', type:'warning'}})
   }
-	const user = await User.findById(id);
+	const user = await User.findByPk(id);
 	const bal = user.balance
 	if (bal < amount) {
   	return res.status(400).json({error:{message:"Insufficient balance", type:'danger'}})
