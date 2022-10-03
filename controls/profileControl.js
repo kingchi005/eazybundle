@@ -4,26 +4,22 @@ const bcrypt = require('bcrypt');
 //Password settings
 const update_password = async (req, res) => {
 	let {old_password, new_password} = req.body;
-	const user = await User.findOne({_id: req.params.id});
+	const user = await User.findByPk(req.params.id);
 	if (user) {
 	  const old_password_iscorrect = await bcrypt.compare(old_password, user.password);
+	  
 	  if (old_password_iscorrect) {
-		  const salt = await bcrypt.genSalt();
-		  if (new_password.length < 6) {
-		  res.status(500).json({message: 'Password must have minimum of 6 characters', type: 'danger'});
-		  return;
-		  }
-		  let new_hashed = await bcrypt.hash(new_password, salt);
-		  let password_updated = await User.findByIdAndUpdate({_id: req.params.id}, {$set: {password: new_hashed}});
+		  if (new_password.length < 6) return res.status(500).json({message: 'Password must have minimum of 6 characters', type: 'danger'})
+	  	let password_updated = await User.update(
+		  		{ password: new_password },
+		  		{ where: {_id: user._id }
+				});
 		  if (password_updated) {
-			  res.status(200).json({message: 'Password updated successfully', type: 'success'});
-		  return;
+			  return res.status(200).json({message: 'Password updated successfully', type: 'success'});
 		  }
-		  res.status(500).json({message: 'An error occurd please try again in few minutes', type: 'danger'});
-		  return;
+		  return res.status(500).json({message: 'An error occurd please try again in few minutes', type: 'danger'});
 	  }
-	  res.status(500).json({message: 'Incorrect old password', type: 'danger'});
-	  return;
+	  return res.status(500).json({message: 'Incorrect old password', type: 'danger'});
 	}
   res.status(500).json({message: `User not found`, type: 'danger'});
 }
