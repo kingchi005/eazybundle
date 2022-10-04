@@ -207,7 +207,7 @@ const Transaction = sequelize.define('transaction', {
 // User.hasMany(Transaction);
 // Transaction.belongsTo(User)
 
-sequelize.sync({force: false})
+sequelize.sync({alter: true})
 	.then(() => {console.log('Users and transaction ready') })
 	.catch(err => {console.log(err) })
 

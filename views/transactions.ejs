@@ -9,7 +9,8 @@
 <div class="row m-0 p-0 mobile-view table-trn bg-light table-trn">
 	<h5 class="text-primary text-uppercase pb-3  p-3 font-italic">Transaction History</h5>
 	<% if (transactions.length !== 0) { -%>
-		<% for (let i = 0; i < transactions.length; i++) { -%>
+		<% //for (let i = 0; i < transactions.length; i++) { -%>
+		<% for (let i = transactions.length - 1; i >= 0; i--) { -%>
 	<div class="trn-item">
 		<!-- <div><img src="/svg/tick-circle-solid.svg" alt="confirmed"></div> -->
 		<div class="svg"><i class="bi bi-check-circle-fill"></i></div>
@@ -45,16 +46,17 @@
 			<th>avail. balance</th>
 		</thead>
 		<tbody class="align-middle">
-			<% for (let i = 0; i < transactions.length; i++) { -%>
+			<%// for (let i = 0; i < transactions.length; i++) { -%>
+			<% for (j = transactions.length - 1, n=0; j >= 0 && n<transactions.length; j--, n++) { -%>
 			<tr>
-				<td><%= (i+1) %></td>
-				<td><%= transactions[i].Type %></td>
-				<td><%= transactions[i].Description %></td>
-				<td class="" style="white-space: pre-wrap;"><%= functions.format(transactions[i].Date, 'yyyy-MM-dd hh:mm:ss').toString() %></td>
-				<td class="amount" align="right" style="padding-right: 15px;"><%= fm.from(transactions[i].Amount, { symbol: '₦' }) %></td>
-				<td>0<%= transactions[i].Phone %></td>
-				<td id="p-bal" align="right" style="padding-right: 15px;"><%= fm.from(transactions[i].Previous_balance, { symbol: '₦' }) %></td>
-				<td id="n-bal" align="right" style="padding-right: 15px;"><%= fm.from(transactions[i].New_balance, { symbol: '₦' }) %></td>
+				<td><%= (n+1) %></td>
+				<td><%= transactions[j].Type %></td>
+				<td><%= transactions[j].Description %></td>
+				<td class="" style="white-space: pre-wrap;"><%= functions.format(transactions[j].Date, 'yyyy-MM-dd hh:mm:ss').toString() %></td>
+				<td class="amount" align="right" style="padding-right: 15px;"><%= fm.from(transactions[j].Amount, { symbol: '₦' }) %></td>
+				<td>0<%= transactions[j].Phone %></td>
+				<td id="p-bal" align="right" style="padding-right: 15px;"><%= fm.from(transactions[j].Previous_balance, { symbol: '₦' }) %></td>
+				<td id="n-bal" align="right" style="padding-right: 15px;"><%= fm.from(transactions[j].New_balance, { symbol: '₦' }) %></td>
 			</tr>
 			<% } -%>
 		</tbody>
