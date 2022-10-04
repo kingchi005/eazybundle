@@ -34,10 +34,43 @@ const Transaction = sequelize.define('transaction', {
 	,New_balance: { type: DataTypes.FLOAT }
 })
 
+Transaction.sync({force: false})
+	.then(() => {console.log('Transactions ready') })
+	.catch(err => {console.log(err) })
 
 // Transaction hooks-----
 let helpUrl = 'https://sequelize.org/docs/v6/other-topics/hooks/#instance-hooks'
+Transaction.afterCreate(trn => {
+	const {_id, user_name, New_balance} = trn;
+	handleUserUpdate(user_name, New_balance)
+})
+// Transaction.addHook('afterCreate', async function (trn, options) {
+// 	console.log(options)
+// 	// const add_trn = await findByIdAndPushArr()
+// })
+const {User, findByIdAndPushArr} = require("../models/userModel");
 
+async function handleUserUpdate(un, nb) {
+	let trn_by = await User.update({ New_balance:nb }, {
+		where: { user_name:un }
+	})
+	// console.log(trn_by)
+}
+
+
+/*=================--------------------------**test**--------------------=============================*/
+let transaction_structure = {
+  user_name: 'Grace Uhe',
+  Type: 'test transactioin',
+  Description: '1GB for 30days 350',
+  Amount: 50,
+  cost_price: 49,
+  Phone: '090909',
+  Previous_balance: 2000,
+  New_balance: 1650
+}
+
+/*=================--------------------------**test**--------------------=============================*/
 
 const create_transaction = async (transaction_details) => {
 	let res = {status: 0, message: '', type: ''}
@@ -55,11 +88,9 @@ const create_transaction = async (transaction_details) => {
 	}
 	return res;
 }
-
-Transaction.sync({alter: false})
-	.then(() => {console.log('Transactions ready') })
-	.catch(err => {console.log(err) })
+create_transaction(transaction_structure)
 
 
+console.log(User)
 
-	module.exports = { Transaction, create_transaction, }
+module.exports = { Transaction, create_transaction, }
