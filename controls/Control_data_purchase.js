@@ -58,37 +58,35 @@ const proceed_puchase_data = async (req, res) => {
 	  data : data
 	};
 
-	// axios(config)
-	// 	.then(response => {
-	// 	  if(response.data.Status === 'successful') {
-	  		/*=================--------------------------**delet**--------------------=============================*/
-	User.findByPk('633c46626ae48706c0596bbc')
+	axios(config)
 		.then(response => {
-		  if(true) {
+		  if(response.data.Status === 'successful') {
+	  		/*=================--------------------------**TEST TRANX**--------------------=============================*/
+	// User.findByPk('633c46626ae48706c0596bbc')
+	// 	.then(response => {
+	// 	  if(true) {
+	//   		let trn = {
+	//   			user_name: user.user_name
+	//   			,Type:`respontesting Data`
+	//   			,Description
+	//   			,Amount:amount
+	//   			,cost_price: amount
+	//   			,Phone: number
+	//   			,Previous_balance: user.balance
+	//   			,New_balance
+	//   		}
+	  		/*=================--------------------------**TEST TRANX**--------------------=============================*/
+
 	  		let trn = {
 	  			user_name: user.user_name
-	  			,Type:`respontesting Data`
+	  			,Type:`${response.data.plan_network} Data`
 	  			,Description
 	  			,Amount:amount
-	  			,cost_price: amount
-	  			,Phone: number
+	  			,cost_price: response.data.plan_amount
+	  			,Phone: response.data.mobile_number
 	  			,Previous_balance: user.balance
 	  			,New_balance
 	  		}
-	  		/*=================--------------------------**delet**--------------------=============================*/
-
-		// .then(response => {
-		//   if(response.data.Status === 'successful') {
-	 //  		let trn = {
-	 //  			user_name: user.user_name
-	 //  			,Type:`${response.data.plan_network} Data`
-	 //  			,Description
-	 //  			,Amount:amount
-	 //  			,cost_price: response.data.plan_amount
-	 //  			,Phone: response.data.mobile_number
-	 //  			,Previous_balance: user.balance
-	 //  			,New_balance
-	 //  		}
 	  		create_transaction(trn)
 	  			.then(created_trn => {
 			  		res.status(created_trn.status).json({message:created_trn.message, type:created_trn.type, transaction_details: created_trn.details});

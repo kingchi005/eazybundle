@@ -142,37 +142,37 @@ const Transaction = sequelize.define('transaction', {
 						})
 					};
 
-					// axios(config)
-					// .then(response => {
-					//   // console.log(JSON.stringify(response.data));
+					axios(config)
+					.then(response => {
+					  // console.log(JSON.stringify(response.data));
 					  
-					// 	if(response.data.Status === 'successful') {
-					// =================--------------------------**delete**--------------------=============================
-					User.findByPk('633c46626ae48706c0596bbc')
-						.then(response => {
-						  if(true) {
-					  		let trnx = {
-					  			user_name: trn.user_name
-					  			,_id: generateMongoObjectId()
-					  			,Type:`Bonus`
-					  			,Description: 'Airtime bonus'
-					  			,Amount:bonus_amount
-					  			,cost_price: bonus_amount
-					  			,Phone: null
-					  			,Previous_balance: bonus_amount
-					  			,New_balance: bonus_amount
-					  		}
-					// =================--------------------------**delete**--------------------=============================
-							// let trnx = {
-							// 	user_name:trn.user_name
-							// 	,Type: `Bonus`
-							// 	,Description: 'Airtime Bonus'
-							// 	,Amount: bonus_amount
-							// 	,cost_price: response.data.paid_amount
-							// 	,Phone: response.data.mobile_number
-							// 	,Previous_balance: trn.balance
-							// 	,New_balance: trn.New_balance
-							// }
+						if(response.data.Status === 'successful') {
+					// =================--------------------------**TESTING**--------------------=============================
+					// User.findByPk('633c46626ae48706c0596bbc')
+					// 	.then(response => {
+					// 	  if(true) {
+					//   		let trnx = {
+					//   			user_name: trn.user_name
+					//   			,_id: generateMongoObjectId()
+					//   			,Type:`Bonus`
+					//   			,Description: 'Airtime bonus'
+					//   			,Amount:bonus_amount
+					//   			,cost_price: bonus_amount
+					//   			,Phone: null
+					//   			,Previous_balance: trn.balance
+					//   			,New_balance: trn.balance
+					//   		}
+					// =================--------------------------**TESTING**--------------------=============================
+							let trnx = {
+								user_name:trn.user_name
+								,Type: `Bonus`
+								,Description: 'Airtime Bonus'
+								,Amount: bonus_amount
+								,cost_price: response.data.paid_amount
+								,Phone: response.data.mobile_number
+								,Previous_balance: trn.balance
+								,New_balance: trn.New_balance
+							}
 							create_transaction(trnx)
 								.then(created_trn => {
 									if (created_trn.status === 202) {
