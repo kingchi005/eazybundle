@@ -81,7 +81,6 @@ const findPropAndPushArr = async (user_prop, prop, user_arr, item) => {
 		return false
 	}
 }
-console.log(findPropAndPushArr)
 
 const Transaction = sequelize.define('transaction', {
 	_id: {
@@ -105,11 +104,101 @@ const Transaction = sequelize.define('transaction', {
 			// console.log('trn created by', trn.user_name, 'arg', trn._id, trn.New_balance)
 			User.update({balance: trn.New_balance},{where:{user_name: trn.user_name}})
 			.then(user => {
-				console.log('-----------------------------------------------here')
 				findPropAndPushArr('user_name', trn.user_name, 'transactions', trn._id)
 			})
 			.catch(err => {console.log(err) })
-		}
+			// promo hook
+/*			if (trn.Type === 'MTN SME' || trn.Type === 'Airtel Data') {
+					let bonus_amount;
+					if (trn.Description === '3GB for 30days #1000' && trn.Amount === 1000) {
+*/
+			if (trn.Type === 'respontesting Data' || trn.Type === 'Airtel Data') {
+					let bonus_amount;
+					if (trn.Description === '3.5GB for 30days #1900' && trn.Amount == 1900) {
+
+						bonus_amount = 100
+					} else if (trn.Description === '5GB for 30days #1600' && trn.Amount == 1600) {
+						bonus_amount = 200
+					} else if (trn.Description === '10GB for 30days #3000' && trn.Amount == 3000) {
+						bonus_amount = 450
+					} else {
+						return
+					}
+
+
+					let config = {
+					  method: 'post',
+					  url: 'https://www.superjara.com/api/topup/',
+					  headers: { 
+					    'Authorization': 'Token '+process.env.SUP_JA_K, 
+					    'Content-Type': 'application/json'
+					  },
+					  data : JSON.stringify({
+						    network: 1,
+						    amount: bonus_amount,
+						    mobile_number: `0${trn.Phone}`,
+						    Ported_number: true,
+						    airtime_type: "VTU"
+						})
+					};
+
+					// axios(config)
+					// .then(response => {
+					//   // console.log(JSON.stringify(response.data));
+					  
+					// 	if(response.data.Status === 'successful') {
+					// =================--------------------------**delete**--------------------=============================
+					User.findByPk('633c46626ae48706c0596bbc')
+						.then(response => {
+						  if(true) {
+					  		let trnx = {
+					  			user_name: trn.user_name
+					  			,_id: generateMongoObjectId()
+					  			,Type:`Bonus`
+					  			,Description: 'Airtime bonus'
+					  			,Amount:bonus_amount
+					  			,cost_price: bonus_amount
+					  			,Phone: null
+					  			,Previous_balance: bonus_amount
+					  			,New_balance: bonus_amount
+					  		}
+					// =================--------------------------**delete**--------------------=============================
+							// let trnx = {
+							// 	user_name:trn.user_name
+							// 	,Type: `Bonus`
+							// 	,Description: 'Airtime Bonus'
+							// 	,Amount: bonus_amount
+							// 	,cost_price: response.data.paid_amount
+							// 	,Phone: response.data.mobile_number
+							// 	,Previous_balance: trn.balance
+							// 	,New_balance: trn.New_balance
+							// }
+							create_transaction(trnx)
+								.then(created_trn => {
+									if (created_trn.status === 202) {
+										const notify = `Congratulation! You received a transaction bonus of NGN ${created_trn.details.Amount} in form of airtime to 0${created_trn.details.Phone}. Purchase more data bundle to receive airtime bonus |${Date.now()}`
+
+										findPropAndPushArr('user_name', created_trn.details.user_name, 'notifications', notify)
+										User.increment('trn_bonus', { by: created_trn.details.Amount, where: { user_name: created_trn.details.user_name }})
+										// User.update({trn_bonus:created_trn.details.Amount},{
+										// 	where: {user_name: created_trn.details.user_name}
+										// })
+									}
+									return
+								})
+								.catch(error => {
+									console.log(error)
+								});
+						}
+					})
+					.catch(err => {
+						console.log(err)
+					})
+				} else {
+					// console.log(error)
+				}
+		},
+
 	}
 })
 
@@ -132,7 +221,7 @@ sequelize.sync({force: false})
 // 	.then(() => {console.log('Transactions ready') })
 // 	.catch(err => {console.log(err) })
 
-const create_transaction = async (transaction_details) => {
+async function create_transaction(transaction_details) {
 	let res = {status: 0, message: '', type: ''}
 	try {
 		const details = await Transaction.create(transaction_details)
