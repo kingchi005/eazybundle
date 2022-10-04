@@ -1,5 +1,5 @@
-const {User} = require("../models/userModel");
-const {Transaction, create_transaction} = require("../models/transactionModel");
+const {User, Transaction} = require('../models/utileModel');
+const {create_transaction} = require("../models/transactionModel");
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const axios = require('axios');
 

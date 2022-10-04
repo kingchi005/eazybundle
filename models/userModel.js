@@ -1,69 +1,8 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const Transaction = require('./transactionModel');
-const {sequelize} = require('../sql_db');
+const {User} = require('./utileModel');
+const {Transaction} = require('./utileModel');
 const bcrypt = require('bcrypt')
 
 
-const User = sequelize.define('user', {
-	_id: {
-		type: DataTypes.STRING,
-		allowNull: false,
-		primaryKey: true,
-		unique: true
-	}
-	,user_name: {
-		type: DataTypes.STRING,
-		// unique: true
-		unique: {
-		      args: true,
-		      msg: 'User name already in use!'
-		  }
-	}
-	,email: {
-		type: DataTypes.STRING,
-		// unique: true
-		unique: {
-		      args: true,
-		      msg: 'Email address already in use!'
-		  }
-	}
-	,password: {
-		type: DataTypes.STRING,
-		set(value) {
-			let salt = bcrypt.genSaltSync(10);
-			let hashed = bcrypt.hashSync(value, salt)
-      this.setDataValue('password', hashed);
-    }
-	}
-
-	,phone: { type: DataTypes.BIGINT }
-	,bank_details: { type: DataTypes.JSON }
-
-	,balance: { type: DataTypes.FLOAT }
-	,trn_bonus: { type: DataTypes.FLOAT }
-	,ref_bonus: { type: DataTypes.FLOAT }
-
-	,ref_id: { type: DataTypes.STRING, unique: true }
-	,upline: { type: DataTypes.STRING }
-
-	,notifications: { type: DataTypes.JSON }
-	,downlines: { type: DataTypes.JSON }
-	,transactions: { type: DataTypes.JSON }
-})
-
-
-// User.hasMany(Transaction);
-// Transaction.belongsTo(User)
-
-// sequelize.sync({force: true})
-// 	.then(() => {console.log('Users and transaction ready') })
-// 	.catch(err => {console.log(err) })
-
-// return console.log(Transaction)
-
-User.sync({force: false})
-	.then(() => {console.log('Users ready') })
-	.catch(err => {console.log(err) })
 
 
 // USER PARSER
@@ -104,9 +43,9 @@ const add_upline = async (user) => {
 	const urUpline = await User.findOne({ where: { ref_id: upline } });
 	if (!urUpline) return 'this user has no upline'
 	if (urUpline) {
-		let addedUpline = await findByIdAndPushArr(urUpline._id, 'downlines', user_name)
+		let addedUpline = await findPropAndPushArr(urUpline._id, 'downlines', user_name)
 		if (addedUpline) {
-			let notified = await findByIdAndPushArr(urUpline._id, 'notifications', notify)
+			let notified = await findPropAndPushArr(urUpline._id, 'notifications', notify)
 			if (notified) {
 				console.log('upline notified')
 			}
@@ -145,12 +84,12 @@ const User_login = async (user_name, password) => {
 }
 
 
-const findByIdAndPushArr = async (user_id, user_arr, item) => {
+const findPropAndPushArr = async (user_prop, prop, user_arr, item) => {
 	// const rawQ = `UPDATE users SET downlines = ( SELECT JSON_ARRAY_INSERT(downlines, '$[1000000]', 'aganda') ) WHERE users._id = '633a0b6e09e08abb3b49895c';`
-	const query = `UPDATE users SET ${user_arr} = ( SELECT JSON_ARRAY_INSERT(${user_arr}, '$[1000000]', :item) ) WHERE users._id = :id`
+	const query = `UPDATE users SET ${user_arr} = ( SELECT JSON_ARRAY_INSERT(${user_arr}, '$[1000000]', :item) ) WHERE users.${user_prop} = :id`
 
 	const [results, metadata] = await sequelize.query( query, {
-		replacements: { item: `${item}`, id: `${user_id}` }
+		replacements: { item: `${item}`, id: `${prop}` }
 	});
 	if (results.changedRows) {
 		return true
@@ -159,8 +98,7 @@ const findByIdAndPushArr = async (user_id, user_arr, item) => {
 	}
 }
 
-// findByIdAndPushArr('633a0b6e09e08abb3b49895c', 'notifications', 'it is done oo now i can update arrays')
+// findPropAndPushArr('user_name','Grace Uhe', 'notifications', 'it is done oo now i can update arrays')
 // 	.then(res => {console.log(res) })
 // 	.catch(err => {console.log(err) })
-
-module.exports = { User, add_upline, User_login, findByIdAndPushArr, parseUser }
+module.exports = { add_upline, User_login, findPropAndPushArr, parseUser }

@@ -1,4 +1,4 @@
-const {User} = require("../models/userModel");
+const {User} = require('../models/utileModel');
 const bcrypt = require('bcrypt');
 
 //Password settings

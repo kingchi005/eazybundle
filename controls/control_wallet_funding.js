@@ -1,6 +1,7 @@
 require('dotenv').config();
-const {User, findByIdAndPushArr} = require("../models/userModel");
-const {Transaction, create_transaction} = require("../models/transactionModel");
+const { findPropAndPushArr} = require("../models/userModel");
+const {Transaction, User} = require('../models/utileModel');
+const { create_transaction} = require("../models/transactionModel");
 const https = require('https');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 // const fetch = import('node-fetch');
@@ -23,7 +24,7 @@ const process_fund_wallet = async (email, amount) => {
 	const notify = `Your wallet has been succesfully funded with the sum of ₦ ${amount}, your new balance is ₦ ${New_balance} |${Date.now()}`
   if (res) {
 
-  	findByIdAndPushArr(user._id, 'notifications', notify)
+  	findPropAndPushArr(user._id, 'notifications', notify)
   		.then(use => {})
   		.catch(err => {})
 	  return res;

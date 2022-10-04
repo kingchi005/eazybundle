@@ -1,4 +1,5 @@
-const {User, add_upline, User_login, parseUser} = require("../models/userModel");
+const { add_upline, User_login, parseUser} = require("../models/userModel");
+const {User} = require('../models/utileModel');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 
@@ -153,6 +154,7 @@ const control_login = async (req, res) => {
     res.cookie('eb_nU', token, {httpOnly: true, maxAge: maxAge*1000});
     res.status(200).json({message: 'Login successful', type: 'success', user: user._id});
 	} catch(e) {
+		console.log(e)
     const errors = handleError(e);
     res.status(400).json({errors})
 	}

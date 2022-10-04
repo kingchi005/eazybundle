@@ -1,5 +1,5 @@
-const {User} = require("../models/userModel");
-const {Transaction, create_transaction} = require("../models/transactionModel");
+const {User, Transaction, create_transaction} = require('../models/utileModel');
+// const {create_transaction} = require("../models/transactionModel");
 const {select_plan} = require('../models/pricing');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const axios = require('axios');
@@ -30,13 +30,15 @@ const process_transaction = async (req, res, next) => {
 		// return res.status(417).json({error: 'Insufficient balance', message: 'You have insufficient balance to continue this transaction, Please fund your wallet and continue', type: 'info'})
 	}
 	//REQUEST TO THIRD PARTY API
+	let New_balance = user.balance - amount
+	res.locals.New_balance = New_balance;
 	res.locals.user = user;
 	next();
 }
 
 
 const proceed_puchase_data = async (req, res) => {
-	const {user} = res.locals;
+	const {user, New_balance} = res.locals;
 	const {network, plan_id, number, amount, Description, net} = req.body;
 	let data = {
 		network,
@@ -56,28 +58,48 @@ const proceed_puchase_data = async (req, res) => {
 	  data : data
 	};
 
-	axios(config)
+	// axios(config)
+	// 	.then(response => {
+	// 	  if(response.data.Status === 'successful') {
+	  		/*=================--------------------------**delet**--------------------=============================*/
+	User.findByPk('633c46626ae48706c0596bbc')
 		.then(response => {
-		  if(response.data.Status === 'successful') {
+		  if(true) {
 	  		let trn = {
 	  			user_name: user.user_name
-	  			,Type:`${response.data.plan_network} Data`
+	  			,Type:`respontesting Data`
 	  			,Description
 	  			,Amount:amount
-	  			,cost_price: response.data.plan_amount
-	  			,Phone: response.data.mobile_number
+	  			,cost_price: amount
+	  			,Phone: number
 	  			,Previous_balance: user.balance
 	  			,New_balance
 	  		}
+	  		/*=================--------------------------**delet**--------------------=============================*/
+
+		// .then(response => {
+		//   if(response.data.Status === 'successful') {
+	 //  		let trn = {
+	 //  			user_name: user.user_name
+	 //  			,Type:`${response.data.plan_network} Data`
+	 //  			,Description
+	 //  			,Amount:amount
+	 //  			,cost_price: response.data.plan_amount
+	 //  			,Phone: response.data.mobile_number
+	 //  			,Previous_balance: user.balance
+	 //  			,New_balance
+	 //  		}
 	  		create_transaction(trn)
 	  			.then(created_trn => {
 			  		res.status(created_trn.status).json({message:created_trn.message, type:created_trn.type, transaction_details: created_trn.details});
 	  			})
 	  			.catch(error => {
+						// console.log('inner')
 	  				console.log(JSON.stringify(error,null,2))
 			  		res.status(501).json({error: {message: 'Something went wrong please contact the Admin for your support', type: 'danger'}})
 	  			})
 	  	}else {
+				// console.log('out')
 	  		res.status(501).json({error: {message: 'Something went wrong please contact the Admin for your support', type: 'danger'}})
 	  	}   
 		})
