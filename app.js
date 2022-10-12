@@ -43,11 +43,11 @@ const PORT = process.env.PORT;
 sequelize.authenticate()
 	.then(result => {
 	  console.log('DB connected');
-		app.listen(PORT, () => {console.log('----------------------------------------------------------\nserver started visit',`${hostname}:${PORT}\n----------------------------------------------------------`) })
 	})
 	.catch(err => {
 	  console.log(err)
 	})
+		app.listen(PORT, () => {console.log('----------------------------------------------------------\nserver started visit',`${hostname}:${PORT}\n----------------------------------------------------------`) })
 // mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true, useFindAndModify: true })
   // .then((result) => {
 		// app.listen(PORT, () => {console.log('----------------------------------------------------------\nserver started visit',`${hostname}:${PORT}\n----------------------------------------------------------`) })
