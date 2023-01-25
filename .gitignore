@@ -6,3 +6,4 @@ secret.txt
 *.zip
 test.js
 models/*.ts
+/nbproject/private/

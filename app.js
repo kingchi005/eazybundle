@@ -34,15 +34,15 @@ app.set('view engine', 'ejs');
 dbURI = process.env.DB_URI;
 // const hostname = '192.168.43.19'
 const hostname = '127.0.0.1';
-const PORT = process.env.PORT;
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true, useFindAndModify: true })
-  .then((result) => {
+const PORT = 1000 || process.env.PORT;
+// mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true, useFindAndModify: true })
+//   .then((result) => {
 		app.listen(PORT, () => {
 			console.log('server started visit',`${hostname}:${PORT}`)
 		})
-  console.log('DB connected');
-  })
-  .catch((err) => console.log(err));
+  // console.log('DB connected');
+  // })
+  // .catch((err) => console.log(err));
 
 //routes
 app.get('*', fetch_current_user);
