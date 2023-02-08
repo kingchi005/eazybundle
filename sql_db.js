@@ -4,7 +4,7 @@ require('dotenv').config();
 
 
 const sequelize = new Sequelize(process.env.sql_database, process.env.sql_user, process.env.sql_password, {
-  host: process.env.sql_hos,
+  host: process.env.sql_host,
   dialect: 'mysql'
 });
 // const pool = mysql.createPool({
