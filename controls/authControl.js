@@ -135,7 +135,7 @@ const control_signup = async (req, res) => {
 
 //Controller (Log in)
 const control_login = async (req, res) => {
-	return console.log(req.body)
+	// return console.log(req.body)
 	let errors = {user_name: '', email: '', password: ''}	
 	const {error, value} = signinSchema.validate(req.body, {abortEarly: false})
 	if (error) {
