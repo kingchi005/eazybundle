@@ -34,7 +34,7 @@ app.set('view engine', 'ejs');
 dbURI = process.env.DB_URI;
 // const hostname = '192.168.43.19'
 const hostname = '127.0.0.1';
-const PORT = 1000 || process.env.PORT;
+const PORT = process.env.PORT || '';
 // mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true, useFindAndModify: true })
 //   .then((result) => {
 		app.listen(PORT, () => {
