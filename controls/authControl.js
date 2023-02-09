@@ -157,7 +157,7 @@ const control_login = async (req, res) => {
 	} catch(e) {
 		console.log(e)
     const errors = handleError(e);
-    res.status(400).json({errors})
+    res.status(400).json({errors,err:e.message})
 	}
 }
 
